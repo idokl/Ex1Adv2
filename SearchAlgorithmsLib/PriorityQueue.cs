@@ -36,7 +36,7 @@ namespace SearchAlgorithmsLib
         public T top()
         {
             if (Count > 0) return heap[0];
-            throw new InvalidOperationException("优先队列为空");
+            throw new InvalidOperationException("");
         }
         void SiftUp(int n)
         {

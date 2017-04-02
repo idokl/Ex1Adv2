@@ -6,23 +6,25 @@ using System.Threading.Tasks;
 
 namespace SearchAlgorithmsLib
 {
-    class BestFirstSearch<T> : ISearcher
+    public class BestFirstSearch<T> : Searcher
     {
+        /*
         public int getNumberOfNodesEvaluated()
         {
             throw new NotImplementedException();
         }
+        */
 
-        public Solution search(ISearchable searchable)
+        public override Solution search(ISearchable searchable)
         {
-            IComparer<State> comperar = searchable.GetComaparer();
-            PriorityQueue<State> openStates = new PriorityQueue<State>();
+            IComparer<State> comperar = new StateComparer();
+            //PriorityQueue<State> openList = new PriorityQueue<State>();
             HashSet<State> closeStates = new HashSet<State>();
             State initialState = searchable.getInitialState();
-            openStates.push(initialState);
-            while(openStates.Count > 0)
+            openList.push(initialState);
+            while(OpenListSize > 0)
             {
-                State bestOpenState = openStates.pop();
+                State bestOpenState = popOpenList();
                 closeStates.Add(bestOpenState);
                 if (bestOpenState.Equals(searchable.getGoalState()))
                 {
@@ -38,14 +40,14 @@ namespace SearchAlgorithmsLib
                 List<State> successors = searchable.getAllPossibleStates(bestOpenState);
                 foreach(State s in successors)
                 {
-                    if ((!closeStates.Contains(s)) && (!openStates.DoesContain(s)))
+                    if ((!closeStates.Contains(s)) && (!openList.DoesContain(s)))
                     {
                         s.SetCameFrom(bestOpenState);
-                        openStates.push(s);
+                        openList.push(s);
                     }
                     else
                     {
-                        openStates.AddElementOrTryToDecreaseItsKey(s);
+                        openList.AddElementOrTryToDecreaseItsKey(s);
                     }
                 }
             }

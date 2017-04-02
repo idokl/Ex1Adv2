@@ -8,7 +8,7 @@ namespace SearchAlgorithmsLib
 {
     class PointState : BaseState
     {
-        MazeLib.Position CurrentPosition;
+        public MazeLib.Position CurrentPosition { get; }
 
         public PointState(MazeLib.Position currentPosition)
         {

@@ -11,6 +11,6 @@ namespace SearchAlgorithmsLib
         State getInitialState();
         State getGoalState();
         List<State> getAllPossibleStates(State s);
-        Comparer<State> GetComaparer();
+        //Comparer<State> GetComaparer();
     }
 }

@@ -8,12 +8,12 @@ namespace SearchAlgorithmsLib
 {
     public abstract class Searcher : ISearcher
     {
-        private PriorityQueue<State> openList;
+        protected PriorityQueue<State> openList;
         private int evaluatedNodes;
 
         public Searcher()
         {
-            openList = new PriorityQueue<State>();
+            openList = new PriorityQueue<State>(new StateComparer());
             evaluatedNodes = 0;
         }
         protected State popOpenList()
@@ -23,7 +23,7 @@ namespace SearchAlgorithmsLib
             return openList.pop();
         }
         // a property of openList
-        public int OpenListSizey
+        public int OpenListSize
         { // it is a read-only property :)
             get { return openList.Count; }
         }

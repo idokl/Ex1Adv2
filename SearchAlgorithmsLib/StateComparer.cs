@@ -6,13 +6,16 @@ using System.Threading.Tasks;
 
 namespace SearchAlgorithmsLib
 {
-    class StateComparer : Comparer<BaseState>
+    class StateComparer : IComparer<State>
     {
-        private static StringComparer MyComparer = StringComparer.Ordinal;
+        //private static StringComparer MyComparer = StringComparer.Ordinal;
         
-        public override int Compare(BaseState x, BaseState y)
+        public int Compare(State x, State y)
         {
-            return (MyComparer.Compare(x, y));
+            if (x.GetCost() < y.GetCost())
+                return -1;
+            else
+                return 1;
         }
     }
 }

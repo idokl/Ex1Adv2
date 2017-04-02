@@ -20,10 +20,10 @@ namespace SearchAlgorithmsLib
 
         {
             evaluatedNodes++;
-            return openList.poll();
+            return openList.pop();
         }
         // a property of openList
-        public int OpenListSize()
+        public int OpenListSize
         { // it is a read-only property :)
             get { return openList.Count; }
         }

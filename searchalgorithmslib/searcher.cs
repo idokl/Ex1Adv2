@@ -6,34 +6,35 @@ using System.Threading.Tasks;
 
 namespace SearchAlgorithmsLib
 {
-    public abstract class Searcher: ISearcher
+    public abstract class Searcher : ISearcher
     {
         private PriorityQueue<State> openList;
         private int evaluatedNodes;
-        
+
         public Searcher()
         {
             openList = new PriorityQueue<State>();
             evaluatedNodes = 0;
         }
-
         protected State popOpenList()
+
         {
             evaluatedNodes++;
             return openList.pop();
         }
         // a property of openList
-
-        public int OpenListSize
+        public int OpenListSizey
         { // it is a read-only property :)
             get { return openList.Count; }
         }
-        
+
         // ISearcher’s methods:
-        public int getNumberOfNodesEvaluated()
+        public virtual int getNumberOfNodesEvaluated()
         {
             return evaluatedNodes;
         }
+
         public abstract Solution search(ISearchable searchable);
     }
+
 }

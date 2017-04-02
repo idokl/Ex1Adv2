@@ -8,5 +8,6 @@ namespace SearchAlgorithmsLib
 {
     class Searcher
     {
+        //test seracher
     }
 }

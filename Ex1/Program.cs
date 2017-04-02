@@ -15,7 +15,19 @@ namespace Ex1
             Maze MyMaze = new Maze(3, 4);
             string s = MyMaze.ToString();
             Console.WriteLine(s);
-            
+            SearchableMaze SM = new SearchableMaze();
+            s = SM.MyMaze.ToString();
+            Console.WriteLine(s);
+            BestFirstSearch<PointState> BFS = new BestFirstSearch<PointState>();
+            Solution solution = BFS.search(SM);
+            LinkedList<State> path = solution.Path;
+            Console.WriteLine("The solution path is:");
+            foreach (State state in path)
+            {
+                Console.WriteLine(state.ToString());
+            }
+            Console.WriteLine();
+
 
             SearchAlgorithmsLib.PriorityQueue<int> PQ = new PriorityQueue<int>();
             PQ.push(2);

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SearchAlgorithmsLib
 {
-    class BestFirstSearch<T> : Searcher
+    public class BestFirstSearch<T> : Searcher
     {
         /*
         public int getNumberOfNodesEvaluated()

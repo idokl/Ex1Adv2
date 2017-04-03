@@ -47,6 +47,7 @@ namespace SearchAlgorithmsLib
                     }
                     else
                     {
+                        s.SetCameFrom(bestOpenState);
                         openList.AddElementOrTryToDecreaseItsKey(s);
                     }
                 }

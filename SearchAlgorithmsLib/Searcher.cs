@@ -23,7 +23,7 @@ namespace SearchAlgorithmsLib
             return openList.pop();
         }
         // a property of openList
-        public int OpenListSizey
+        public int OpenListSize
         { // it is a read-only property :)
             get { return openList.Count; }
         }

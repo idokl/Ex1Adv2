@@ -13,12 +13,12 @@ namespace SearchAlgorithmsLib
 
         abstract public bool Equals(State s);
 
-        public double Cost { get; }
+        public double Cost { get; set; }
 
-        public void SetCost(double cost)
-        {
-            this.cost = cost;
-        }
+//        public void SetCost(double cost)
+//        {
+//            this.cost = cost;
+//        }
 
         public State GetCameFrom()
         {

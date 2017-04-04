@@ -30,15 +30,15 @@ namespace Ex1
             Position up, down, right, left;
             if (!((currRow + 1) == MyMaze.Rows))
             {
-                up = new Position(currRow + 1, currCol);
+                down = new Position(currRow + 1, currCol);
                 if (CellType.Free == MyMaze[currRow + 1, currCol])
-                    accessiblePositionStates.Add(new PointState(up));
+                    accessiblePositionStates.Add(new PointState(down));
             }
             if (!((currRow) == 0))
             {
-                down = new Position(currRow - 1, currCol);
+                up = new Position(currRow - 1, currCol);
                 if (CellType.Free == MyMaze[currRow - 1, currCol])
-                    accessiblePositionStates.Add(new PointState(down));
+                    accessiblePositionStates.Add(new PointState(up));
             }
             if (!((currCol) == 0))
             {

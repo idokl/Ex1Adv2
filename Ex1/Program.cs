@@ -26,6 +26,19 @@ namespace Ex1
             Console.WriteLine("Start:" + new PointState(MyMaze.InitialPos).ToString());
             Console.WriteLine("Goal:" + new PointState(MyMaze.GoalPos).ToString());
 
+            BestFirstSearch<PointState> BFS = new BestFirstSearch<PointState>();
+            Solution solution = BFS.search(SM);
+
+            // LinkedList<State> path = solution.Path;
+            Console.WriteLine("The solution path by BFS is:");
+            foreach (State state in solution.Path)
+            {
+                Console.WriteLine(state.ToString());
+            }
+            Console.WriteLine();
+
+
+
             DepthFirstSearch<PointState> DFS = new DepthFirstSearch<PointState>();
             Solution solutionDFS = DFS.search(SM);
 
@@ -38,16 +51,7 @@ namespace Ex1
             Console.WriteLine();
 
 
-            BestFirstSearch<PointState> BFS = new BestFirstSearch<PointState>();
-            Solution solution = BFS.search(SM);
             
-           // LinkedList<State> path = solution.Path;
-            Console.WriteLine("The solution path by BFS is:");
-            foreach (State state in solution.Path)
-            {
-                Console.WriteLine(state.ToString());
-            }
-            Console.WriteLine();
 
            
             Console.WriteLine();

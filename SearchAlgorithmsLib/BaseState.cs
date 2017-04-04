@@ -8,19 +8,16 @@ namespace SearchAlgorithmsLib
 {
     public abstract class BaseState : State
     {
-        private double Cost; // cost to reach this state (set by a setter)
+        private double cost; // cost to reach this state (set by a setter)
         private State CameFrom; // the state we came from to this state (setter)
 
         abstract public bool Equals(State s);
 
-        public double GetCost()
-        {
-            return this.Cost;
-        }
+        public double Cost { get; }
 
         public void SetCost(double cost)
         {
-            this.Cost = cost;
+            this.cost = cost;
         }
 
         public State GetCameFrom()

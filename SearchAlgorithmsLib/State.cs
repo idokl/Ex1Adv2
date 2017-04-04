@@ -10,7 +10,7 @@ namespace SearchAlgorithmsLib
     {
         bool Equals(State s); // we overload Object's Equals method
 
-        double GetCost();
+        double Cost { get; }
 
         void SetCost(double cost);
 

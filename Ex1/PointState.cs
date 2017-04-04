@@ -23,7 +23,10 @@ namespace SearchAlgorithmsLib
 
         public override string ToString()
         {
-            return CurrentPosition.ToString();
+            return String.Format("{0},{1}", CurrentPosition.Row,CurrentPosition.Col);
         }
+
+        //public override bool Equals(object s) => Equals(s as State);
+        public override int GetHashCode() => CurrentPosition.GetHashCode();
     }
 }

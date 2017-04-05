@@ -14,12 +14,6 @@ namespace SearchAlgorithmsLib
         double Cost { get; set; }
 
         State CameFrom { get; set; }
-        // void SetCost(double cost);
-
-            // State GetCameFrom();
-
-            //void SetCameFrom(State cameFrom);
-
 
         }
 }

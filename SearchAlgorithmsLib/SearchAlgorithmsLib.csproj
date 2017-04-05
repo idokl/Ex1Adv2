@@ -56,7 +56,6 @@
     <Compile Include="Searcher.cs" />
     <Compile Include="ISearchable.cs" />
     <Compile Include="ISearcher.cs" />
-    <Compile Include="PointState.cs" />
     <Compile Include="PriorityQueue.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Solution.cs" />

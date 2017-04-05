@@ -14,12 +14,9 @@ namespace SearchAlgorithmsLib
         {
             if (x.Cost < y.Cost)
                 return -1;
-            else
-            {
-                if (x.Cost == y.Cost)
-                    return 0;
-                return 1;
-            }
+            if (x.Cost > y.Cost)
+                return 1; 
+            return 0;
         }
     }
 }

@@ -45,11 +45,13 @@ namespace SearchAlgorithmsLib
                     if ((!closeStates.Contains(s)) && (!openList.DoesContain(s)))
                     {
                         s.CameFrom = bestOpenState;
+                        s.Cost = s.CameFrom.Cost + 1;
                         openList.push(s);
                     }
                     else
                     {
                         s.CameFrom = bestOpenState;
+                        s.Cost = s.CameFrom.Cost + 1;
                         openList.AddElementOrTryToDecreaseItsKey(s);
                     }
                 }

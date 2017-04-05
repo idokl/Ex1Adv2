@@ -15,7 +15,7 @@ namespace Ex1
         public static void Run() { 
 
             DFSMazeGenerator dfsMazeGenerator = new DFSMazeGenerator();
-            Maze MyMaze = dfsMazeGenerator.Generate(3, 3);
+            Maze MyMaze = dfsMazeGenerator.Generate(20, 20);
 
             string s = MyMaze.ToString();
 

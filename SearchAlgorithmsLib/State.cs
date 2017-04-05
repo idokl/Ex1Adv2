@@ -8,16 +8,18 @@ namespace SearchAlgorithmsLib
 {
     public interface State
     {
+
         bool Equals(State s); // we overload Object's Equals method
 
         double Cost { get; set; }
 
-       // void SetCost(double cost);
+        State CameFrom { get; set; }
+        // void SetCost(double cost);
 
-        State GetCameFrom();
+            // State GetCameFrom();
 
-        void SetCameFrom(State cameFrom);
+            //void SetCameFrom(State cameFrom);
 
 
-    }
+        }
 }

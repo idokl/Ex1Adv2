@@ -16,8 +16,10 @@ namespace SearchAlgorithmsLib
             Stack<State> stackOfStates = new Stack<State>();
             State initialState = searchable.getInitialState();
             LinkedList<State> path = new LinkedList<State>();
+            
             HashSet<State> visited = new HashSet<State>();
             Solution solution = new Solution();
+            solution.Path = path;
             stackOfStates.Push(initialState);
             while (stackOfStates.Count > 0)
             {
@@ -27,25 +29,27 @@ namespace SearchAlgorithmsLib
                 {
                     while (!(currentState.Equals(initialState)))
                     {
-
+                       
                         solution.Path.AddFirst(currentState);
-                        currentState = currentState.GetCameFrom();
+                        currentState = currentState.CameFrom;
                     }
 
                     return solution;
                 }
-
+                 
                 if (!visited.Contains(currentState))
                 {
                     visited.Add(currentState);
+                    List<State> successors = searchable.getAllPossibleStates(currentState);
+                    foreach (State s in successors)
+                    {
+                        s.CameFrom = currentState;
+                        stackOfStates.Push(s);
+                    }
                 }
-                List<State> successors = searchable.getAllPossibleStates(currentState);
+               
 
-                foreach (State s in successors)
-                {
-                    s.SetCameFrom(currentState);
-                    stackOfStates.Push(s);
-                }
+               
 
             }
             Console.WriteLine("This Searchable doesn't have a solution and we didn't" +

@@ -16,7 +16,7 @@ namespace Ex1
           
            
             DFSMazeGenerator dfsMazeGenerator = new DFSMazeGenerator();
-            Maze MyMaze = dfsMazeGenerator.Generate(5, 5);
+            Maze MyMaze = dfsMazeGenerator.Generate(10, 10);
           
             string s = MyMaze.ToString();
             
@@ -25,6 +25,20 @@ namespace Ex1
 
             Console.WriteLine("Start:" + new PointState(MyMaze.InitialPos).ToString());
             Console.WriteLine("Goal:" + new PointState(MyMaze.GoalPos).ToString());
+
+
+            DepthFirstSearch<PointState> DFS = new DepthFirstSearch<PointState>();
+            Solution solutionDFS = DFS.search(SM);
+
+            // LinkedList<State> path = solution.Path;
+            Console.WriteLine("The solution path by DFS is:");
+            foreach (State state in solutionDFS.Path)
+            {
+                Console.WriteLine(state.ToString());
+            }
+            Console.WriteLine();
+
+
 
             BestFirstSearch<PointState> BFS = new BestFirstSearch<PointState>();
             Solution solution = BFS.search(SM);
@@ -39,16 +53,7 @@ namespace Ex1
 
 
 
-            DepthFirstSearch<PointState> DFS = new DepthFirstSearch<PointState>();
-            Solution solutionDFS = DFS.search(SM);
-
-            // LinkedList<State> path = solution.Path;
-            Console.WriteLine("The solution path by DFS is:");
-            foreach (State state in solutionDFS.Path)
-            {
-                Console.WriteLine(state.ToString());
-            }
-            Console.WriteLine();
+           
 
 
             

@@ -32,22 +32,24 @@ namespace SearchAlgorithmsLib
                     while(!(bestOpenState.Equals(initialState)))
                     {
                         bestPath.AddFirst(bestOpenState);
-                        bestOpenState = bestOpenState.GetCameFrom();
+                        bestOpenState = bestOpenState.CameFrom;
                     }
                     bestPath.AddFirst(initialState);
-                    return new Solution(bestPath);
+                    Solution solution = new Solution();
+                   solution.Path = bestPath;
+                    return solution;
                 }
                 List<State> successors = searchable.getAllPossibleStates(bestOpenState);
                 foreach(State s in successors)
                 {
                     if ((!closeStates.Contains(s)) && (!openList.DoesContain(s)))
                     {
-                        s.SetCameFrom(bestOpenState);
+                        s.CameFrom = bestOpenState;
                         openList.push(s);
                     }
                     else
                     {
-                        s.SetCameFrom(bestOpenState);
+                        s.CameFrom = bestOpenState;
                         openList.AddElementOrTryToDecreaseItsKey(s);
                     }
                 }

@@ -12,10 +12,14 @@ namespace SearchAlgorithmsLib
         
         public int Compare(State x, State y)
         {
-            if (x.Cost< y.Cost)
+            if (x.Cost < y.Cost)
                 return -1;
             else
+            {
+                if (x.Cost == y.Cost)
+                    return 0;
                 return 1;
+            }
         }
     }
 }

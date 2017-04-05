@@ -10,6 +10,7 @@ namespace Ex1
 {
     class Program
     {
+        //The main:
         static void Main(string[] args)
         {
            CompareSolvers.Run();

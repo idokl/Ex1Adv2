@@ -8,7 +8,7 @@ namespace SearchAlgorithmsLib
 {
     public class PQAdapter : Searcher
     {
-        public Searcher searcher;
+       // public Searcher searcher;
 
         public PriorityQueue<State> openList;
 

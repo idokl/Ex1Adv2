@@ -6,13 +6,8 @@ using System.Threading.Tasks;
 
 namespace Ex1
 {
-    interface IView
+    interface ICommand
     {
-        void ExecuteCommand(string commandName);
-    }
-
-    public enum move
-    {
-        up, down,left,right
+        void execute();
     }
 }

@@ -9,7 +9,7 @@ namespace SearchAlgorithmsLib
     public abstract class Searcher : ISearcher
     {
         protected PriorityQueue<State> openList;
-        private int evaluatedNodes;
+        public int evaluatedNodes { get; private set; }
 
         public Searcher()
         {

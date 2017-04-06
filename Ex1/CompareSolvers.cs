@@ -35,6 +35,7 @@ namespace Ex1
             {
                 Console.WriteLine(state.ToString());
             }
+            Console.WriteLine("The DFS algorithm treated " + DFS.evaluatedNodes + " nodes.");
             Console.WriteLine();
 
 
@@ -48,6 +49,7 @@ namespace Ex1
             {
                 Console.WriteLine(state.ToString());
             }
+            Console.WriteLine("The BFS algorithm treated " + BFS.evaluatedNodes + " nodes.");
             Console.WriteLine();
 
 

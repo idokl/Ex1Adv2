@@ -16,7 +16,8 @@ namespace Ex1
         }
         public string Execute(string[] args, TcpClient client = null)
         {
-            throw new NotImplementedException();
+            string name = args[0];
+            return "end of game";
         }
     }
 }

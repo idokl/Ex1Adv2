@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
+using SearchAlgorithmsLib;
 
 namespace Ex1
 {
@@ -16,7 +17,18 @@ namespace Ex1
         }
         public string Execute(string[] args, TcpClient client = null)
         {
-            throw new NotImplementedException();
+            string name = args[0];
+            int algorithm = int.Parse(args[1]);
+            if (algorithm==0)
+            {
+                DepthFirstSearch<PointState> BFS = new DepthFirstSearch<PointState>();
+                Solution solutionDFS = BFS.search();
+            }
+            else
+            {
+                DepthFirstSearch<PointState> DFS = new DepthFirstSearch<PointState>();
+                Solution solutionDFS = DFS.search();
+            }
         }
     }
 }

@@ -16,7 +16,7 @@ namespace Ex1
         }
         public string Execute(string[] args, TcpClient client = null)
         {
-            throw new NotImplementedException();
+          IModel.Move move = args[0];
         }
     }
 }

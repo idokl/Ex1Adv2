@@ -10,9 +10,4 @@ namespace Ex1
     {
         void ExecuteCommand(string commandName);
     }
-
-    public enum move
-    {
-        up, down,left,right
-    }
 }

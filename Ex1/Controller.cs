@@ -14,7 +14,7 @@ namespace Ex1
         public Controller()
 
         {
-            //model = new Model();
+            model = new Model();
             commands = new Dictionary<string, ICommand>();
             commands.Add("generate", new GenerateMazeCommand(model));
             // more commands...

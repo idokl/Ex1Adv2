@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SearchAlgorithmsLib
 {
-    public class PQAdapter
+    public class PQAdapter : Searcher
     {
         public Searcher searcher;
 
@@ -18,9 +18,15 @@ namespace SearchAlgorithmsLib
         }
 
         public State popOpenList(){
-            searcher.evaluatedNodes++;
+            evaluatedNodes++;
             return openList.pop();
         }
+
+        public override Solution search(ISearchable searchable)
+        {
+            throw new NotImplementedException();
+        }
+
         // a property of openList
         public int OpenListSize{ // it is a read-only property :)
             get { return openList.Count; }

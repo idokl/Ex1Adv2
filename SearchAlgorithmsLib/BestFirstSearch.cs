@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SearchAlgorithmsLib
 {
-    public class BestFirstSearch<T> : Searcher
+    public class BestFirstSearch<T> : PQAdapter
     {
         /*
         public int getNumberOfNodesEvaluated()
@@ -14,7 +14,6 @@ namespace SearchAlgorithmsLib
             throw new NotImplementedException();
         }
         */
-        public PQAdapter pqAdapter = new PQAdapter();
        
         public override Solution search(ISearchable searchable)
         {
@@ -22,10 +21,10 @@ namespace SearchAlgorithmsLib
             //PriorityQueue<State> openList = new PriorityQueue<State>();
             HashSet<State> closeStates = new HashSet<State>();
             State initialState = searchable.getInitialState();
-            pqAdapter.openList.push(initialState);
-            while(pqAdapter.OpenListSize > 0)
+            openList.push(initialState);
+            while(OpenListSize > 0)
             {
-                State bestOpenState = pqAdapter.popOpenList();
+                State bestOpenState = popOpenList();
                 closeStates.Add(bestOpenState);
                 if (bestOpenState.Equals(searchable.getGoalState()))
                 {
@@ -43,17 +42,17 @@ namespace SearchAlgorithmsLib
                 List<State> successors = searchable.getAllPossibleStates(bestOpenState);
                 foreach(State s in successors)
                 {
-                    if ((!closeStates.Contains(s)) && (!pqAdapter.openList.DoesContain(s)))
+                    if ((!closeStates.Contains(s)) && (!openList.DoesContain(s)))
                     {
                         s.CameFrom = bestOpenState;
                         s.Cost = s.CameFrom.Cost + 1;
-                        pqAdapter.openList.push(s);
+                        openList.push(s);
                     }
                     else
                     {
                         s.CameFrom = bestOpenState;
                         s.Cost = s.CameFrom.Cost + 1;
-                        pqAdapter.openList.AddElementOrTryToDecreaseItsKey(s);
+                        openList.AddElementOrTryToDecreaseItsKey(s);
                     }
                 }
             }

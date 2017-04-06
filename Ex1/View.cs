@@ -12,7 +12,7 @@ namespace Ex1
     class View
     {
         
-        private int port;
+        private int port; 
         private TcpListener listener;
         private IClientHandler ch;
         public View(int port, IClientHandler ch)

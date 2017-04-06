@@ -53,6 +53,7 @@
     <Compile Include="BaseState.cs" />
     <Compile Include="BestFirstSearch.cs" />
     <Compile Include="DepthFirstSearch.cs" />
+    <Compile Include="PQAdapter.cs" />
     <Compile Include="Searcher.cs" />
     <Compile Include="ISearchable.cs" />
     <Compile Include="ISearcher.cs" />

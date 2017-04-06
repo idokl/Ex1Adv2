@@ -14,7 +14,7 @@ namespace SearchAlgorithmsLib
             throw new NotImplementedException();
         }
         */
-
+        PQAdapter pqAdapter = new PQAdapter();
         public override Solution search(ISearchable searchable)
         {
             IComparer<State> comperar = new StateComparer();

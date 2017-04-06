@@ -11,40 +11,39 @@ namespace SearchAlgorithmsLib
     {
         public override Solution search(ISearchable searchable)
         {
-            IComparer<State> comperar = new StateComparer();
-
-            Stack<State> stackOfStates = new Stack<State>();
+   
+            Stack<State> s = new Stack<State>();
             State initialState = searchable.getInitialState();
             LinkedList<State> path = new LinkedList<State>();
             
-            HashSet<State> visited = new HashSet<State>();
+            HashSet<State> discovered = new HashSet<State>();
             Solution solution = new Solution();
             solution.Path = path;
-            stackOfStates.Push(initialState);
-            while (stackOfStates.Count > 0)
+            s.Push(initialState);
+            while (s.Count > 0)
             {
-                State currentState = stackOfStates.Pop();
+                State v = s.Pop();
 
-                if (currentState.Equals(searchable.getGoalState()))
+                if (v.Equals(searchable.getGoalState()))
                 {
-                    while (!(currentState.Equals(initialState)))
+                    while (!(v.Equals(initialState)))
                     {
                        
-                        solution.Path.AddFirst(currentState);
-                        currentState = currentState.CameFrom;
+                        solution.Path.AddFirst(v);
+                        v = v.CameFrom;
                     }
 
                     return solution;
                 }
                  
-                if (!visited.Contains(currentState))
+                if (!discovered.Contains(v))
                 {
-                    visited.Add(currentState);
-                    List<State> successors = searchable.getAllPossibleStates(currentState);
-                    foreach (State s in successors)
+                    discovered.Add(v);
+                    List<State> successors = searchable.getAllPossibleStates(v);
+                    foreach (State w in successors)
                     {
-                        s.CameFrom = currentState;
-                        stackOfStates.Push(s);
+                        w.CameFrom = v;
+                        s.Push(w);
                     }
                 }
                

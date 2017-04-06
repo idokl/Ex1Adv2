@@ -8,26 +8,14 @@ namespace SearchAlgorithmsLib
 {
     public abstract class Searcher : ISearcher
     {
-        protected PriorityQueue<State> openList;
-        public int evaluatedNodes { get; private set; }
+       
+        public int evaluatedNodes { get; set; }
 
-        public Searcher()
-        {
-            openList = new PriorityQueue<State>(new StateComparer());
-            evaluatedNodes = 0;
-        }
-        protected State popOpenList()
-
-        {
-            evaluatedNodes++;
-            return openList.pop();
-        }
-        // a property of openList
-        public int OpenListSize
-        { // it is a read-only property :)
-            get { return openList.Count; }
-        }
-
+       // public Searcher()
+        //{
+         //   evaluatedNodes = 0;
+       // }
+       
         // ISearcher’s methods:
         public virtual int getNumberOfNodesEvaluated()
         {

@@ -19,7 +19,8 @@ namespace Ex1
             string name = args[0];
             int rows = int.Parse(args[1]);
             int cols = int.Parse(args[2]);
-            return ""
+            model.start(name, rows, cols);
+            return "start";
         }
     }
 }

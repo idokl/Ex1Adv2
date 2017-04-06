@@ -16,6 +16,7 @@ namespace Ex1
         }
         public string Execute(string[] args, TcpClient client = null)
         {
+            model.list();
             return "list of games";
         }
     }

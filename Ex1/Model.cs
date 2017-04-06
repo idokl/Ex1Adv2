@@ -4,11 +4,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MazeLib;
+using MazeGeneratorLib;
+using SearchAlgorithmsLib;
 
 namespace Ex1
 {
     class Model : IModel
     {
+
+        public Dictionary<string, Maze> dictionaryOfMazes = new Dictionary<string, Maze>();
+        public Dictionary<SearchableMaze, Solution> dictionaryOfMazesAndSolutions = new Dictionary<SearchableMaze, Solution>();
+
         public void close(string name)
         {
             throw new NotImplementedException();
@@ -16,7 +22,10 @@ namespace Ex1
 
         public Maze generate(string name, int rows, int cols)
         {
-            throw new NotImplementedException();
+            DFSMazeGenerator dfsMazeGenerator = new DFSMazeGenerator();
+            Maze MyMaze = dfsMazeGenerator.Generate(rows, cols);
+            MyMaze.Name = name;
+            return MyMaze;
         }
 
         public void join(string name)
@@ -36,7 +45,20 @@ namespace Ex1
 
         public void solve(string name, int algorithm)
         {
-            throw new NotImplementedException();
+            Maze maze = this.dictionaryOfMazes[name];
+            SearchableMaze searchableMaze = new SearchableMaze(maze);
+            Solution solution;
+            if (algorithm == 1)
+            {
+                BestFirstSearch<PointState> BFS = new BestFirstSearch<PointState>();
+                solution = BFS.search(searchableMaze);
+            }
+            else
+            {
+                DepthFirstSearch<PointState> DFS = new DepthFirstSearch<PointState>();
+                solution = DFS.search(searchableMaze);
+            }
+            dictionaryOfMazesAndSolutions.Add(searchableMaze, solution);
         }
 
         public void start(string name, int rows, int cols)

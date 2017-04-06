@@ -17,6 +17,7 @@ namespace Ex1
         public string Execute(string[] args, TcpClient client = null)
         {
             string name = args[0];
+            model.join(name);
             return "join game";
         }
     }

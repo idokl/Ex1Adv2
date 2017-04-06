@@ -9,10 +9,16 @@ namespace SearchAlgorithmsLib
     public class PQAdapter
     {
         public Searcher searcher;
-        
-        protected PriorityQueue<State> openList =  new PriorityQueue<State>(new StateComparer());
-        protected State popOpenList(){
-            //evaluatedNodes++;
+
+        public PriorityQueue<State> openList;
+
+        public PQAdapter()
+        {
+            openList = new PriorityQueue<State>(new StateComparer());
+        }
+
+        public State popOpenList(){
+            searcher.evaluatedNodes++;
             return openList.pop();
         }
         // a property of openList

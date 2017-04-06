@@ -21,8 +21,9 @@ namespace Ex1
             string name = args[0];
             int rows = int.Parse(args[1]);
             int cols = int.Parse(args[2]);
-            Maze maze = model.GenerateMaze(name, rows, cols);
-            return maze.ToJSON();
+            //Maze maze = model.GenerateMaze(name, rows, cols);
+            //return maze.ToJSON();
+            return null;
         }
     }
 }

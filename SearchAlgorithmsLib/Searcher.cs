@@ -11,7 +11,7 @@ namespace SearchAlgorithmsLib
        
         public int evaluatedNodes { get; set; }
 
-        public Searcher()
+        public Searcher() 
         {
            evaluatedNodes = 0;
         }

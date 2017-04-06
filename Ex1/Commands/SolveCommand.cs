@@ -22,13 +22,14 @@ namespace Ex1
             if (algorithm==0)
             {
                 DepthFirstSearch<PointState> BFS = new DepthFirstSearch<PointState>();
-                Solution solutionDFS = BFS.search();
+                //Solution solutionDFS = BFS.search();
             }
             else
             {
                 DepthFirstSearch<PointState> DFS = new DepthFirstSearch<PointState>();
-                Solution solutionDFS = DFS.search();
+                //Solution solutionDFS = DFS.search();
             }
+            return "";
         }
     }
 }

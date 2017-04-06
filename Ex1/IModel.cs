@@ -15,11 +15,11 @@ namespace Ex1
         void start(string name, int rows, int cols);
         List<string> list();
         void join(string name);
-        void play(move move);
+        void play(Move move);
         void close(string name);
     }
 
-    public enum move
+    public enum Move
     {
         up, down, left, right
     }

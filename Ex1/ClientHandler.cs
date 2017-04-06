@@ -27,6 +27,10 @@ namespace Ex1
                 {
                     string commandLine = reader.ReadLine();
                     Console.WriteLine("Got command: {0}", commandLine);
+                    char[] separator = { ' ' };
+                    string[] words = commandLine.Split(separator);
+                    Console.WriteLine("arg0: {0}", words[0]);
+                    Console.WriteLine("arg1: {0}", words[1]);
                     string result = Controller.ExecuteCommand(commandLine, client);
                     writer.Write(result);
                 }

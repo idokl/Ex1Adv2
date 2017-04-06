@@ -29,7 +29,7 @@ namespace Ex1
             throw new NotImplementedException();
         }
 
-        public void play(move move)
+        public void play(Move move)
         {
             throw new NotImplementedException();
         }

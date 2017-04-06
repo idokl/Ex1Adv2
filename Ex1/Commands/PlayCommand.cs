@@ -16,7 +16,9 @@ namespace Ex1
         }
         public string Execute(string[] args, TcpClient client = null)
         {
-          IModel.Move move = args[0];
+          Move move = (Move)int.Parse(args[0]);
+            return "";
+
         }
     }
 }

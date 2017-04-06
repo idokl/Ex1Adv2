@@ -49,6 +49,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CompareSolvers.cs" />
+    <Compile Include="Controller.cs" />
+    <Compile Include="GenerateMazeCommand.cs" />
     <Compile Include="ICommand.cs" />
     <Compile Include="IController.cs" />
     <Compile Include="IModel.cs" />

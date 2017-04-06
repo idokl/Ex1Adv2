@@ -16,9 +16,10 @@ namespace Ex1
         }
         public string Execute(string[] args, TcpClient client = null)
         {
-          Move move = (Move)int.Parse(args[0]);
-            return "";
 
+            move move = (move)Enum.Parse(typeof(move),args[0]);
+            model.play(move);
+            return "play";
         }
     }
 }

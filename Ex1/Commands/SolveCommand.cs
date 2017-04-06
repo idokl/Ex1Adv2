@@ -19,17 +19,8 @@ namespace Ex1
         {
             string name = args[0];
             int algorithm = int.Parse(args[1]);
-            if (algorithm==0)
-            {
-                DepthFirstSearch<PointState> BFS = new DepthFirstSearch<PointState>();
-                //Solution solutionDFS = BFS.search();
-            }
-            else
-            {
-                DepthFirstSearch<PointState> DFS = new DepthFirstSearch<PointState>();
-                //Solution solutionDFS = DFS.search();
-            }
-            return "";
+            model.solve(name, algorithm);
+            return "solve";
         }
     }
 }

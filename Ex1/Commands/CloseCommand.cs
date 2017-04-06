@@ -7,11 +7,17 @@ using System.Threading.Tasks;
 
 namespace Ex1
 {
-    class SolveCommand : ICommand
+    class CloseCommand : ICommand
     {
+        private IModel model;
+        public CloseCommand(IModel model)
+        {
+            this.model = model;
+        }
         public string Execute(string[] args, TcpClient client = null)
         {
-            throw new NotImplementedException();
+            string name = args[0];
+            return "end of game";
         }
     }
 }

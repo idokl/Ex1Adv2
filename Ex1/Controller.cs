@@ -17,7 +17,12 @@ namespace Ex1
             model = new Model();
             commands = new Dictionary<string, ICommand>();
             commands.Add("generate", new GenerateMazeCommand(model));
-            // more commands...
+            commands.Add("solve", new SolveCommand(model));
+            commands.Add("start", new StartCommand(model));
+            commands.Add("list", new ListCommand(model));
+            commands.Add("join", new JoinCommand(model));
+            commands.Add("play", new PlayCommand(model));
+            commands.Add("close", new CloseCommand(model));
         }
         public string ExecuteCommand(string commandLine, TcpClient client)
         {

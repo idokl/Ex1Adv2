@@ -11,9 +11,4 @@ namespace Ex1
         void Start();
         //void ExecuteCommand(string commandName);
     }
-
-    public enum move
-    {
-        up, down,left,right
-    }
 }

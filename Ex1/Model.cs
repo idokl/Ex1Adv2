@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MazeLib;
 
 namespace Ex1
 {
@@ -13,7 +14,7 @@ namespace Ex1
             throw new NotImplementedException();
         }
 
-        public void generate(string name, int rows, int cols)
+        public Maze generate(string name, int rows, int cols)
         {
             throw new NotImplementedException();
         }

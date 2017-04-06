@@ -11,10 +11,10 @@ namespace SearchAlgorithmsLib
        
         public int evaluatedNodes { get; set; }
 
-       // public Searcher()
-        //{
-         //   evaluatedNodes = 0;
-       // }
+        public Searcher()
+        {
+           evaluatedNodes = 0;
+        }
        
         // ISearcher’s methods:
         public virtual int getNumberOfNodesEvaluated()

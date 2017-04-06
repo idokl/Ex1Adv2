@@ -8,7 +8,8 @@ namespace Ex1
 {
     interface IView
     {
-        void ExecuteCommand(string commandName);
+        void Start();
+        //void ExecuteCommand(string commandName);
     }
 
     public enum move

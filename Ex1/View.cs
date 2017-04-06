@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Ex1
 {
-    class View
+    class View : IView
     {
         
         private int port; 
@@ -25,7 +25,8 @@ namespace Ex1
             IPEndPoint ep = new IPEndPoint(IPAddress.Parse("127.0.0.1"), port);
             listener = new TcpListener(ep);
             listener.Start(); 
-            Console.WriteLine("Waiting for connections...");
+            Console.WriteLine("Waiting 1 second for connections...");
+            System.Threading.Thread.Sleep(1000);
             Task task = new Task(() => {
                 while (true)
                 {
@@ -39,6 +40,7 @@ namespace Ex1
                     {
                         break;
                     }
+
                 }
                 Console.WriteLine("Server stopped");
             });

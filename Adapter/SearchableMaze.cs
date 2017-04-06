@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Ex1
 {
-    class SearchableMaze : ISearchable
+    public class SearchableMaze : ISearchable
     {
         public Maze MyMaze { get; }
         private PointState GoalPosition;

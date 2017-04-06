@@ -7,6 +7,7 @@ using MazeGeneratorLib;
 using MazeLib;
 using SearchAlgorithmsLib;
 
+
 namespace Ex1
 {
     class CompareSolvers

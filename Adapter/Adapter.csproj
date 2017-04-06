@@ -4,16 +4,15 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{D4228214-FBE8-47B8-B206-3DFED6AE28ED}</ProjectGuid>
-    <OutputType>Exe</OutputType>
-    <RootNamespace>Ex1</RootNamespace>
-    <AssemblyName>Ex1</AssemblyName>
+    <ProjectGuid>{2AE7A674-B8A3-4E7F-A8B5-DA5460BDCC92}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Adapter</RootNamespace>
+    <AssemblyName>Adapter</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -23,7 +22,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -48,21 +46,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CompareSolvers.cs" />
-    <Compile Include="IController.cs" />
-    <Compile Include="IModel.cs" />
-    <Compile Include="IView.cs" />
-    <Compile Include="Program.cs" />
+    <Compile Include="PointState.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SearchableMaze.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Adapter\Adapter.csproj">
-      <Project>{2ae7a674-b8a3-4e7f-a8b5-da5460bdcc92}</Project>
-      <Name>Adapter</Name>
-    </ProjectReference>
     <ProjectReference Include="..\SearchAlgorithmsLib\SearchAlgorithmsLib.csproj">
       <Project>{4cda06c4-f1ab-45f3-a5f3-af697f4ab464}</Project>
       <Name>SearchAlgorithmsLib</Name>

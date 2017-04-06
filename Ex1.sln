@@ -13,6 +13,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "lib", "lib", "{FB15B3D8-D13
 		packages\MazeLib.dll = packages\MazeLib.dll
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Adapter", "Adapter\Adapter.csproj", "{2AE7A674-B8A3-4E7F-A8B5-DA5460BDCC92}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{4CDA06C4-F1AB-45F3-A5F3-AF697F4AB464}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4CDA06C4-F1AB-45F3-A5F3-AF697F4AB464}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4CDA06C4-F1AB-45F3-A5F3-AF697F4AB464}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2AE7A674-B8A3-4E7F-A8B5-DA5460BDCC92}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2AE7A674-B8A3-4E7F-A8B5-DA5460BDCC92}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2AE7A674-B8A3-4E7F-A8B5-DA5460BDCC92}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2AE7A674-B8A3-4E7F-A8B5-DA5460BDCC92}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

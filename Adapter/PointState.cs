@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SearchAlgorithmsLib
 {
-    class PointState : State
+    public class PointState : State
     {
         public MazeLib.Position CurrentPosition { get; }
 

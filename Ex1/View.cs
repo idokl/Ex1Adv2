@@ -24,7 +24,7 @@ namespace Ex1
         {
             IPEndPoint ep = new IPEndPoint(IPAddress.Parse("127.0.0.1"), port);
             listener = new TcpListener(ep);
-            listener.Start();
+            listener.Start(); 
             Console.WriteLine("Waiting for connections...");
             Task task = new Task(() => {
                 while (true)

@@ -14,17 +14,18 @@ namespace SearchAlgorithmsLib
             throw new NotImplementedException();
         }
         */
-        PQAdapter pqAdapter = new PQAdapter();
+        public PQAdapter pqAdapter = new PQAdapter();
+       
         public override Solution search(ISearchable searchable)
         {
             IComparer<State> comperar = new StateComparer();
             //PriorityQueue<State> openList = new PriorityQueue<State>();
             HashSet<State> closeStates = new HashSet<State>();
             State initialState = searchable.getInitialState();
-            openList.push(initialState);
-            while(OpenListSize > 0)
+            pqAdapter.openList.push(initialState);
+            while(pqAdapter.OpenListSize > 0)
             {
-                State bestOpenState = popOpenList();
+                State bestOpenState = pqAdapter.popOpenList();
                 closeStates.Add(bestOpenState);
                 if (bestOpenState.Equals(searchable.getGoalState()))
                 {
@@ -42,17 +43,17 @@ namespace SearchAlgorithmsLib
                 List<State> successors = searchable.getAllPossibleStates(bestOpenState);
                 foreach(State s in successors)
                 {
-                    if ((!closeStates.Contains(s)) && (!openList.DoesContain(s)))
+                    if ((!closeStates.Contains(s)) && (!pqAdapter.openList.DoesContain(s)))
                     {
                         s.CameFrom = bestOpenState;
                         s.Cost = s.CameFrom.Cost + 1;
-                        openList.push(s);
+                        pqAdapter.openList.push(s);
                     }
                     else
                     {
                         s.CameFrom = bestOpenState;
                         s.Cost = s.CameFrom.Cost + 1;
-                        openList.AddElementOrTryToDecreaseItsKey(s);
+                        pqAdapter.openList.AddElementOrTryToDecreaseItsKey(s);
                     }
                 }
             }

@@ -9,6 +9,7 @@ namespace Ex1
     interface IView
     {
         void Start();
+        void Stop();
         //void ExecuteCommand(string commandName);
     }
 }

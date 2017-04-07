@@ -16,19 +16,20 @@ namespace ClientForDebug
             IPEndPoint ep = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 8000); 
             TcpClient client = new TcpClient();
             client.Connect(ep);
-            Console.WriteLine("You are connected");
+            Console.WriteLine("debug massage: You are connected");
             using (NetworkStream stream = client.GetStream())
-            using (StreamReader reader = new StreamReader(stream))
-            using (StreamWriter writer = new StreamWriter(stream))
+            using (BinaryReader reader = new BinaryReader(stream))
+            using (BinaryWriter writer = new BinaryWriter(stream))
             {
                 // Send data to server
                 Console.Write("Please enter a command: ");
                 String command = Console.ReadLine();
-                //int num = int.Parse(Console.ReadLine());
+                //String command = "command arg0_of_command arg1_of_command";
                 writer.Write(command);
+
                 // Get result from server
-                string result = reader.ReadLine();
-                Console.WriteLine("Result = {0}", result);
+                string result = reader.ReadString();
+                Console.WriteLine("debug massage: Result = {0}", result);
             }
             client.Close();
         }

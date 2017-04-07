@@ -9,6 +9,12 @@ namespace Ex1
 {
     class TestOfCommand : ICommand
     {
+        private IModel model;
+        public TestOfCommand(IModel model)
+        {
+            this.model = model;
+        }
+
         public string Execute(string[] args, TcpClient client = null)
         {
             Console.WriteLine("I am the Server.");

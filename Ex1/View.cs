@@ -15,6 +15,7 @@ namespace Ex1
         private int port; 
         private TcpListener listener;
         private IClientHandler ch;
+
         public View(int port, IClientHandler ch)
         {
             this.port = port;
@@ -22,29 +23,33 @@ namespace Ex1
         }
         public void Start()
         {
+            //definition of communication channels:
             IPEndPoint ep = new IPEndPoint(IPAddress.Parse("127.0.0.1"), port);
             listener = new TcpListener(ep);
-            listener.Start(); 
-            Console.WriteLine("Waiting 1 second for connections...");
-            System.Threading.Thread.Sleep(1000);
-            Task task = new Task(() => {
-                while (true) 
+            listener.Start();
+
+            Task acceptingClients = new Task(() =>
+            {
+                //accept clients:
+                while (true)
                 {
+                    int counterOfClients = 0;
                     try
                     {
                         TcpClient client = listener.AcceptTcpClient();
-                        Console.WriteLine("Got new connection");
+                        Console.WriteLine("debug massage: Got new connection");
                         ch.HandleClient(client);
                     }
                     catch (SocketException)
                     {
                         break;
                     }
-
+                    counterOfClients++;
+                    Console.WriteLine("debug massage: counterOfClients: " + counterOfClients);
                 }
-                Console.WriteLine("Server stopped");
+                Console.WriteLine("debug massage: Server stopped");
             });
-            task.Start();
+            acceptingClients.Start();
         }
 
         public void Stop()

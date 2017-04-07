@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Net;
+using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -14,6 +17,8 @@ namespace ClientForDebug
             System.Threading.Thread.Sleep(500);
             Communication communication = new Communication();
             communication.Communicate();
+
+            System.Threading.Thread.Sleep(2000);
         }
     }
 }

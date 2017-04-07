@@ -28,7 +28,7 @@ namespace Ex1
             Console.WriteLine("Waiting 1 second for connections...");
             System.Threading.Thread.Sleep(1000);
             Task task = new Task(() => {
-                while (true)
+                while (true) 
                 {
                     try
                     {

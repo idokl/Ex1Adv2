@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace SearchAlgorithmsLib
 {
-    public class PQAdapter : Searcher
+    public abstract class PQAdapter : Searcher
     {
-       // public Searcher searcher;
 
         public PriorityQueue<State> openList;
 
@@ -20,11 +19,6 @@ namespace SearchAlgorithmsLib
         public State popOpenList(){
             evaluatedNodes++;
             return openList.pop();
-        }
-
-        public override Solution search(ISearchable searchable)
-        {
-            throw new NotImplementedException();
         }
 
         // a property of openList

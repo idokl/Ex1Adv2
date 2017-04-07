@@ -9,6 +9,12 @@ namespace SearchAlgorithmsLib
 {
     public class DepthFirstSearch<T> : Searcher
     {
+
+        public override int getNumberOfNodesEvaluated()
+        {
+            return base.evaluatedNodes;
+        }
+
         public override Solution search(ISearchable searchable)
         {
    
@@ -20,19 +26,18 @@ namespace SearchAlgorithmsLib
             Solution solution = new Solution();
             solution.Path = path;
             s.Push(initialState);
-            while (s.Count > 0)
+            int sSize = s.Count;
+            while (sSize > 0)
             {
                 State v = s.Pop();
-
+                base.evaluatedNodes++;
                 if (v.Equals(searchable.getGoalState()))
                 {
                     while (!(v.Equals(initialState)))
                     {
-                       
                         solution.Path.AddFirst(v);
                         v = v.CameFrom;
                     }
-
                     return solution;
                 }
                  
@@ -46,10 +51,7 @@ namespace SearchAlgorithmsLib
                         s.Push(w);
                     }
                 }
-               
-
-               
-
+                sSize = s.Count;
             }
             Console.WriteLine("This Searchable doesn't have a solution and we didn't" +
                 "implement solutions for insolvable problems, so we throws an exception");

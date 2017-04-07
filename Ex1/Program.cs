@@ -19,7 +19,7 @@ namespace Ex1
             view.Start();
 
 
-           CompareSolvers.Run();
+          // CompareSolvers.Run();
         }
     }
 

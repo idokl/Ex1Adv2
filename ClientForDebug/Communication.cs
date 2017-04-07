@@ -22,14 +22,13 @@ namespace ClientForDebug
             using (BinaryWriter writer = new BinaryWriter(stream))
             {
                 // Send data to server
-                Console.Write("Please enter command: ");
+                Console.Write("Please enter a command: ");
                 String command = Console.ReadLine();
+                //int num = int.Parse(Console.ReadLine());
                 writer.Write(command);
-                ////int num = int.Parse(Console.ReadLine());
-                //writer.Write(command);
-                //// Get result from server
-                //int result = reader.ReadInt32();
-                //Console.WriteLine("Result = {0}", result);
+                // Get result from server
+                string result = reader.ReadString();
+                Console.WriteLine("Result = {0}", result);
             }
             client.Close();
         }

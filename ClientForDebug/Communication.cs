@@ -10,10 +10,10 @@ using System.Threading.Tasks;
 namespace ClientForDebug
 {
     class Communication
-    {    
+    {
         public void Communicate()
         {
-            IPEndPoint ep = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 8000); 
+            IPEndPoint ep = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 8000);
             TcpClient client = new TcpClient();
             client.Connect(ep);
             Console.WriteLine("debug massage: You are connected");
@@ -21,15 +21,22 @@ namespace ClientForDebug
             using (BinaryReader reader = new BinaryReader(stream))
             using (BinaryWriter writer = new BinaryWriter(stream))
             {
-                // Send data to server
-                Console.Write("Please enter a command: ");
-                String command = Console.ReadLine();
-                //String command = "command arg0_of_command arg1_of_command";
-                writer.Write(command);
+                while (true)
+                {
+                    // Send data to server
+                    Console.Write("Please enter a command: ");
+                    String command;
+                    command = Console.ReadLine();
+                    //command = "debug arg0 arg1 arg2";
+                    //command = "generate mazeName 10 10";
+                    writer.Write(command);
+                    if (command == "terminate")
+                        break;
 
-                // Get result from server
-                string result = reader.ReadString();
-                Console.WriteLine("debug massage: Result = {0}", result);
+                    // Get result from server
+                    string result = reader.ReadString();
+                    Console.WriteLine("debug massage: Result = {0}", result);
+                }
             }
             client.Close();
         }

@@ -11,8 +11,8 @@ namespace Ex1
 {
     class View : IView
     {
-        
-        private int port; 
+
+        private int port;
         private TcpListener listener;
         private IClientHandler ch;
 
@@ -30,10 +30,10 @@ namespace Ex1
 
             Task acceptingClients = new Task(() =>
             {
+                int counterOfClients = 0;
                 //accept clients:
                 while (true)
                 {
-                    int counterOfClients = 0;
                     try
                     {
                         TcpClient client = listener.AcceptTcpClient();
@@ -58,4 +58,4 @@ namespace Ex1
         }
     }
 }
-    
+

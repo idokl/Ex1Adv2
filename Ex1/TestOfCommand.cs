@@ -17,7 +17,6 @@ namespace Ex1
 
         public string Execute(string[] args, TcpClient client = null)
         {
-            Console.WriteLine("I am the Server.");
             Console.WriteLine("The client executed the command TestOfCommand.");
             Console.WriteLine("It sended " + args.Length + " arguments");
             Console.WriteLine("The arguments are:");

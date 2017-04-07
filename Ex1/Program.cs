@@ -16,7 +16,7 @@ namespace Ex1
         //The main:
         static void Main(string[] args)
         {
-
+            Console.WriteLine("debug massage: I am the Server.");
             IController controller = new Controller();
             IClientHandler clientHandler = new ClientHandler(controller);
             IView view = new View(8000, clientHandler);
@@ -32,5 +32,5 @@ namespace Ex1
         }
     }
 
-  
+
 }

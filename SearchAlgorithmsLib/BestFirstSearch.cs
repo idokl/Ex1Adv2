@@ -42,22 +42,21 @@ namespace SearchAlgorithmsLib
                 List<State> successors = searchable.getAllPossibleStates(bestOpenState);
                 foreach(State s in successors)
                 {
-                    if ((!closeStates.Contains(s)) && (!openList.DoesContain(s)))
-                    {
-                        s.CameFrom = bestOpenState;
-                        s.Cost = s.CameFrom.Cost + 1;
-                        openList.push(s);
-                    }
-                    else
-                    {
-                        s.CameFrom = bestOpenState;
-                        s.Cost = s.CameFrom.Cost + 1;
-                        openList.AddElementOrTryToDecreaseItsKey(s);
-                    }
+                    if (!closeStates.Contains(s))
+                        if (!openList.DoesContain(s))
+                        {
+                            s.CameFrom = bestOpenState;
+                            openList.push(s);
+                        }
+                        else
+                        {
+                            s.CameFrom = bestOpenState;
+                            openList.TryToDecreaseTheKeyOfTheElement(s);
+                        }
                 }
             }
             Console.WriteLine("This Searchable doesn't have a solution and we didn't" +
-                "implement solutions for insolvable problems, so we throws an exception");
+                "implement solutions for insolvable problems, so we throw an exception");
             throw new NotImplementedException();
         }
     }

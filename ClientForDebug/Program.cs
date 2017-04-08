@@ -19,7 +19,7 @@ namespace ClientForDebug
             Communication communication = new Communication();
             communication.Communicate();
 
-            System.Threading.Thread.Sleep(2000);
+            System.Threading.Thread.Sleep(1000);
         }
     }
 }

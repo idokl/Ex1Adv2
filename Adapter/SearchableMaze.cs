@@ -28,29 +28,30 @@ namespace Ex1
             int currCol = currentPosition.Col;
             List<State> accessiblePositionStates = new List<State>();
             Position up, down, right, left;
+            double costOfNeighbor = s.Cost + 1;
             if (!((currRow + 1) == MyMaze.Rows))
             {
                 down = new Position(currRow + 1, currCol);
                 if (CellType.Free == MyMaze[currRow + 1, currCol])
-                    accessiblePositionStates.Add(new PointState(down));
+                    accessiblePositionStates.Add(new PointState(down, costOfNeighbor));
             }
             if (!((currRow) == 0))
             {
                 up = new Position(currRow - 1, currCol);
                 if (CellType.Free == MyMaze[currRow - 1, currCol])
-                    accessiblePositionStates.Add(new PointState(up));
+                    accessiblePositionStates.Add(new PointState(up, costOfNeighbor));
             }
             if (!((currCol) == 0))
             {
                 left = new Position(currRow, currCol - 1);
                 if (CellType.Free == MyMaze[currRow, currCol - 1])
-                    accessiblePositionStates.Add(new PointState(left));
+                    accessiblePositionStates.Add(new PointState(left, costOfNeighbor));
             }
             if (!((currCol+1) == MyMaze.Cols))
             {
                 right = new Position(currRow, currCol + 1);
                 if (CellType.Free == MyMaze[currRow, currCol + 1])
-                    accessiblePositionStates.Add(new PointState(right));
+                    accessiblePositionStates.Add(new PointState(right, costOfNeighbor));
             }
 
             return accessiblePositionStates;

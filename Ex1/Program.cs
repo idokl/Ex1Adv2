@@ -28,7 +28,7 @@ namespace Ex1
             Console.ReadLine();
             view.Stop();
 
-            // CompareSolvers.Run();
+            //CompareSolvers.Run();
         }
     }
 

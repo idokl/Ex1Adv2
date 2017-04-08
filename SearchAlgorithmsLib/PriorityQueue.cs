@@ -71,23 +71,14 @@ namespace SearchAlgorithmsLib
         }
 
         //my implementation (not efficient: O(n))
-        public void AddElementOrTryToDecreaseItsKey(T element)
+        public void TryToDecreaseTheKeyOfTheElement(T element)
         {
-            if (!heap.Contains(element))
+            int indexOfElement = Array.IndexOf(heap, element);
+            if (comparer.Compare(element, heap[indexOfElement]) < 0)
             {
-                this.push(element);
-            }
-            else
-            {
-                int indexOfElement = Array.IndexOf(heap, element);
-                if (comparer.Compare(element, heap[indexOfElement]) < 0)
-                {
-                    heap[indexOfElement] = element;
-                    SiftUp(indexOfElement);
-                }
+                heap[indexOfElement] = element;
+                SiftUp(indexOfElement);
             }
         }
-
-        //////////////////////////////////////////////////////////////////
     }
 }

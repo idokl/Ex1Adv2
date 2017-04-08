@@ -26,7 +26,7 @@ namespace Ex1
             Console.WriteLine("Start:" + new PointState(MyMaze.InitialPos).ToString());
             Console.WriteLine("Goal:" + new PointState(MyMaze.GoalPos).ToString());
 
-
+            
             DepthFirstSearch<PointState> DFS = new DepthFirstSearch<PointState>();
             Solution solutionDFS = DFS.search(SM);
 
@@ -38,7 +38,7 @@ namespace Ex1
             }
             Console.WriteLine("The DFS algorithm treated " + DFS.evaluatedNodes + " nodes.");
             Console.WriteLine();
-
+            
 
 
             BestFirstSearch<PointState> BFS = new BestFirstSearch<PointState>();

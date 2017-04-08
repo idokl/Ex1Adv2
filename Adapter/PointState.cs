@@ -17,6 +17,12 @@ namespace SearchAlgorithmsLib
             this.CurrentPosition = currentPosition;
         }
 
+        public PointState(MazeLib.Position currentPosition, double cost)
+        {
+            this.CurrentPosition = currentPosition;
+            this.Cost = cost;
+        }
+
         public bool Equals(State s)
         {
             return ((this.CurrentPosition.Row == (s as PointState).CurrentPosition.Row) 

@@ -12,8 +12,9 @@ namespace Ex1
     class Model : IModel
     {
 
-        public Dictionary<string, Maze> dictionaryOfMazes = new Dictionary<string, Maze>();
-        public Dictionary<SearchableMaze, Solution> dictionaryOfMazesAndSolutions = new Dictionary<SearchableMaze, Solution>();
+        private Dictionary<string, Maze> dictionaryOfMazes = new Dictionary<string, Maze>();
+        private Dictionary<SearchableMaze, Solution> dictionaryOfMazesAndSolutions = new Dictionary<SearchableMaze, Solution>();
+
 
         public void close(string name)
         {
@@ -36,7 +37,12 @@ namespace Ex1
 
         public List<string> list()
         {
-            throw new NotImplementedException();
+            List<string> listOgGames = new List<string>();
+            foreach (String name in dictionaryOfMazes.Keys)
+            {
+                listOgGames.Add(name);
+            }
+            return listOgGames;
         }
 
         public void play(Move move)

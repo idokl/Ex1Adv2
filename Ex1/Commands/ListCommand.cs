@@ -16,8 +16,15 @@ namespace Ex1
         }
         public string Execute(string[] args, TcpClient client = null)
         {
-            model.list();
-            return "list of games";
+            List<String> listOfGames =  model.list();
+            StringBuilder listOfGameStringBuilder = new StringBuilder(" ");
+            foreach (String name in listOfGames)
+            {
+                String nameFormat = String.Format("{0},", name);
+                listOfGameStringBuilder.AppendLine(nameFormat);
+            }
+            listOfGameStringBuilder.Length -= 1;
+            return  listOfGameStringBuilder.ToString();
         }
     }
 }

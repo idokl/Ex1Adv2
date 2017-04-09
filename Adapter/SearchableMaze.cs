@@ -66,5 +66,16 @@ namespace Ex1
         {
             return InitialPosition;
         }
+
+        public bool Equals(SearchableMaze sm)
+        {
+            return ((this.MyMaze.ToString() == sm.MyMaze.ToString())
+                && (this.GoalPosition.ToString() == sm.GoalPosition.ToString())
+                && (this.InitialPosition.ToString() == sm.InitialPosition.ToString()));
+        }
+
+        public override bool Equals(object sm) => Equals(sm as SearchableMaze);
+
+        public override int GetHashCode() => MyMaze.GetHashCode() * 101 + GoalPosition.GetHashCode() * 103 + InitialPosition.GetHashCode() * 107;
     }
 }

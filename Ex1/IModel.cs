@@ -5,13 +5,14 @@ using System.Text;
 using System.Threading.Tasks;
 using MazeGeneratorLib;
 using MazeLib;
+using SearchAlgorithmsLib;
 
 namespace Ex1
 {
     interface IModel
     {
         Maze generate(string name, int rows, int cols);
-        void solve(string name, int algorithm);
+        Solution solve(string name, int algorithm);
         void start(string name, int rows, int cols);
         List<string> list();
         void join(string name);

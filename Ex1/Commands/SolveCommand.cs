@@ -19,8 +19,34 @@ namespace Ex1
         {
             string name = args[0];
             int algorithm = int.Parse(args[1]);
-            model.solve(name, algorithm);
-            return "solve";
+            Solution solution = model.solve(name, algorithm);
+            StringBuilder solutionStringBuilder = new StringBuilder("");
+            LinkedListNode<State> state = solution.Path.First;
+            PointState point = state.Value as PointState;
+            LinkedListNode<State> nextState;
+            PointState nextPoint;
+            for (nextState = state.Next; nextState != null; nextState = state.Next)
+            {
+                nextPoint = nextState.Value as PointState;
+                if (nextPoint.CurrentPosition.Row == point.CurrentPosition.Row)
+                {
+                    if (nextPoint.CurrentPosition.Col < point.CurrentPosition.Col)
+                        solutionStringBuilder.Append("0");
+                    else
+                        solutionStringBuilder.Append("1");
+                }
+                else
+                {
+                    if (nextPoint.CurrentPosition.Row < point.CurrentPosition.Row)
+                        solutionStringBuilder.Append("2");
+                    else
+                        solutionStringBuilder.Append("3");
+                }
+                state = nextState;
+                point = nextPoint;
+            }
+            return solutionStringBuilder.ToString();
+            //return "solve";
         }
     }
 }

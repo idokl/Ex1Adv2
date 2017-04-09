@@ -25,6 +25,7 @@ namespace Ex1
             DFSMazeGenerator dfsMazeGenerator = new DFSMazeGenerator();
             Maze MyMaze = dfsMazeGenerator.Generate(rows, cols);
             MyMaze.Name = name;
+            dictionaryOfMazes[name] = MyMaze;
             return MyMaze;
         }
 
@@ -43,10 +44,12 @@ namespace Ex1
             throw new NotImplementedException();
         }
 
-        public void solve(string name, int algorithm)
+        public Solution solve(string name, int algorithm)
         {
             Maze maze = this.dictionaryOfMazes[name];
             SearchableMaze searchableMaze = new SearchableMaze(maze);
+            if (dictionaryOfMazesAndSolutions.ContainsKey(searchableMaze))
+                return dictionaryOfMazesAndSolutions[searchableMaze];
             Solution solution;
             if (algorithm == 1)
             {
@@ -59,6 +62,7 @@ namespace Ex1
                 solution = DFS.search(searchableMaze);
             }
             dictionaryOfMazesAndSolutions.Add(searchableMaze, solution);
+            return solution;
         }
 
         public void start(string name, int rows, int cols)

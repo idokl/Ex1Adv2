@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
+using MazeLib;
 
 namespace Ex1
 {
@@ -17,8 +18,8 @@ namespace Ex1
         public string Execute(string[] args, TcpClient client = null)
         {
 
-            Move move = (Move)Enum.Parse(typeof(Move),args[0]);
-            model.play(move);
+            Direction direction = (Direction)Enum.Parse(typeof(Direction),args[0]);
+            model.play(direction);
             return "play";
         }
     }

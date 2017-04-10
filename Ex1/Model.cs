@@ -45,7 +45,7 @@ namespace Ex1
             return listOgGames;
         }
 
-        public void play(Move move)
+        public void play(Direction direction)
         {
             throw new NotImplementedException();
         }
@@ -73,7 +73,14 @@ namespace Ex1
 
         public void start(string name, int rows, int cols)
         {
-            throw new NotImplementedException();
+            if (dictionaryOfMazes.ContainsKey(name))
+            {
+
+            }
+            else
+            {
+                this.generate(name, rows, cols);
+            }
         }
     }
 }

@@ -16,12 +16,7 @@ namespace Ex1
         void start(string name, int rows, int cols);
         List<string> list();
         void join(string name);
-        void play(Move move);
+        void play(Direction direction);
         void close(string name);
-    }
-
-    public enum Move
-    {
-        up, down, left, right
     }
 }

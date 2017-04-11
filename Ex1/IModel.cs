@@ -13,10 +13,10 @@ namespace Ex1
     {
         Maze generate(string name, int rows, int cols);
         Solution solve(string name, int algorithm);
-        void start(string name, int rows, int cols);
+        Maze start(string name, int rows, int cols);
         List<string> list();
         void join(string name);
-        void play(Direction direction);
+        Direction play(Direction direction);
         void close(string name);
     }
 }

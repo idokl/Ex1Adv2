@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net.Sockets;
 using System.Text;
@@ -14,7 +15,7 @@ namespace Ex1
         {
             this.model = model;
         }
-        public string Execute(string[] args, TcpClient client = null)
+        public string Execute(string[] args, TcpClient client)
         {
             List<String> listOfGames =  model.list();
             StringBuilder listOfGameStringBuilder = new StringBuilder(" ");
@@ -24,7 +25,12 @@ namespace Ex1
                 listOfGameStringBuilder.AppendLine(nameFormat);
             }
             listOfGameStringBuilder.Length -= 1;
-            return  listOfGameStringBuilder.ToString();
+            string listJson = Newtonsoft.Json.JsonConvert.SerializeObject(listOfGameStringBuilder);
+            using (NetworkStream stream = client.GetStream())
+            using (BinaryReader reader = new BinaryReader(stream))
+            using (BinaryWriter writer = new BinaryWriter(stream))
+                writer.Write(listJson);
+            return "-1";
         }
     }
 }

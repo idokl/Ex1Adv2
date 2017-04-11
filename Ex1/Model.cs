@@ -45,9 +45,9 @@ namespace Ex1
             return listOgGames;
         }
 
-        public void play(Direction direction)
+        public Direction play(Direction direction)
         {
-            throw new NotImplementedException();
+            return direction;
         }
 
         public Solution solve(string name, int algorithm)
@@ -71,15 +71,15 @@ namespace Ex1
             return solution;
         }
 
-        public void start(string name, int rows, int cols)
+        public Maze start(string name, int rows, int cols)
         {
             if (dictionaryOfMazes.ContainsKey(name))
             {
-
+                return dictionaryOfMazes[name];
             }
             else
             {
-                this.generate(name, rows, cols);
+               return this.generate(name, rows, cols);
             }
         }
     }

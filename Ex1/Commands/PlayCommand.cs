@@ -21,7 +21,12 @@ namespace Ex1
 
             Direction direction = (Direction)Enum.Parse(typeof(Direction),args[0]);
             Direction directionBack = model.play(direction);
-            PacketStream playPacketStream = new PacketStream(true, directionBack.ToString());
+
+            PacketStream playPacketStream = new PacketStream
+            {
+                MultiPlayer = true, StringStream = directionBack.ToString()
+            };
+
             return Newtonsoft.Json.JsonConvert.SerializeObject(playPacketStream);
         }
     }

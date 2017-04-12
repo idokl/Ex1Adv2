@@ -42,7 +42,7 @@ namespace Ex1
                         {
                             
                         }
-                       // writer.Write(result);
+                        writer.Write(result);
                     }
                 }
             client.Close();

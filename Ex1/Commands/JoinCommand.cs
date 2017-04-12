@@ -19,7 +19,11 @@ namespace Ex1
         {
             string name = args[0];
             model.join(name);
-            PacketStream joinPacketStream = new PacketStream(true, "");
+            PacketStream joinPacketStream = new PacketStream
+            {
+                MultiPlayer = true,
+                StringStream = ""
+            };
             return Newtonsoft.Json.JsonConvert.SerializeObject(joinPacketStream);
         }
     }

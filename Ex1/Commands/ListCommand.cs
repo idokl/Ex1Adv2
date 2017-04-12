@@ -26,8 +26,11 @@ namespace Ex1
             }
             listOfGameStringBuilder.Length -= 1;
            
-            PacketStream listPacketStream = new PacketStream(false, listOfGameStringBuilder.ToString());
-            return Newtonsoft.Json.JsonConvert.SerializeObject(listPacketStream);
+            PacketStream ListPacketStream = new PacketStream
+            {
+                StringStream = listOfGameStringBuilder.ToString()
+            };
+            return Newtonsoft.Json.JsonConvert.SerializeObject(ListPacketStream);
         }
     }
 }

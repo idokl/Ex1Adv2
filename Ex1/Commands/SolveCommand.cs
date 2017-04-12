@@ -46,8 +46,12 @@ namespace Ex1
                 state = nextState;
                 point = nextPoint;
             }
-            PacketStream listPacketStream = new PacketStream(false, solutionStringBuilder.ToString());
-            return Newtonsoft.Json.JsonConvert.SerializeObject(listPacketStream);
+            
+            PacketStream solvePacketStream = new PacketStream
+            {
+                StringStream = solutionStringBuilder.ToString()
+            };
+            return Newtonsoft.Json.JsonConvert.SerializeObject(solvePacketStream);
         }
     }
 }

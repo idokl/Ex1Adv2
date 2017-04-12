@@ -24,7 +24,10 @@ namespace Ex1
             int rows = int.Parse(args[1]);
             int cols = int.Parse(args[2]);
             Maze maze = model.generate(name, rows, cols);
-            PacketStream generatePacketStream = new PacketStream(false, maze.ToString());
+            PacketStream generatePacketStream = new PacketStream
+            {
+                StringStream = maze.ToString()
+            };
             String s = Newtonsoft.Json.JsonConvert.SerializeObject(generatePacketStream);
             return s;
         }

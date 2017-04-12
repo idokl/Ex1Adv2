@@ -20,8 +20,12 @@ namespace Ex1
         {
             string name = args[0];
             model.close(name);
-            PacketStream closePacketStream = new PacketStream(true,"");
-           return Newtonsoft.Json.JsonConvert.SerializeObject(closePacketStream);
+            PacketStream closePacketStream = new PacketStream
+            {
+                MultiPlayer = true,
+                StringStream = ""
+            };
+            return Newtonsoft.Json.JsonConvert.SerializeObject(closePacketStream);
         }
     }
 }

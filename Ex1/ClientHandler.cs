@@ -33,11 +33,10 @@ namespace Ex1
                             break;
                         char[] separator = { ' ' };
                         string[] words = commandLine.Split(separator);
-                        string s = Controller.ExecuteCommand(commandLine, client);
-                       PacketStream packet = Newtonsoft.Json.JsonConvert.DeserializeObject< PacketStream>(s);
+                        
+                       PacketStream packet = Newtonsoft.Json.JsonConvert.DeserializeObject< PacketStream>(Controller.ExecuteCommand(commandLine, client));
 
-                        Console.WriteLine(("test"));
-                        String result = packet.StringStream;
+                     String result = packet.StringStream;
                         if (packet.MultiPlayer == true)
                         {
                             

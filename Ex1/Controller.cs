@@ -34,8 +34,7 @@ namespace Ex1
                 return "Command not found";
             string[] args = arr.Skip(1).ToArray();
             ICommand command = commands[commandKey];
-            string s= command.Execute(args, client);
-            return s;
-        }
+            return command.Execute(args, client);
+           }
     }
 }

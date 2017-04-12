@@ -28,8 +28,8 @@ namespace Ex1
             {
                 StringStream = maze.ToString()
             };
-            String s = Newtonsoft.Json.JsonConvert.SerializeObject(generatePacketStream);
-            return s;
+            return Newtonsoft.Json.JsonConvert.SerializeObject(generatePacketStream);
+           
         }
     }
 }

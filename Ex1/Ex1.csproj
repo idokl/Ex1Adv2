@@ -59,11 +59,11 @@
     <Compile Include="CompareSolvers.cs" />
     <Compile Include="Controller.cs" />
     <Compile Include="Commands\GenerateMazeCommand.cs" />
-    <Compile Include="IClientHandler.cs" />
-    <Compile Include="ICommand.cs" />
-    <Compile Include="IController.cs" />
-    <Compile Include="IModel.cs" />
-    <Compile Include="IView.cs" />
+    <Compile Include="Interfaces\IClientHandler.cs" />
+    <Compile Include="Interfaces\ICommand.cs" />
+    <Compile Include="Interfaces\IController.cs" />
+    <Compile Include="Interfaces\IModel.cs" />
+    <Compile Include="Interfaces\IView.cs" />
     <Compile Include="Commands\JoinCommand.cs" />
     <Compile Include="Commands\ListCommand.cs" />
     <Compile Include="Model.cs" />

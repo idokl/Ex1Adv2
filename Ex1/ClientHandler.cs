@@ -33,13 +33,16 @@ namespace Ex1
                             break;
                         char[] separator = { ' ' };
                         string[] words = commandLine.Split(separator);
-                        String result = Controller.ExecuteCommand(commandLine, client);
-                       PacketStream packet = (PacketStream)Newtonsoft.Json.JsonConvert.DeserializeObject(result);
+                        string s = Controller.ExecuteCommand(commandLine, client);
+                       PacketStream packet = (PacketStream)Newtonsoft.Json.JsonConvert.DeserializeObject(s);
+
+                        Console.WriteLine(("test"));
+                        String result = packet.StringStream;
                         if (packet.MultiPlayer == true)
                         {
                             
                         }
-                        writer.Write(result);
+                       // writer.Write(result);
                     }
                 }
             client.Close();

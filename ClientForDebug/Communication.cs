@@ -13,7 +13,7 @@ namespace ClientForDebug
     {
         public void Communicate()
         {
-            IPEndPoint ep = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 8000);
+            IPEndPoint ep = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 9000);
             TcpClient client = new TcpClient();
             client.Connect(ep);
             Console.WriteLine("debug massage: You are connected");

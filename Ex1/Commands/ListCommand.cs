@@ -25,12 +25,9 @@ namespace Ex1
                 listOfGameStringBuilder.AppendLine(nameFormat);
             }
             listOfGameStringBuilder.Length -= 1;
-            string listJson = Newtonsoft.Json.JsonConvert.SerializeObject(listOfGameStringBuilder);
-            using (NetworkStream stream = client.GetStream())
-            using (BinaryReader reader = new BinaryReader(stream))
-            using (BinaryWriter writer = new BinaryWriter(stream))
-                writer.Write(listJson);
-            return "-1";
+           
+            PacketStream listPacketStream = new PacketStream(false, listOfGameStringBuilder.ToString());
+            return Newtonsoft.Json.JsonConvert.SerializeObject(listPacketStream);
         }
     }
 }

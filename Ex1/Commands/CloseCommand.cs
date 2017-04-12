@@ -20,12 +20,8 @@ namespace Ex1
         {
             string name = args[0];
             model.close(name);
-            string closeJson = Newtonsoft.Json.JsonConvert.SerializeObject("");
-            using (NetworkStream stream = client.GetStream())
-            using (BinaryReader reader = new BinaryReader(stream))
-            using (BinaryWriter writer = new BinaryWriter(stream))
-                writer.Write(closeJson);
-            return "1";
+            PacketStream closePacketStream = new PacketStream(true,"");
+           return Newtonsoft.Json.JsonConvert.SerializeObject(closePacketStream);
         }
     }
 }

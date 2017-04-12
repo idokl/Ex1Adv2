@@ -46,12 +46,8 @@ namespace Ex1
                 state = nextState;
                 point = nextPoint;
             }
-            string solveJson = Newtonsoft.Json.JsonConvert.SerializeObject(solutionStringBuilder);
-            using (NetworkStream stream = client.GetStream())
-            using (BinaryReader reader = new BinaryReader(stream))
-            using (BinaryWriter writer = new BinaryWriter(stream))
-                writer.Write(solveJson);
-            return "-1";
+            PacketStream listPacketStream = new PacketStream(false, solutionStringBuilder.ToString());
+            return Newtonsoft.Json.JsonConvert.SerializeObject(listPacketStream);
         }
     }
 }

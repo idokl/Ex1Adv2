@@ -22,11 +22,11 @@ namespace Ex1
             int rows = int.Parse(args[1]);
             int cols = int.Parse(args[2]);
             Maze maze = model.start(name, rows, cols);
-            using (NetworkStream stream = client.GetStream())
-            using (BinaryReader reader = new BinaryReader(stream))
-            using (BinaryWriter writer = new BinaryWriter(stream))
-                writer.Write(maze.ToJSON());
-            return "1";
+            Dictionary<TcpClient,TcpClient> clientList = new Dictionary<TcpClient, TcpClient>();
+            clientList.Add(client,null);
+            model.ClientListForMultiplayerGames = clientList;
+            PacketStream listPacketStream = new PacketStream(true, maze.ToString());
+            return Newtonsoft.Json.JsonConvert.SerializeObject(listPacketStream);
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 using MazeLib;
@@ -14,6 +15,7 @@ namespace Ex1
 
         private Dictionary<string, Maze> dictionaryOfMazes = new Dictionary<string, Maze>();
         private Dictionary<SearchableMaze, Solution> dictionaryOfMazesAndSolutions = new Dictionary<SearchableMaze, Solution>();
+        public Dictionary<TcpClient, TcpClient> ClientListForMultiplayerGames { get; set; }
 
 
         public void close(string name)

@@ -24,11 +24,8 @@ namespace Ex1
             int rows = int.Parse(args[1]);
             int cols = int.Parse(args[2]);
             Maze maze = model.generate(name, rows, cols);
-            using (NetworkStream stream = client.GetStream())
-            using (BinaryReader reader = new BinaryReader(stream))
-            using (BinaryWriter writer = new BinaryWriter(stream))
-                writer.Write(maze.ToJSON());
-            return "-1";
+            PacketStream generatePacketStream = new PacketStream(false, maze.ToString());
+            return Newtonsoft.Json.JsonConvert.SerializeObject(generatePacketStream);
         }
     }
 }

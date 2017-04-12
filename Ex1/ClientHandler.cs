@@ -34,7 +34,7 @@ namespace Ex1
                         char[] separator = { ' ' };
                         string[] words = commandLine.Split(separator);
                         string s = Controller.ExecuteCommand(commandLine, client);
-                       PacketStream packet = (PacketStream)Newtonsoft.Json.JsonConvert.DeserializeObject(s);
+                       PacketStream packet = Newtonsoft.Json.JsonConvert.DeserializeObject< PacketStream>(s);
 
                         Console.WriteLine(("test"));
                         String result = packet.StringStream;

@@ -10,11 +10,6 @@ namespace SearchAlgorithmsLib
     {
         public LinkedList<State> Path { get; set; }
 
-//        public Solution(LinkedList<State> path)
-//        {
-//            this.Path = path;
-//        }
-
         public Solution()
         {
 

@@ -68,6 +68,7 @@
     <Compile Include="Commands\ListCommand.cs" />
     <Compile Include="Model.cs" />
     <Compile Include="Commands\PlayCommand.cs" />
+    <Compile Include="MultiPlayer.cs" />
     <Compile Include="PacketStream.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

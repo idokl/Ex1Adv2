@@ -18,7 +18,17 @@ namespace Ex1
         public string Execute(string[] args, TcpClient client)
         {
             string name = args[0];
-            model.join(name);
+            MultiPlayer mpJoin;
+            try
+            {
+                mpJoin = this.model.join(name);
+                mpJoin.JoinGameClient = client;
+            }
+            catch
+            {
+                Console.WriteLine("the name of game to join isn't exist");
+            }
+           
             PacketStream joinPacketStream = new PacketStream
             {
                 MultiPlayer = true,

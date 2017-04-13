@@ -12,13 +12,14 @@ namespace Ex1
 {
     interface IModel
     {
-        Dictionary<TcpClient, TcpClient> ClientListForMultiplayerGames { get; set; }
+        List<MultiPlayer> MultyPlayerList { get; set; }
         Maze generate(string name, int rows, int cols);
         Solution solve(string name, int algorithm);
         Maze start(string name, int rows, int cols);
         List<string> list();
-        void join(string name);
-        Direction play(Direction direction);
+        MultiPlayer join(string name);
+        MultiPlayer play(Direction direction, TcpClient client);
         void close(string name);
+        int GetEvaluateNodes { get; }
     }
 }

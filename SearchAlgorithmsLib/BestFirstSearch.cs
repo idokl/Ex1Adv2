@@ -8,12 +8,12 @@ namespace SearchAlgorithmsLib
 {
     public class BestFirstSearch<T> : PQAdapter
     {
-        /*
+        
         public int getNumberOfNodesEvaluated()
         {
-            throw new NotImplementedException();
+            return base.evaluatedNodes;
         }
-        */
+        
        
         public override Solution search(ISearchable searchable)
         {

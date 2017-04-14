@@ -19,7 +19,7 @@ namespace Ex1
             Console.WriteLine("debug massage: I am the Server.");
             IController controller = new Controller();
             IClientHandler clientHandler = new ClientHandler(controller);
-            IView view = new View(9000, clientHandler);
+            IView view = new View(8000, clientHandler);
             view.Start();
 
             //terminating:

@@ -23,6 +23,7 @@ namespace Ex1
             {
                 mpJoin = this.model.join(name);
                 mpJoin.JoinGameClient = client;
+               // mpJoin.IsAvilble = false;
             }
             catch
             {

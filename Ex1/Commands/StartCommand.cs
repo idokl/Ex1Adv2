@@ -30,6 +30,7 @@ namespace Ex1
                 JoinGameClient = null,
                 MazeInit = maze,
                 NameOfGame = this.Name
+              //  IsAvilble = true
             };
             this.model.MultyPlayerList.Add(mpStart);
             PacketStream startPacketStream = new PacketStream

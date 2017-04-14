@@ -19,6 +19,7 @@ namespace Ex1
         public int GetEvaluateNodes { get; }
 
 
+
         public void close(string name)
         {
             throw new NotImplementedException();
@@ -48,9 +49,12 @@ namespace Ex1
         public List<string> list()
         {
             List<string> listOgGames = new List<string>();
-            foreach (String name in DictionaryOfMazes.Keys)
+            foreach (MultiPlayer mp in MultyPlayerList)
             {
-                listOgGames.Add(name);
+                if (mp.IsAvilble)
+                {
+                    listOgGames.Add(mp.NameOfGame);
+                }
             }
             return listOgGames;
         }

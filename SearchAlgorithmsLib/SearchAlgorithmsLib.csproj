@@ -61,7 +61,6 @@
     <Compile Include="Solution.cs" />
     <Compile Include="State.cs" />
     <Compile Include="StateComparer.cs" />
-    <Compile Include="StringState.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Net.Sockets;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Ex1
@@ -31,17 +28,22 @@ namespace Ex1
                         Console.WriteLine("debug massage: Got command: {0}", commandLine);
                         if (commandLine == "terminate")
                             break;
-                        char[] separator = { ' ' };
-                        string[] words = commandLine.Split(separator);
-                        
-                       PacketStream packet = Newtonsoft.Json.JsonConvert.DeserializeObject< PacketStream>(Controller.ExecuteCommand(commandLine, client));
+                        //char[] separator = { ' ' };
+                        //string[] words = commandLine.Split(separator);
+
+                        string commandResult = Controller.ExecuteCommand(commandLine, client);
+                       PacketStream packet = Newtonsoft.Json.JsonConvert.DeserializeObject< PacketStream>(commandResult);
 
                      String result = packet.StringStream;
-                        if (packet.MultiPlayer == true)
+                        if (packet.MultiPlayer)
                         {
-                            
+                            writer.Write(commandResult);
                         }
-                        writer.Write(result);
+                        else
+                        {
+                            writer.Write(result);
+                        }
+                        
                     }
                 }
             client.Close();

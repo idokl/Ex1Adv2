@@ -10,12 +10,7 @@ namespace SearchAlgorithmsLib
     public class DepthFirstSearch<T> : Searcher
     {
 
-        public override int getNumberOfNodesEvaluated()
-        {
-            return base.evaluatedNodes;
-        }
-
-        public override Solution search(ISearchable searchable)
+    public override Solution search(ISearchable searchable)
         {
    
             Stack<State> s = new Stack<State>();

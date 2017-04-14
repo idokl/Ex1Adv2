@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Net.Sockets;
+using Ex1.Commands;
 
 namespace Ex1
 {
@@ -20,8 +21,6 @@ namespace Ex1
             commands.Add("join", new JoinCommand(model));
             commands.Add("play", new PlayCommand(model));
             commands.Add("close", new CloseCommand(model));
-
-            commands.Add("debug", new TestOfCommand(model));
         }
         public string ExecuteCommand(string commandLine, TcpClient client)
         {

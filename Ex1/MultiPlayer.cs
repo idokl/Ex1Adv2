@@ -15,6 +15,6 @@ namespace Ex1
         public string NameOfGame { get; set; }
         public Maze MazeInit { get; set; }
         public Direction CurrentDirection { get; set; }
-      //  public bool IsAvilble { get; set; }
+        public bool IsAvilble { get; set; }
     }
 }

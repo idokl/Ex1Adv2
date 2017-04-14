@@ -20,6 +20,6 @@ namespace Ex1
         MultiPlayer join(string name);
         MultiPlayer play(Direction direction, TcpClient client);
         void close(string name);
-        int GetEvaluateNodes { get; }
+        int EvaluateNodes { get; set; }
     }
 }

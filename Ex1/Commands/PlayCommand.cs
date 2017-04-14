@@ -1,29 +1,24 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
 using System.Net.Sockets;
-using System.Text;
-using System.Threading.Tasks;
 using MazeLib;
 using Newtonsoft.Json.Linq;
 
-namespace Ex1
+namespace Ex1.Commands
 {
     class PlayCommand : ICommand
     {
         private IModel model;
         private string Name { get; set; }
-        private Direction direction { get; set; }
+        private Direction Direction { get; set; }
         public PlayCommand(IModel model)
         {
             this.model = model;
         }
         public string Execute(string[] args, TcpClient client)
         {
-            this.direction = (Direction)Enum.Parse(typeof(Direction),args[0]);
-            MultiPlayer mpPlay = this.model.play(this.direction, client);
-
+            this.Direction = (Direction)Enum.Parse(typeof(Direction),args[0]);
+            MultiPlayer mpPlay = this.model.play(this.Direction, client);
+            mpPlay.CurrentDirection = Direction;
            PacketStream playPacketStream = new PacketStream
             {
                 MultiPlayer = true, StringStream = this.ToJSON()
@@ -36,7 +31,7 @@ namespace Ex1
             JObject playJObject = new JObject
             {
                 ["Name"] = this.Name,
-                ["Direction"] = this.direction.ToString(),
+                ["Direction"] = this.Direction.ToString(),
             };
 
             return playJObject.ToString();

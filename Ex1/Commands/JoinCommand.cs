@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
 using System.Net.Sockets;
-using System.Text;
-using System.Threading.Tasks;
+using Newtonsoft.Json;
 
-namespace Ex1
+namespace Ex1.Commands
 {
     class JoinCommand : ICommand
     {
@@ -23,7 +19,7 @@ namespace Ex1
             {
                 mpJoin = this.model.join(name);
                 mpJoin.JoinGameClient = client;
-               // mpJoin.IsAvilble = false;
+                mpJoin.IsAvilble = false;
             }
             catch
             {
@@ -35,7 +31,7 @@ namespace Ex1
                 MultiPlayer = true,
                 StringStream = ""
             };
-            return Newtonsoft.Json.JsonConvert.SerializeObject(joinPacketStream);
+            return JsonConvert.SerializeObject(joinPacketStream);
         }
     }
 }

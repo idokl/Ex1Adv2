@@ -7,15 +7,8 @@ using System.Threading.Tasks;
 namespace SearchAlgorithmsLib
 {
     public class BestFirstSearch<T> : PQAdapter
-    {
-        
-        public int getNumberOfNodesEvaluated()
-        {
-            return base.evaluatedNodes;
-        }
-        
-       
-        public override Solution search(ISearchable searchable)
+    { 
+      public override Solution search(ISearchable searchable)
         {
             IComparer<State> comperar = new StateComparer();
             //PriorityQueue<State> openList = new PriorityQueue<State>();

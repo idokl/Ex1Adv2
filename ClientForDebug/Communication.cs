@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Net;
 using System.Net.Sockets;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ClientForDebug
 {
@@ -35,6 +31,7 @@ namespace ClientForDebug
 
                     // Get result from server
                     string result = reader.ReadString();
+
                     Console.WriteLine("debug massage: Result = {0}", result);
                 }
             }

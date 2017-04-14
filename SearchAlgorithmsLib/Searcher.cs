@@ -9,7 +9,7 @@ namespace SearchAlgorithmsLib
     public abstract class Searcher : ISearcher
     {
 
-        public int evaluatedNodes { get; set; } = 0;
+        public int evaluatedNodes { get; set; }
 
        public Searcher()
        {
@@ -17,7 +17,7 @@ namespace SearchAlgorithmsLib
        }
        
         // ISearcher’s methods:
-        public virtual int getNumberOfNodesEvaluated()
+        public int getNumberOfNodesEvaluated()
         {
             return evaluatedNodes;
         }

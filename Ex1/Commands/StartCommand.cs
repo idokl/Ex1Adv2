@@ -1,19 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Net.Sockets;
-using System.Text;
-using System.Threading.Tasks;
-using MazeLib;
-using Newtonsoft.Json.Linq;
+﻿using System.Net.Sockets;
+using Newtonsoft.Json;
 
-namespace Ex1
+namespace Ex1.Commands
 {
     class StartCommand : ICommand
     {
         private IModel model;
-        public string Name { get; set; }
+        private string Name { get; set; }
         public StartCommand(IModel model)
         {
             this.model = model;
@@ -21,24 +14,24 @@ namespace Ex1
         public string Execute(string[] args, TcpClient client)
         {
             this.Name = args[0];
-            int rows = int.Parse(args[1]);
-            int cols = int.Parse(args[2]);
-            Maze maze = this.model.start(this.Name, rows, cols);
-            MultiPlayer mpStart = new MultiPlayer
+            var rows = int.Parse(args[1]);
+            var cols = int.Parse(args[2]);
+            var maze = this.model.start(this.Name, rows, cols);
+            var mpStart = new MultiPlayer
             {
                 StartGameClient = client,
                 JoinGameClient = null,
                 MazeInit = maze,
-                NameOfGame = this.Name
-              //  IsAvilble = true
+                NameOfGame = this.Name,
+                IsAvilble = true
             };
             this.model.MultyPlayerList.Add(mpStart);
-            PacketStream startPacketStream = new PacketStream
+            var startPacketStream = new PacketStream
             {
                 MultiPlayer = true,
-                StringStream = maze.ToJSON()
+                StringStream = ""
             };
-            return Newtonsoft.Json.JsonConvert.SerializeObject(startPacketStream);
+            return JsonConvert.SerializeObject(startPacketStream);
         }
     }
 }

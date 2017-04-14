@@ -6,8 +6,9 @@ using System.Linq;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
-namespace Ex1
+namespace Ex1.Commands
 {
     class GenerateMazeCommand : ICommand
     {
@@ -26,9 +27,9 @@ namespace Ex1
             Maze maze = model.generate(name, rows, cols);
             PacketStream generatePacketStream = new PacketStream
             {
-                StringStream = maze.ToString()
+                StringStream = maze.ToJSON()
             };
-            return Newtonsoft.Json.JsonConvert.SerializeObject(generatePacketStream);
+            return JsonConvert.SerializeObject(generatePacketStream);
            
         }
     }

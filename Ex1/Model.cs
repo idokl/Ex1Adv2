@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
+using Adapter;
 using MazeLib;
 using MazeGeneratorLib;
 using SearchAlgorithmsLib;
@@ -16,7 +17,7 @@ namespace Ex1
         private Dictionary<string, Maze> DictionaryOfMazes { get; set; }
         private Dictionary<SearchableMaze, Solution> DictionaryOfMazesAndSolutions { get; set; }
         public List<MultiPlayer> MultyPlayerList { get; set; }
-        public int GetEvaluateNodes { get; }
+        public int EvaluateNodes { get; set; }
 
         public Model()
         {
@@ -85,18 +86,17 @@ namespace Ex1
             if (DictionaryOfMazesAndSolutions.ContainsKey(searchableMaze))
                 return DictionaryOfMazesAndSolutions[searchableMaze];
             Solution solution;
-            int evaluateNodes;
             if (algorithm == 1)
             {
                 BestFirstSearch<PointState> BFS = new BestFirstSearch<PointState>();
                 solution = BFS.search(searchableMaze);
-                evaluateNodes = BFS.getNumberOfNodesEvaluated();
+                EvaluateNodes = BFS.getNumberOfNodesEvaluated();
             }
             else
             {
                 DepthFirstSearch<PointState> DFS = new DepthFirstSearch<PointState>();
                 solution = DFS.search(searchableMaze);
-                evaluateNodes = DFS.getNumberOfNodesEvaluated();
+                EvaluateNodes = DFS.getNumberOfNodesEvaluated();
             }
             DictionaryOfMazesAndSolutions.Add(searchableMaze, solution);
             return solution;

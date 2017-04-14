@@ -9,10 +9,5 @@ namespace SearchAlgorithmsLib
     public class Solution
     {
         public LinkedList<State> Path { get; set; }
-
-        public Solution()
-        {
-
-        }
     }
 }

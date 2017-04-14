@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Net.Sockets;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Net.Sockets;
 using Newtonsoft.Json;
 
-namespace Ex1
+namespace Ex1.Commands
 {
     class CloseCommand : ICommand
     {
@@ -25,7 +19,7 @@ namespace Ex1
                 MultiPlayer = true,
                 StringStream = ""
             };
-            return Newtonsoft.Json.JsonConvert.SerializeObject(closePacketStream);
+            return JsonConvert.SerializeObject(closePacketStream);
         }
     }
 }

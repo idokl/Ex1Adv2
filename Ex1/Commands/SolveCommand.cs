@@ -1,14 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Net.Sockets;
 using System.Text;
-using System.Threading.Tasks;
+using Adapter;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using SearchAlgorithmsLib;
 
-namespace Ex1
+namespace Ex1.Commands
 {
     class SolveCommand : ICommand
     {
@@ -51,9 +49,9 @@ namespace Ex1
             }
             PacketStream solvePacketStream = new PacketStream
             {
-                StringStream = solutionStringBuilder.ToString()
+                StringStream = this.ToJSON()
             };
-            return Newtonsoft.Json.JsonConvert.SerializeObject(solvePacketStream);
+            return JsonConvert.SerializeObject(solvePacketStream);
         }
 
         public string ToJSON()
@@ -62,7 +60,7 @@ namespace Ex1
             {
                 ["Name"] = this.Name,
                 ["Solution"] = this.solutionStringBuilder.ToString(),
-                ["NodesEvaluated"] = this.model.GetEvaluateNodes
+                ["NodesEvaluated"] = this.model.EvaluateNodes
             };
 
             return startJObject.ToString();

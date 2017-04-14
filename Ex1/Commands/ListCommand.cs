@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
 using System.Net.Sockets;
 using System.Text;
-using System.Threading.Tasks;
+using Newtonsoft.Json;
 
-namespace Ex1
+namespace Ex1.Commands
 {
     class ListCommand : ICommand
     {
@@ -30,7 +28,7 @@ namespace Ex1
             {
                 StringStream = listOfGameStringBuilder.ToString()
             };
-            return Newtonsoft.Json.JsonConvert.SerializeObject(ListPacketStream);
+            return JsonConvert.SerializeObject(ListPacketStream);
         }
     }
 }

@@ -1,37 +1,35 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using MazeLib;
+using SearchAlgorithmsLib;
 
-namespace SearchAlgorithmsLib
+namespace Adapter
 {
     public class PointState : State
     {
-        public MazeLib.Position CurrentPosition { get; }
+        public Position CurrentPosition { get; }
 
         public State CameFrom { get; set; }
 
-        public PointState(MazeLib.Position currentPosition)
+        public PointState(Position currentPosition)
         {
-            this.CurrentPosition = currentPosition;
+            CurrentPosition = currentPosition;
         }
 
-        public PointState(MazeLib.Position currentPosition, double cost)
+        public PointState(Position currentPosition, double cost)
         {
-            this.CurrentPosition = currentPosition;
-            this.Cost = cost;
+            CurrentPosition = currentPosition;
+            Cost = cost;
         }
 
         public bool Equals(State s)
         {
-            return ((this.CurrentPosition.Row == (s as PointState).CurrentPosition.Row) 
-                && (this.CurrentPosition.Col == (s as PointState).CurrentPosition.Col));
+            var pointState = s as PointState;
+            return pointState != null && ((CurrentPosition.Row == pointState.CurrentPosition.Row) 
+                                               && (CurrentPosition.Col == pointState.CurrentPosition.Col));
         }
 
         public override string ToString()
         {
-            return String.Format("{0},{1}", CurrentPosition.Row,CurrentPosition.Col);
+            return string.Format("{0},{1}", CurrentPosition.Row,CurrentPosition.Col);
         }
 
         public double Cost { get; set; }

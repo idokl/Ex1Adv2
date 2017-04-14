@@ -18,6 +18,12 @@ namespace Ex1
         public List<MultiPlayer> MultyPlayerList { get; set; }
         public int GetEvaluateNodes { get; }
 
+        public Model()
+        {
+            DictionaryOfMazes = new Dictionary<string, Maze>();
+            DictionaryOfMazesAndSolutions = new Dictionary<SearchableMaze, Solution>();
+            MultyPlayerList = new List<MultiPlayer>();
+        }
 
         public void close(string name)
         {

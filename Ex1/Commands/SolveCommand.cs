@@ -54,7 +54,7 @@ namespace Ex1.Commands
             return JsonConvert.SerializeObject(solvePacketStream);
         }
 
-        public string ToJSON()
+        private string ToJSON()
         {
             JObject startJObject = new JObject
             {

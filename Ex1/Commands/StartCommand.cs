@@ -17,7 +17,7 @@ namespace Ex1.Commands
             var rows = int.Parse(args[1]);
             var cols = int.Parse(args[2]);
             var maze = this.model.start(this.Name, rows, cols);
-            var mpStart = new MultiPlayer
+            var mpStart = new MultiPlayerDS
             {
                 StartGameClient = client,
                 JoinGameClient = null,
@@ -25,10 +25,11 @@ namespace Ex1.Commands
                 NameOfGame = this.Name,
                 IsAvilble = true
             };
-            this.model.MultyPlayerList.Add(mpStart);
+            this.model.DictionaryOfMultyPlayerDS.Add(this.Name,mpStart);
             var startPacketStream = new PacketStream
             {
                 MultiPlayer = true,
+                MultiPlayerDs = mpStart,
                 StringStream = ""
             };
             return JsonConvert.SerializeObject(startPacketStream);

@@ -9,16 +9,18 @@ namespace ClientForDebug
     {
         public void Communicate()
         {
-            IPEndPoint ep = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 8000);
-            TcpClient client = new TcpClient();
-            client.Connect(ep);
-            Console.WriteLine("debug massage: You are connected");
-            using (NetworkStream stream = client.GetStream())
-            using (BinaryReader reader = new BinaryReader(stream))
-            using (BinaryWriter writer = new BinaryWriter(stream))
+            bool multiplayer = false;
+            while (!multiplayer)
             {
-                while (true)
+                IPEndPoint ep = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 9000);
+                TcpClient client = new TcpClient();
+                client.Connect(ep);
+                Console.WriteLine("debug massage: You are connected");
+                using (NetworkStream stream = client.GetStream())
+                using (BinaryReader reader = new BinaryReader(stream))
+                using (BinaryWriter writer = new BinaryWriter(stream))
                 {
+
                     // Send data to server
                     Console.Write("Please enter a command: ");
                     String command;
@@ -33,9 +35,11 @@ namespace ClientForDebug
                     string result = reader.ReadString();
 
                     Console.WriteLine("debug massage: Result = {0}", result);
+
                 }
+                client.Close();
             }
-            client.Close();
+           
         }
     }
 }

@@ -17,7 +17,7 @@ namespace Ex1.Commands
         public string Execute(string[] args, TcpClient client)
         {
             this.Direction = (Direction)Enum.Parse(typeof(Direction),args[0]);
-            MultiPlayer mpPlay = this.model.play(this.Direction, client);
+            MultiPlayerDS mpPlay = this.model.play(this.Direction, client);
             mpPlay.CurrentDirection = Direction;
            PacketStream playPacketStream = new PacketStream
             {
@@ -26,7 +26,7 @@ namespace Ex1.Commands
 
             return Newtonsoft.Json.JsonConvert.SerializeObject(playPacketStream);
         }
-        public string ToJSON()
+        private string ToJSON()
         {
             JObject playJObject = new JObject
             {

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net.Sockets;
 using Ex1.Commands;
@@ -22,15 +23,34 @@ namespace Ex1
             commands.Add("play", new PlayCommand(model));
             commands.Add("close", new CloseCommand(model));
         }
-        public string ExecuteCommand(string commandLine, TcpClient client)
+        public bool ExecuteCommand(string commandLine, TcpClient client)
         {
             string[] arr = commandLine.Split(' ');
             string commandKey = arr[0];
-            if (!commands.ContainsKey(commandKey))
-                return "Command not found";
+           /* if (!commands.ContainsKey(commandKey))
+                throw NotImplementedException;*/
             string[] args = arr.Skip(1).ToArray();
             ICommand command = commands[commandKey];
-            return command.Execute(args, client);
-           }
+
+            string commandResult = command.Execute(args, client);
+            PacketStream packet = Newtonsoft.Json.JsonConvert.DeserializeObject<PacketStream>(commandResult);
+
+            string result = packet.StringStream;
+            MultiPlayerGame mp;
+            if (packet.MultiPlayer)
+            {
+
+                if (command is PlayCommand)
+                {
+                    
+                }
+                mp = new MultiPlayerGame(client, result, packet.MultiPlayerDs);
+                mp.Play();
+                return false;
+            }
+            SinglePlayerGame sp = new SinglePlayerGame(client, result);
+            sp.Play();
+            return true;
+        }
     }
 }

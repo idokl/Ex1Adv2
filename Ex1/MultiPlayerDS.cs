@@ -8,7 +8,7 @@ using MazeLib;
 
 namespace Ex1
 {
-    class MultiPlayer
+    class MultiPlayerDS
     {
         public TcpClient StartGameClient { get; set; }
         public TcpClient JoinGameClient { get; set; }

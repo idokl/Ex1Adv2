@@ -16,14 +16,15 @@ namespace Ex1
 
         private Dictionary<string, Maze> DictionaryOfMazes { get; set; }
         private Dictionary<SearchableMaze, Solution> DictionaryOfMazesAndSolutions { get; set; }
-        public List<MultiPlayer> MultyPlayerList { get; set; }
+        public Dictionary<string, MultiPlayerDS> DictionaryOfMultyPlayerDS { get; set; }
         public int EvaluateNodes { get; set; }
 
+        
         public Model()
         {
             DictionaryOfMazes = new Dictionary<string, Maze>();
             DictionaryOfMazesAndSolutions = new Dictionary<SearchableMaze, Solution>();
-            MultyPlayerList = new List<MultiPlayer>();
+            DictionaryOfMultyPlayerDS = new Dictionary<string,MultiPlayerDS>();
         }
 
 
@@ -41,14 +42,11 @@ namespace Ex1
             return MyMaze;
         }
 
-        public MultiPlayer join(string name)
+        public MultiPlayerDS join(string name)
         {
-            foreach (MultiPlayer multiPlayer in MultyPlayerList)
-            {
-                if (multiPlayer.NameOfGame == name)
-                {
-                    return multiPlayer;
-                }
+            if (DictionaryOfMultyPlayerDS.ContainsKey(name)) { 
+               return DictionaryOfMultyPlayerDS[name];
+                
             }
             throw new NotImplementedException();
         }
@@ -56,7 +54,7 @@ namespace Ex1
         public List<string> list()
         {
             List<string> listOgGames = new List<string>();
-            foreach (MultiPlayer mp in MultyPlayerList)
+            foreach (MultiPlayerDS mp in DictionaryOfMultyPlayerDS.Values)
             {
                 if (mp.IsAvilble)
                 {
@@ -66,9 +64,9 @@ namespace Ex1
             return listOgGames;
         }
 
-        public MultiPlayer play(Direction direction, TcpClient client)
+        public MultiPlayerDS play(Direction direction, TcpClient client)
         {
-            foreach (MultiPlayer multiPlayer in MultyPlayerList)
+            foreach (MultiPlayerDS multiPlayer in DictionaryOfMultyPlayerDS.Values)
             {
                 if (multiPlayer.StartGameClient == client || multiPlayer.JoinGameClient == client)
                 {

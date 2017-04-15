@@ -17,37 +17,20 @@ namespace Ex1
         public void HandleClient(TcpClient client)
         {
             Task t = new Task(() =>
-        {
-            using (NetworkStream stream = client.GetStream())
-            using (BinaryReader reader = new BinaryReader(stream))
-            using (BinaryWriter writer = new BinaryWriter(stream))
-                while (true)
-                {
+            {
+                bool stop = false;
+                using (NetworkStream stream = client.GetStream())
+                using (BinaryReader reader = new BinaryReader(stream))
+                using (BinaryWriter writer = new BinaryWriter(stream))
+                    while (!stop)
                     {
-                        string commandLine = reader.ReadString();
-                        Console.WriteLine("debug massage: Got command: {0}", commandLine);
-                        if (commandLine == "terminate")
-                            break;
-                        //char[] separator = { ' ' };
-                        //string[] words = commandLine.Split(separator);
-
-                        string commandResult = Controller.ExecuteCommand(commandLine, client);
-                       PacketStream packet = Newtonsoft.Json.JsonConvert.DeserializeObject< PacketStream>(commandResult);
-
-                     String result = packet.StringStream;
-                        if (packet.MultiPlayer)
                         {
-                            writer.Write(commandResult);
+                            string commandLine = reader.ReadString();
+                            Console.WriteLine("debug massage: Got command: {0}", commandLine);
+                           stop = Controller.ExecuteCommand(commandLine, client);
                         }
-                        else
-                        {
-                            writer.Write(result);
-                        }
-                        
                     }
-                }
-            client.Close();
-        });
+            });
             t.Start();
 
         }

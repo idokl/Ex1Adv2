@@ -14,7 +14,7 @@ namespace Ex1.Commands
         public string Execute(string[] args, TcpClient client)
         {
             string name = args[0];
-            MultiPlayer mpJoin;
+            MultiPlayerDS mpJoin;
             try
             {
                 mpJoin = this.model.join(name);

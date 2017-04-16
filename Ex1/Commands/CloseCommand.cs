@@ -10,7 +10,7 @@ namespace Ex1.Commands
         {
             this.model = model;
         }
-        public string Execute(string[] args, TcpClient client)
+        public PacketStream Execute(string[] args, TcpClient client)
         {
             string name = args[0];
             model.close(name);
@@ -19,7 +19,7 @@ namespace Ex1.Commands
                 MultiPlayer = true,
                 StringStream = ""
             };
-            return JsonConvert.SerializeObject(closePacketStream);
+            return closePacketStream;
         }
     }
 }

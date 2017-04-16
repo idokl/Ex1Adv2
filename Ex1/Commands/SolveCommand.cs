@@ -17,7 +17,7 @@ namespace Ex1.Commands
         {
             this.model = model;
         }
-        public string Execute(string[] args, TcpClient client)
+        public PacketStream Execute(string[] args, TcpClient client)
         {
             this.Name = args[0];
             int algorithm = int.Parse(args[1]);
@@ -51,7 +51,7 @@ namespace Ex1.Commands
             {
                 StringStream = this.ToJSON()
             };
-            return JsonConvert.SerializeObject(solvePacketStream);
+            return solvePacketStream;
         }
 
         private string ToJSON()

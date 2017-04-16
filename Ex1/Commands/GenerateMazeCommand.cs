@@ -19,7 +19,7 @@ namespace Ex1.Commands
             this.model = model;
         }
 
-        public string Execute(string[] args, TcpClient client)
+        public PacketStream Execute(string[] args, TcpClient client)
         {
             string name = args[0];
             int rows = int.Parse(args[1]);
@@ -29,7 +29,7 @@ namespace Ex1.Commands
             {
                 StringStream = maze.ToJSON()
             };
-            return JsonConvert.SerializeObject(generatePacketStream);
+            return generatePacketStream;
            
         }
     }

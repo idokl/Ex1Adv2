@@ -1,5 +1,8 @@
 ﻿using System.Net.Sockets;
 using Newtonsoft.Json;
+using System.Threading.Tasks;
+using System.IO;
+using System.Linq;
 
 namespace Ex1.Commands
 {
@@ -11,7 +14,7 @@ namespace Ex1.Commands
         {
             this.model = model;
         }
-        public string Execute(string[] args, TcpClient client)
+        public PacketStream Execute(string[] args, TcpClient client)
         {
             this.Name = args[0];
             var rows = int.Parse(args[1]);
@@ -32,7 +35,41 @@ namespace Ex1.Commands
                 MultiPlayerDs = mpStart,
                 StringStream = ""
             };
-            return JsonConvert.SerializeObject(startPacketStream);
+            /*
+            Task keepListenningToClientCommands = new Task(() =>
+            {
+                using (NetworkStream stream = client.GetStream())
+                using (BinaryReader reader = new BinaryReader(stream))
+                using (BinaryWriter writer = new BinaryWriter(stream))
+                    while (mpStart.IsAvilble)
+                    {
+                        {
+                            string commandLine = reader.ReadString();
+                            //Console.WriteLine("debug massage: Got command: {0}", commandLine);
+                            string[] arr = commandLine.Split(' ');
+                            string commandKey = arr[0];
+                            // if (!commands.ContainsKey(commandKey))
+                            //     throw NotImplementedException;
+                            string[] mpCommandArgs = arr.Skip(1).ToArray();
+                            if (commandKey == "play")
+                            {
+
+                            }
+                            else if (commandKey == "close")
+                            {
+                                mpStart.IsAvilble = false;
+                                break;
+                            }
+                            //PacketStream packet = command.Execute(mpCommandArgs, client);
+
+                            //string result = packet.StringStream;
+                        }
+                    }
+            });
+            keepListenningToClientCommands.Start();
+            */
+
+            return startPacketStream;
         }
     }
 }

@@ -14,7 +14,7 @@ namespace Ex1.Commands
         {
             this.model = model;
         }
-        public string Execute(string[] args, TcpClient client)
+        public PacketStream Execute(string[] args, TcpClient client)
         {
             this.Direction = (Direction)Enum.Parse(typeof(Direction),args[0]);
             MultiPlayerDS mpPlay = this.model.play(this.Direction, client);
@@ -24,7 +24,7 @@ namespace Ex1.Commands
                 MultiPlayer = true, StringStream = this.ToJSON()
             };
 
-            return Newtonsoft.Json.JsonConvert.SerializeObject(playPacketStream);
+            return playPacketStream;
         }
         private string ToJSON()
         {

@@ -52,6 +52,7 @@
   <ItemGroup>
     <Compile Include="BestFirstSearch.cs" />
     <Compile Include="DepthFirstSearch.cs" />
+    <Compile Include="GenericState.cs" />
     <Compile Include="PQAdapter.cs" />
     <Compile Include="Searcher.cs" />
     <Compile Include="ISearchable.cs" />

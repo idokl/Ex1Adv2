@@ -32,25 +32,30 @@ namespace Ex1
             string[] args = arr.Skip(1).ToArray();
             ICommand command = commands[commandKey];
 
-            string commandResult = command.Execute(args, client);
-            PacketStream packet = Newtonsoft.Json.JsonConvert.DeserializeObject<PacketStream>(commandResult);
+            //string commandResult = command.Execute(args, client);
+            //PacketStream packet = Newtonsoft.Json.JsonConvert.DeserializeObject<PacketStream>(commandResult);
+            PacketStream packet = command.Execute(args, client);
 
             string result = packet.StringStream;
             MultiPlayerGame mp;
+            SinglePlayerGame sp;
             if (packet.MultiPlayer)
             {
 
                 if (command is PlayCommand)
                 {
-                    
+
                 }
-                mp = new MultiPlayerGame(client, result, packet.MultiPlayerDs);
+                mp = new MultiPlayerGame(packet.MultiPlayerDs);
                 mp.Play();
                 return false;
             }
-            SinglePlayerGame sp = new SinglePlayerGame(client, result);
-            sp.Play();
-            return true;
+            else
+            {
+                sp = new SinglePlayerGame(client, result);
+                sp.Play();
+                return true;
+            }
         }
     }
 }

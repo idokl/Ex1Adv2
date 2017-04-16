@@ -9,6 +9,6 @@ namespace Ex1
 {
     interface ICommand
     {
-        string Execute(string[] args, TcpClient client = null);
+        PacketStream Execute(string[] args, TcpClient client = null);
     }
 }

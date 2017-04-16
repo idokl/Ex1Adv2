@@ -13,7 +13,7 @@ namespace Ex1.Commands
         {
             this.model = model;
         }
-        public string Execute(string[] args, TcpClient client)
+        public PacketStream Execute(string[] args, TcpClient client)
         {
             List<String> listOfGames =  model.list();
             StringBuilder listOfGameStringBuilder = new StringBuilder(" ");
@@ -28,7 +28,7 @@ namespace Ex1.Commands
             {
                 StringStream = listOfGameStringBuilder.ToString()
             };
-            return JsonConvert.SerializeObject(ListPacketStream);
+            return ListPacketStream;
         }
     }
 }

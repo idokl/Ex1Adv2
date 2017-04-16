@@ -11,9 +11,11 @@ namespace SearchAlgorithmsLib
 
         public PriorityQueue<State> openList;
 
-        public PQAdapter()
+        //public PQAdapter(): this(new StateComparer()) {  }
+
+        public PQAdapter(IComparer<State> optionalSpecialComparer)
         {
-            openList = new PriorityQueue<State>(new StateComparer());
+            openList = new PriorityQueue<State>(optionalSpecialComparer);
         }
 
         public State popOpenList(){

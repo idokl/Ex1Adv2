@@ -22,14 +22,14 @@ namespace Ex1
                 using (NetworkStream stream = client.GetStream())
                 using (BinaryReader reader = new BinaryReader(stream))
                 using (BinaryWriter writer = new BinaryWriter(stream))
-                    while (!stop)
-                    {
+//                    while (!stop)
+//                    {
                         {
                             string commandLine = reader.ReadString();
                             Console.WriteLine("debug massage: Got command: {0}", commandLine);
                            stop = Controller.ExecuteCommand(commandLine, client);
                         }
-                    }
+//                    }
             });
             t.Start();
 

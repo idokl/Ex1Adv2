@@ -100,16 +100,23 @@ namespace Ex1
             return solution;
         }
 
-        public Maze start(string name, int rows, int cols)
+        public Maze start(string name, int rows, int cols, MultiPlayerDS multiPlayerNewGame)
         {
+            
             if (DictionaryOfMazes.ContainsKey(name))
             {
+                multiPlayerNewGame.MazeInit = DictionaryOfMazes[name];
+                DictionaryOfMultyPlayerDS.Add(name, multiPlayerNewGame);
                 return DictionaryOfMazes[name];
             }
             else
             {
-               return this.generate(name, rows, cols);
+                Maze newMaze = this.generate(name, rows, cols);
+                multiPlayerNewGame.MazeInit = newMaze;
+                DictionaryOfMultyPlayerDS.Add(name, multiPlayerNewGame);
+                return newMaze;
             }
+
         }
     }
 }

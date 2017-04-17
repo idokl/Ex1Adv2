@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Net.Sockets;
 using Newtonsoft.Json;
+using System.IO;
 
 namespace Ex1.Commands
 {
@@ -20,6 +21,14 @@ namespace Ex1.Commands
                 mpJoin = this.model.join(name);
                 mpJoin.JoinGameClient = client;
                 mpJoin.IsAvilble = false;
+                NetworkStream stream = mpJoin.StartGameClient.GetStream();
+                StreamWriter writer = new StreamWriter(stream);
+                writer.WriteLine(mpJoin.MazeInit.ToJSON());
+                writer.Flush();
+                stream = client.GetStream();
+                writer = new StreamWriter(stream);
+                writer.WriteLine(mpJoin.MazeInit.ToJSON());
+                writer.Flush();
             }
             catch
             {

@@ -16,15 +16,15 @@ namespace Ex1.Commands
             this.Name = args[0];
             var rows = int.Parse(args[1]);
             var cols = int.Parse(args[2]);
-            var maze = this.model.start(this.Name, rows, cols);
             var mpStart = new MultiPlayerDS
             {
                 StartGameClient = client,
                 JoinGameClient = null,
-                MazeInit = maze,
                 NameOfGame = this.Name,
                 IsAvilble = true
             };
+            var maze = this.model.start(this.Name, rows, cols, mpStart);
+            
             this.model.DictionaryOfMultyPlayerDS.Add(this.Name,mpStart);
             var startPacketStream = new PacketStream
             {

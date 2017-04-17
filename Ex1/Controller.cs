@@ -10,47 +10,27 @@ namespace Ex1
     {
         private Dictionary<string, ICommand> commands;
         private IModel model;
-        public Controller()
-
+        public Controller(IModel model)
         {
-            model = new Model();
+            this.model = model;
             commands = new Dictionary<string, ICommand>();
-            commands.Add("generate", new GenerateMazeCommand(model));
-            commands.Add("solve", new SolveCommand(model));
-            commands.Add("start", new StartCommand(model));
-            commands.Add("list", new ListCommand(model));
-            commands.Add("join", new JoinCommand(model));
-            commands.Add("play", new PlayCommand(model));
-            commands.Add("close", new CloseCommand(model));
+            commands.Add("generate", new GenerateMazeCommand(this.model));
+            commands.Add("solve", new SolveCommand(this.model));
+            commands.Add("start", new StartCommand(this.model));
+            commands.Add("list", new ListCommand(this.model));
+            commands.Add("join", new JoinCommand(this.model));
+            commands.Add("play", new PlayCommand(this.model));
+            commands.Add("close", new CloseCommand(this.model));
         }
-        public bool ExecuteCommand(string commandLine, TcpClient client)
+        public string ExecuteCommand(string commandLine, TcpClient client)
         {
             string[] arr = commandLine.Split(' ');
             string commandKey = arr[0];
-           /* if (!commands.ContainsKey(commandKey))
-                throw NotImplementedException;*/
+            if (!commands.ContainsKey(commandKey))
+                return "Command not found";
             string[] args = arr.Skip(1).ToArray();
             ICommand command = commands[commandKey];
-
-            string commandResult = command.Execute(args, client);
-            PacketStream packet = Newtonsoft.Json.JsonConvert.DeserializeObject<PacketStream>(commandResult);
-
-            string result = packet.StringStream;
-            MultiPlayerGame mp;
-            if (packet.MultiPlayer)
-            {
-
-                if (command is PlayCommand)
-                {
-                    
-                }
-                mp = new MultiPlayerGame(client, result, packet.MultiPlayerDs);
-                mp.Play();
-                return false;
-            }
-            SinglePlayerGame sp = new SinglePlayerGame(client, result);
-            sp.Play();
-            return true;
+            return command.Execute(args, client);
         }
     }
 }

@@ -9,6 +9,6 @@ namespace Ex1
 {
     interface IController
     {
-       bool ExecuteCommand(string commandLine, TcpClient client);
+       string ExecuteCommand(string commandLine, TcpClient client);
     }
 }

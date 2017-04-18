@@ -19,19 +19,11 @@ namespace Ex1.Commands
             this.Name = args[0];
             var rows = int.Parse(args[1]);
             var cols = int.Parse(args[2]);
-            var maze = this.model.start(this.Name, rows, cols);
-            var mpStart = new MultiPlayerDS(client, this.Name, maze);
-/*
-            {
-                StartGameClient = client,
-                JoinGameClient = null,
-                MazeInit = maze,
-                NameOfGame = this.Name,
-                IsAvailable = true,
-                //Closed = false
-            };
- */
-            this.model.DictionaryOfMultyPlayerDS.Add(this.Name,mpStart);
+           // var maze =
+            var mpStart = this.model.start(this.Name, rows, cols, client);
+           // new MultiPlayerDS(client, this.Name, maze);
+
+            //this.model.DictionaryOfMultyPlayerDS.Add(this.Name,mpStart);
             var startPacketStream = new PacketStream
             {
                 MultiPlayer = true,

@@ -100,15 +100,15 @@ namespace Ex1
             return solution;
         }
 
-        public Maze start(string name, int rows, int cols)
+        public MultiPlayerDS start(string name, int rows, int cols, TcpClient host)
         {
             if (DictionaryOfMazes.ContainsKey(name))
             {
-                return DictionaryOfMazes[name];
+                return new MultiPlayerDS(host, name, DictionaryOfMazes[name]);
             }
             else
             {
-               return this.generate(name, rows, cols);
+                return new MultiPlayerDS(host, name, this.generate(name, rows, cols));
             }
         }
     }

@@ -47,6 +47,11 @@ namespace Ex1
             while (!multiPlayerDs.Closed)
             {
                 string commandFromTheClient = Reader.ReadString();
+                if(multiPlayerDs.Closed)
+                {
+                    break;
+                }
+
                 Console.WriteLine("debug massage: commandFromTheClient = {0}", commandFromTheClient);
                 if (commandFromTheClient == "close")
                 {

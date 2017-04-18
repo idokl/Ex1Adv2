@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Sockets;
 using Ex1.Commands;
+using System.IO;
 
 namespace Ex1
 {
@@ -46,9 +47,21 @@ namespace Ex1
                 {
 
                 }
-                //mp = new MultiPlayerGame(packet.MultiPlayerDs);
-                //mp.Play();
-                return false;
+
+
+                NetworkStream stream = client.GetStream();
+                BinaryReader reader = new BinaryReader(stream);
+                BinaryWriter writer = new BinaryWriter(stream);
+                {
+                    commandLine = reader.ReadString();
+                    Console.WriteLine("debug massage: Got command: {0}", commandLine);
+                    this.ExecuteCommand(commandLine, client);
+                }
+
+
+                    //mp = new MultiPlayerGame(packet.MultiPlayerDs);
+                    //mp.Play();
+                    return false;
             }
             else
             {

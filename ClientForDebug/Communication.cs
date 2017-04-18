@@ -18,14 +18,17 @@ namespace ClientForDebug
                 TcpClient client = new TcpClient();
                 client.Connect(ep);
                 Console.WriteLine("debug massage: You are connected");
+                String command;
                 using (NetworkStream stream = client.GetStream())
                 using (BinaryReader reader = new BinaryReader(stream))
                 using (BinaryWriter writer = new BinaryWriter(stream))
+                //NetworkStream stream = client.GetStream();
+                //BinaryReader reader = new BinaryReader(stream);
+                //BinaryWriter writer = new BinaryWriter(stream);
                 {
 
                     // Send data to server
                     Console.Write("Please enter a command: ");
-                    String command;
                     command = Console.ReadLine();
                     //command = "debug arg0 arg1 arg2";
                     //command = "generate mazeName 10 10";
@@ -35,7 +38,7 @@ namespace ClientForDebug
 
                     // Get result from server
                     string result = reader.ReadString();
-
+                    Console.WriteLine("debug massage: Result = {0}", result);
 
                     if (result == "pass to multiplayer mode")
                     {
@@ -56,16 +59,22 @@ namespace ClientForDebug
                         while (!stop)
                         {
                             Console.Write("You are in multiplayer mode. Please enter a command: ");
-                            String command2;
-                            command2 = Console.ReadLine();
-                            try
+                            //String command;
+                            command = Console.ReadLine();
+                            //try
+                            //{
+                            //if (!stop)
+                            writer.Write(command);
+                            if (stop)
                             {
-                                writer.Write(command2);
+                                result = reader.ReadString();
+                                Console.WriteLine("debug massage: The result = {0}", result);
                             }
-                            catch (SocketException)
-                            {
-                                break;
-                            }
+                            //}
+                            //catch (SocketException)
+                            //{
+                            //break;
+                            //}
                             /*
                             if (command2 == "terminate")
                                 break;
@@ -75,9 +84,6 @@ namespace ClientForDebug
                         }
                         stop = true;
                     }
-
-
-                    Console.WriteLine("debug massage: Result = {0}", result);
 
                 }
                 client.Close();

@@ -19,13 +19,17 @@ namespace Ex1
             Task t = new Task(() =>
             {
                 //bool stop = false;
-                using (NetworkStream stream = client.GetStream())
-                using (BinaryReader reader = new BinaryReader(stream))
-                using (BinaryWriter writer = new BinaryWriter(stream))
-//                    while (!stop)
-//                    {
-                        {
-                            string commandLine = reader.ReadString();
+                //using (NetworkStream stream = client.GetStream())
+                //using (BinaryReader reader = new BinaryReader(stream))
+                //using (BinaryWriter writer = new BinaryWriter(stream))
+                NetworkStream stream = client.GetStream();
+                BinaryReader reader = new BinaryReader(stream);
+                BinaryWriter writer = new BinaryWriter(stream);
+                //              
+                //                    while (!stop)
+                //                    {
+                {
+                    string commandLine = reader.ReadString();
                             Console.WriteLine("debug massage: Got command: {0}", commandLine);
                            /*stop = */Controller.ExecuteCommand(commandLine, client);
                         }

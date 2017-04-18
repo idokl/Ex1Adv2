@@ -3,7 +3,7 @@ using System.IO;
 using System.Net.Sockets;
 using System.Threading.Tasks;
 
-namespace Ex1
+namespace Ex1.Controller
 {
     class ClientHandler : IClientHandler
     {

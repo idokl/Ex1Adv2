@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Net.Sockets;
-using System.Text;
-using System.Threading.Tasks;
-using MazeGeneratorLib;
 using MazeLib;
 using SearchAlgorithmsLib;
 
-namespace Ex1
+namespace Ex1.Model
 {
     interface IModel
     {

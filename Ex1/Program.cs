@@ -8,6 +8,9 @@ using MazeGeneratorLib;
 using System.Net;
 using System.Net.Sockets;
 using System.IO;
+using Ex1.Controller;
+using Ex1.Model;
+using Ex1.View;
 
 namespace Ex1
 {
@@ -17,9 +20,10 @@ namespace Ex1
         static void Main(string[] args)
         {
             Console.WriteLine("debug massage: I am the Server.");
-            IController controller = new Controller();
+            IModel model = new Model.Model();
+            IController controller = new Controller.Controller(model);
             IClientHandler clientHandler = new ClientHandler(controller);
-            IView view = new View(9000, clientHandler);
+            IView view = new View.View(9000, clientHandler);
             view.Start();
 
             //terminating:

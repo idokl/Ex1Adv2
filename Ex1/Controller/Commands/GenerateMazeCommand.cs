@@ -1,14 +1,8 @@
-﻿using MazeLib;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Net.Sockets;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
+﻿using System.Net.Sockets;
+using Ex1.Model;
+using MazeLib;
 
-namespace Ex1.Commands
+namespace Ex1.Controller.Commands
 {
     class GenerateMazeCommand : ICommand
     {

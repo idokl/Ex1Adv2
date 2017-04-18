@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Net.Sockets;
+using Ex1.Model;
 using MazeLib;
 using Newtonsoft.Json.Linq;
 
-namespace Ex1.Commands
+namespace Ex1.Controller.Commands
 {
     class PlayCommand : ICommand
     {

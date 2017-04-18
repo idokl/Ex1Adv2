@@ -1,20 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net.Sockets;
-using Ex1.Commands;
-using System.IO;
+using Ex1.Controller.Commands;
+using Ex1.Model;
 
-namespace Ex1
+namespace Ex1.Controller
 {
     class Controller : IController
     {
         private Dictionary<string, ICommand> commands;
         private IModel model;
-        public Controller()
+        public Controller(IModel mazeModel)
 
         {
-            model = new Model();
+            model = mazeModel;
             commands = new Dictionary<string, ICommand>();
             commands.Add("generate", new GenerateMazeCommand(model));
             commands.Add("solve", new SolveCommand(model));

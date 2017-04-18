@@ -2,8 +2,9 @@
 using System.Net;
 using System.Net.Sockets;
 using System.Threading.Tasks;
+using Ex1.Controller;
 
-namespace Ex1
+namespace Ex1.View
 {
     class View : IView
     {

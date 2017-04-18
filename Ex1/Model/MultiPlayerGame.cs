@@ -2,7 +2,7 @@
 using System.IO;
 using System.Net.Sockets;
 
-namespace Ex1
+namespace Ex1.Model
 {
     class MultiPlayerGame
     {

@@ -1,7 +1,7 @@
 ﻿using System.Net.Sockets;
-using Newtonsoft.Json;
+using Ex1.Model;
 
-namespace Ex1.Commands
+namespace Ex1.Controller.Commands
 {
     class CloseCommand : ICommand
     {

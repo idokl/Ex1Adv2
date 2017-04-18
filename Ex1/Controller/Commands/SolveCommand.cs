@@ -2,11 +2,11 @@
 using System.Net.Sockets;
 using System.Text;
 using Adapter;
-using Newtonsoft.Json;
+using Ex1.Model;
 using Newtonsoft.Json.Linq;
 using SearchAlgorithmsLib;
 
-namespace Ex1.Commands
+namespace Ex1.Controller.Commands
 {
     class SolveCommand : ICommand
     {

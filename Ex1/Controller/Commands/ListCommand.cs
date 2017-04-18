@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Net.Sockets;
 using System.Text;
-using Newtonsoft.Json;
+using Ex1.Model;
 
-namespace Ex1.Commands
+namespace Ex1.Controller.Commands
 {
     class ListCommand : ICommand
     {

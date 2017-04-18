@@ -1,15 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net.Sockets;
-using System.Text;
-using System.Threading.Tasks;
 using MazeLib;
-using System.IO;
 
 //credit to the example from: https://msdn.microsoft.com/en-us/library/aa645739(v=vs.71).aspx
 
-namespace Ex1
+namespace Ex1.Model
 {
     // A delegate type for hooking up change notifications.
     public delegate void ChangedEventHandler(object sender, EventArgs e);

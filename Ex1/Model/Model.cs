@@ -1,15 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net.Sockets;
-using System.Text;
-using System.Threading.Tasks;
 using Adapter;
-using MazeLib;
 using MazeGeneratorLib;
+using MazeLib;
 using SearchAlgorithmsLib;
 
-namespace Ex1
+namespace Ex1.Model
 {
     class Model : IModel
     {
@@ -104,11 +101,15 @@ namespace Ex1
         {
             if (DictionaryOfMazes.ContainsKey(name))
             {
-                return new MultiPlayerDS(host, name, DictionaryOfMazes[name]);
+                MultiPlayerDS multiPlayerDs = new MultiPlayerDS(host, name, DictionaryOfMazes[name]);
+                DictionaryOfMultyPlayerDS.Add(name,multiPlayerDs);
+                return multiPlayerDs;
             }
             else
             {
-                return new MultiPlayerDS(host, name, this.generate(name, rows, cols));
+                MultiPlayerDS multiPlayerDs = new MultiPlayerDS(host, name, this.generate(name, rows, cols));
+                DictionaryOfMultyPlayerDS.Add(name, multiPlayerDs);
+                return multiPlayerDs;
             }
         }
     }

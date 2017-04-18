@@ -1,10 +1,7 @@
 ﻿using System.Net.Sockets;
-using Newtonsoft.Json;
-using System.Threading.Tasks;
-using System.IO;
-using System.Linq;
+using Ex1.Model;
 
-namespace Ex1.Commands
+namespace Ex1.Controller.Commands
 {
     class StartCommand : ICommand
     {

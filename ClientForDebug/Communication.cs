@@ -12,13 +12,14 @@ namespace ClientForDebug
         {
             //bool multiplayer = false;
             //while (!multiplayer)
+            String command = "";
+            bool commandIsReadyToBeSent = false;
             while (true)
             {
                 IPEndPoint ep = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 9000);
                 TcpClient client = new TcpClient();
                 client.Connect(ep);
                 Console.WriteLine("debug massage: You are connected");
-                String command;
                 using (NetworkStream stream = client.GetStream())
                 using (BinaryReader reader = new BinaryReader(stream))
                 using (BinaryWriter writer = new BinaryWriter(stream))
@@ -28,14 +29,18 @@ namespace ClientForDebug
                 {
 
                     // Send data to server
-                    Console.Write("Please enter a command: ");
-                    command = Console.ReadLine();
-                    //command = "debug arg0 arg1 arg2";
-                    //command = "generate mazeName 10 10";
+                    if (!commandIsReadyToBeSent)
+                    {
+                        Console.Write("Please enter a command: ");
+                        //command = "debug arg0 arg1 arg2";
+                        //command = "generate mazeName 10 10";
+                        command = Console.ReadLine();
+                        if (command == "terminate")
+                            break;
+                    }
                     writer.Write(command);
-                    if (command == "terminate")
-                        break;
-
+                    commandIsReadyToBeSent = false;
+                    
                     // Get result from server
                     string result = reader.ReadString();
                     Console.WriteLine("debug massage: Result = {0}", result);
@@ -48,7 +53,6 @@ namespace ClientForDebug
                         {
                             while (!stop)
                             {
-
                                 string update = reader.ReadString();
                                 Console.WriteLine("Got update: {0}", update);
                                 if (update == "hello client, we noticed that your multiplayer game is closed now")
@@ -56,20 +60,32 @@ namespace ClientForDebug
                             }
                         });
                         readUpdates.Start();
+
                         while (!stop)
                         {
-                            Console.Write("You are in multiplayer mode. Please enter a command: ");
-                            //String command;
-                            command = Console.ReadLine();
+                            if (!commandIsReadyToBeSent)
+                            {
+                                Console.Write("You are in multiplayer mode. Please enter a command: ");
+                                command = Console.ReadLine();
+                                commandIsReadyToBeSent = true;
+                            }
                             //try
                             //{
-                            //if (!stop)
-                            writer.Write(command);
+                            if (!stop)
+                            {
+                                if (commandIsReadyToBeSent)
+                                {
+                                    writer.Write(command);
+                                    commandIsReadyToBeSent = false;
+                                }
+                            }
+                            /*
                             if (stop)
                             {
                                 result = reader.ReadString();
                                 Console.WriteLine("debug massage: The result = {0}", result);
                             }
+                            */
                             //}
                             //catch (SocketException)
                             //{

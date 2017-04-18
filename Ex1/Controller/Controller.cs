@@ -49,7 +49,7 @@ namespace Ex1.Controller
 
                 }
 
-
+                /*
                 NetworkStream stream = client.GetStream();
                 BinaryReader reader = new BinaryReader(stream);
                 BinaryWriter writer = new BinaryWriter(stream);
@@ -58,6 +58,7 @@ namespace Ex1.Controller
                     Console.WriteLine("debug massage: Got command: {0}", commandLine);
                     this.ExecuteCommand(commandLine, client);
                 }
+                */
 
 
                     //mp = new MultiPlayerGame(packet.MultiPlayerDs);

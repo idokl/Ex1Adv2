@@ -46,22 +46,29 @@ namespace Ex1.Model
 
             while (!multiPlayerDs.Closed)
             {
-                string commandFromTheClient = Reader.ReadString();
-                if(multiPlayerDs.Closed)
+                try
                 {
-                    break;
-                }
+                    string commandFromTheClient = Reader.ReadString();
+                    if (multiPlayerDs.Closed)
+                    {
+                        break;
+                    }
 
-                Console.WriteLine("debug massage: commandFromTheClient = {0}", commandFromTheClient);
-                if (commandFromTheClient == "close")
+                    Console.WriteLine("debug massage: commandFromTheClient = {0}", commandFromTheClient);
+                    if (commandFromTheClient == "close")
+                    {
+                        multiPlayerDs.Close();
+                        Console.WriteLine("debug massage: waiting 0.3 second");
+                        System.Threading.Thread.Sleep(300);
+                    }
+
+                    //string answer = "The server recived your command. Your command was: " + commandFromTheClient;
+                    //Writer.Write(answer);
+                }
+                catch (Exception)
                 {
-                    multiPlayerDs.Close();
-                    Console.WriteLine("debug massage: waiting 0.3 second");
-                    System.Threading.Thread.Sleep(300);
+                    Reader.Dispose();
                 }
-
-                //string answer = "The server recived your command. Your command was: " + commandFromTheClient;
-                //Writer.Write(answer);
             }
 
         }
@@ -74,6 +81,7 @@ namespace Ex1.Model
                 Console.WriteLine("This function is called when the MultiPlayedDS.Closed is changed to be true.");
                 Console.WriteLine("We will pass massage about it ro our client.");
                 Writer.Write("hello client, we noticed that your multiplayer game is closed now");
+                Writer.Dispose();
             }
         }
 

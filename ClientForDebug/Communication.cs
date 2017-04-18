@@ -10,8 +10,6 @@ namespace ClientForDebug
     {
         public void Communicate()
         {
-            //bool multiplayer = false;
-            //while (!multiplayer)
             String command = "";
             bool commandIsReadyToBeSent = false;
             while (true)
@@ -23,9 +21,6 @@ namespace ClientForDebug
                 using (NetworkStream stream = client.GetStream())
                 using (BinaryReader reader = new BinaryReader(stream))
                 using (BinaryWriter writer = new BinaryWriter(stream))
-                //NetworkStream stream = client.GetStream();
-                //BinaryReader reader = new BinaryReader(stream);
-                //BinaryWriter writer = new BinaryWriter(stream);
                 {
 
                     // Send data to server
@@ -47,7 +42,6 @@ namespace ClientForDebug
 
                     if (result == "pass to multiplayer mode")
                     {
-                        //this.ReadAndWrite(reader, writer);
                         bool stop = false;
                         Task readUpdates = new Task(() =>
                         {
@@ -69,8 +63,6 @@ namespace ClientForDebug
                                 command = Console.ReadLine();
                                 commandIsReadyToBeSent = true;
                             }
-                            //try
-                            //{
                             if (!stop)
                             {
                                 if (commandIsReadyToBeSent)
@@ -79,24 +71,6 @@ namespace ClientForDebug
                                     commandIsReadyToBeSent = false;
                                 }
                             }
-                            /*
-                            if (stop)
-                            {
-                                result = reader.ReadString();
-                                Console.WriteLine("debug massage: The result = {0}", result);
-                            }
-                            */
-                            //}
-                            //catch (SocketException)
-                            //{
-                            //break;
-                            //}
-                            /*
-                            if (command2 == "terminate")
-                                break;
-                            string result2 = reader.ReadString();
-                            Console.WriteLine("debug massage: Result = {0}", result2);
-                            */
                         }
                         stop = true;
                     }
@@ -106,36 +80,5 @@ namespace ClientForDebug
             }
            
         }
-
-/*
-        private void ReadAndWrite(BinaryReader reader, BinaryWriter writer)
-        {
-            bool stop = false;
-            Task readUpdates = new Task(() =>
-            {
-                while (!stop)
-                {
-
-                    string update = reader.ReadString();
-                    Console.WriteLine("Got update: {0}", update);
-                    stop = false;
-                }
-            });
-            readUpdates.Start();
-            while (!stop)
-            {
-                Console.Write("You are in multiplayer mode. Please enter a command: ");
-                String command2;
-                command2 = Console.ReadLine();
-                writer.Write(command2);
-                if (command2 == "terminate")
-                    break;
-                string result2 = reader.ReadString();
-                Console.WriteLine("debug massage: Result = {0}", result2);
-            }
-        }
-*/
-
-
     }
 }

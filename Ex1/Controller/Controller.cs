@@ -22,8 +22,8 @@ namespace Ex1.Controller
             commands.Add("start", new StartCommand(model));
             commands.Add("list", new ListCommand(model));
             commands.Add("join", new JoinCommand(model));
-            commands.Add("play", new PlayCommand(model));
-            commands.Add("close", new CloseCommand(model));
+            //commands.Add("play", new PlayCommand(model));
+            //commands.Add("close", new CloseCommand(model));
         }
         public bool ExecuteCommand(string commandLine, TcpClient client)
         {
@@ -39,38 +39,13 @@ namespace Ex1.Controller
             PacketStream packet = command.Execute(args, client);
 
             string result = packet.StringStream;
-            //MultiPlayerGame mp;
             SinglePlayerGame sp;
-            if (packet.MultiPlayer)
-            {
-
-                if (command is PlayCommand)
-                {
-
-                }
-
-                /*
-                NetworkStream stream = client.GetStream();
-                BinaryReader reader = new BinaryReader(stream);
-                BinaryWriter writer = new BinaryWriter(stream);
-                {
-                    commandLine = reader.ReadString();
-                    Console.WriteLine("debug massage: Got command: {0}", commandLine);
-                    this.ExecuteCommand(commandLine, client);
-                }
-                */
-
-
-                    //mp = new MultiPlayerGame(packet.MultiPlayerDs);
-                    //mp.Play();
-                    return false;
-            }
-            else
+            if (!packet.MultiPlayer)
             {
                 sp = new SinglePlayerGame(client, result);
                 sp.Play();
-                return true;
             }
+            return true;
         }
     }
 }

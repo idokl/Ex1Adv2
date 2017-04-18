@@ -18,7 +18,7 @@ namespace Ex1
         {
             Task t = new Task(() =>
             {
-                bool stop = false;
+                //bool stop = false;
                 using (NetworkStream stream = client.GetStream())
                 using (BinaryReader reader = new BinaryReader(stream))
                 using (BinaryWriter writer = new BinaryWriter(stream))
@@ -27,7 +27,7 @@ namespace Ex1
                         {
                             string commandLine = reader.ReadString();
                             Console.WriteLine("debug massage: Got command: {0}", commandLine);
-                           stop = Controller.ExecuteCommand(commandLine, client);
+                           /*stop = */Controller.ExecuteCommand(commandLine, client);
                         }
 //                    }
             });

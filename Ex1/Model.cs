@@ -56,7 +56,7 @@ namespace Ex1
             List<string> listOgGames = new List<string>();
             foreach (MultiPlayerDS mp in DictionaryOfMultyPlayerDS.Values)
             {
-                if (mp.IsAvilble)
+                if (mp.IsAvailable)
                 {
                     listOgGames.Add(mp.NameOfGame);
                 }

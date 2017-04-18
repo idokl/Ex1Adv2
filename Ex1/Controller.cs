@@ -37,7 +37,7 @@ namespace Ex1
             PacketStream packet = command.Execute(args, client);
 
             string result = packet.StringStream;
-            MultiPlayerGame mp;
+            //MultiPlayerGame mp;
             SinglePlayerGame sp;
             if (packet.MultiPlayer)
             {
@@ -46,8 +46,8 @@ namespace Ex1
                 {
 
                 }
-                mp = new MultiPlayerGame(packet.MultiPlayerDs);
-                mp.Play();
+                //mp = new MultiPlayerGame(packet.MultiPlayerDs);
+                //mp.Play();
                 return false;
             }
             else

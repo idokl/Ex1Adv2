@@ -20,14 +20,17 @@ namespace Ex1.Commands
             var rows = int.Parse(args[1]);
             var cols = int.Parse(args[2]);
             var maze = this.model.start(this.Name, rows, cols);
-            var mpStart = new MultiPlayerDS
+            var mpStart = new MultiPlayerDS(client, this.Name, maze);
+/*
             {
                 StartGameClient = client,
                 JoinGameClient = null,
                 MazeInit = maze,
                 NameOfGame = this.Name,
-                IsAvilble = true
+                IsAvailable = true,
+                //Closed = false
             };
+ */
             this.model.DictionaryOfMultyPlayerDS.Add(this.Name,mpStart);
             var startPacketStream = new PacketStream
             {
@@ -35,38 +38,48 @@ namespace Ex1.Commands
                 MultiPlayerDs = mpStart,
                 StringStream = ""
             };
+
+            MultiPlayerGame mpgStart = new MultiPlayerGame(mpStart, true);
+            mpgStart.Initialize();
+            mpgStart.ManageCommunication();
             /*
-            Task keepListenningToClientCommands = new Task(() =>
+            //Task keepListenningToClientCommands = new Task(() =>
+            //{
+            NetworkStream stream = client.GetStream();
+            BinaryReader reader = new BinaryReader(stream);
+            //BinaryWriter writer = new BinaryWriter(stream);
             {
-                using (NetworkStream stream = client.GetStream())
-                using (BinaryReader reader = new BinaryReader(stream))
-                using (BinaryWriter writer = new BinaryWriter(stream))
-                    while (mpStart.IsAvilble)
+                mpStart.Start(stream);
+                //writer.Write("mp");
+
+                while (!mpStart.Closed)
+                {
                     {
+                        string commandLine = reader.ReadString();
+                        //Console.WriteLine("debug massage: Got command: {0}", commandLine);
+                        string[] arr = commandLine.Split(' ');
+                        string commandKey = arr[0];
+                        // if (!commands.ContainsKey(commandKey))
+                        //     throw NotImplementedException;
+                        string[] mpCommandArgs = arr.Skip(1).ToArray();
+                        if (commandKey == "play")
                         {
-                            string commandLine = reader.ReadString();
-                            //Console.WriteLine("debug massage: Got command: {0}", commandLine);
-                            string[] arr = commandLine.Split(' ');
-                            string commandKey = arr[0];
-                            // if (!commands.ContainsKey(commandKey))
-                            //     throw NotImplementedException;
-                            string[] mpCommandArgs = arr.Skip(1).ToArray();
-                            if (commandKey == "play")
-                            {
-
-                            }
-                            else if (commandKey == "close")
-                            {
-                                mpStart.IsAvilble = false;
-                                break;
-                            }
-                            //PacketStream packet = command.Execute(mpCommandArgs, client);
-
-                            //string result = packet.StringStream;
+                            
                         }
+                        else if (commandKey == "close")
+                        {
+                            mpStart.IsAvilble = false;
+                            break;
+                        }
+                        //PacketStream packet = command.Execute(mpCommandArgs, client);
+
+                        //string result = packet.StringStream;
                     }
-            });
-            keepListenningToClientCommands.Start();
+                }
+            }
+            //}
+            //);
+            //keepListenningToClientCommands.Start();
             */
 
             return startPacketStream;

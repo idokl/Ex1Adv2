@@ -28,39 +28,51 @@ namespace Ex1.Commands
             {
                 mpJoin = this.model.join(name);
                 mpJoin.JoinGameClient = client;
-                mpJoin.IsAvilble = false;
+                mpJoin.IsAvailable = false;
+
+                MultiPlayerGame mpgJoin = new MultiPlayerGame(mpJoin, false);
+                mpgJoin.Initialize();
+                mpgJoin.ManageCommunication();
+
                 /*
-                Task keepListenningToClientCommands = new Task(() =>
+                //
+                //Task keepListenningToClientCommands = new Task(() =>
+                //{
+                NetworkStream stream = client.GetStream();
+                BinaryReader reader = new BinaryReader(stream);
+                BinaryWriter writer = new BinaryWriter(stream);
                 {
-                    using (NetworkStream stream = client.GetStream())
-                    using (BinaryReader reader = new BinaryReader(stream))
-                    using (BinaryWriter writer = new BinaryWriter(stream))
-                        while (mpJoin.IsAvilble)
+                    mpJoin.Start(stream);
+                    //writer.Write("mp");
+
+                    while (!mpJoin.Closed)
+                    {
                         {
+                            string commandLine = reader.ReadString();
+                            //Console.WriteLine("debug massage: Got command: {0}", commandLine);
+                            string[] arr = commandLine.Split(' ');
+                            string commandKey = arr[0];
+                            // if (!commands.ContainsKey(commandKey))
+                            //     throw NotImplementedException;
+                            string[] mpCommandArgs = arr.Skip(1).ToArray();
+                            if (commandKey == "play")
                             {
-                                string commandLine = reader.ReadString();
-                                //Console.WriteLine("debug massage: Got command: {0}", commandLine);
-                                string[] arr = commandLine.Split(' ');
-                                string commandKey = arr[0];
-                                // if (!commands.ContainsKey(commandKey))
-                                //     throw NotImplementedException;
-                                string[] mpCommandArgs = arr.Skip(1).ToArray();
-                                if (commandKey == "play")
-                                {
 
-                                }
-                                else if (commandKey == "close")
-                                {
-                                    mpJoin.IsAvilble = false;
-                                    break;
-                                }
-                                //PacketStream packet = command.Execute(mpCommandArgs, client);
-
-                                //string result = packet.StringStream;
                             }
+                            else if (commandKey == "close")
+                            {
+                                mpJoin.IsAvilble = false;
+                                break;
+                            }
+                            //PacketStream packet = command.Execute(mpCommandArgs, client);
+
+                            //string result = packet.StringStream;
                         }
-                });
-                keepListenningToClientCommands.Start();
+                    }
+                    //});
+                    //keepListenningToClientCommands.Start();
+                    //
+                }
                 */
             }
             catch

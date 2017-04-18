@@ -63,7 +63,7 @@
     <Compile Include="Model\Model.cs" />
     <Compile Include="Controller\Commands\PlayCommand.cs" />
     <Compile Include="Model\MultiPlayerDS.cs" />
-    <Compile Include="Model\MultiPlayerGame.cs" />
+    <Compile Include="Controller\MultiPlayerGame.cs" />
     <Compile Include="Model\PacketStream.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

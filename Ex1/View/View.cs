@@ -11,15 +11,18 @@ namespace Ex1.View
 
         private int port;
         private TcpListener listener;
-        private IClientHandler ch;
+        
+       
 
-        public View(int port, IClientHandler ch)
+        public View(int port)
         {
             this.port = port;
-            this.ch = ch;
+           
         }
-        public void Start()
+        public void Start(IController controller)
         {
+            IController MazeController = controller;
+            IClientHandler ch = new ClientHandler(MazeController);
             //definition of communication channels:
             IPEndPoint ep = new IPEndPoint(IPAddress.Parse("127.0.0.1"), port);
             listener = new TcpListener(ep);

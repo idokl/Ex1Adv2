@@ -12,19 +12,22 @@ namespace Ex1.Controller
     {
         private Dictionary<string, ICommand> commands;
         private IModel model;
-        public Controller(IModel mazeModel)
-
+        public Controller()
         {
-            model = mazeModel;
+            
+        }
+
+        public void SetModel(IModel model)
+        {
+            this.model = model;
             commands = new Dictionary<string, ICommand>();
             commands.Add("generate", new GenerateMazeCommand(model));
             commands.Add("solve", new SolveCommand(model));
             commands.Add("start", new StartCommand(model));
             commands.Add("list", new ListCommand(model));
             commands.Add("join", new JoinCommand(model));
-           // commands.Add("play", new PlayCommand(model));
-            //commands.Add("close", new CloseCommand(model));
         }
+
         public bool ExecuteCommand(string commandLine, TcpClient client)
         {
             string[] arr = commandLine.Split(' ');

@@ -48,12 +48,12 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controller\ClientHandler.cs" />
+    <Compile Include="View\ClientHandler.cs" />
     <Compile Include="Controller\Commands\CloseCommand.cs" />
     <Compile Include="CompareSolvers.cs" />
     <Compile Include="Controller\Controller.cs" />
     <Compile Include="Controller\Commands\GenerateMazeCommand.cs" />
-    <Compile Include="Controller\IClientHandler.cs" />
+    <Compile Include="View\IClientHandler.cs" />
     <Compile Include="Controller\ICommand.cs" />
     <Compile Include="Controller\IController.cs" />
     <Compile Include="DirectionChangeEventArgs.cs" />
@@ -70,7 +70,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Controller\Commands\SolveCommand.cs" />
     <Compile Include="Controller\Commands\StartCommand.cs" />
-    <Compile Include="Model\SinglePlayerGame.cs" />
+    <Compile Include="Controller\SinglePlayerGame.cs" />
     <Compile Include="View\View.cs" />
   </ItemGroup>
   <ItemGroup>

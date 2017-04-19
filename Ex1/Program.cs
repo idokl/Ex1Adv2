@@ -20,11 +20,11 @@ namespace Ex1
         static void Main(string[] args)
         {
             Console.WriteLine("debug massage: I am the Server.");
-            IModel model = new Model.Model();
-            IController controller = new Controller.Controller(model);
-            IClientHandler clientHandler = new ClientHandler(controller);
-            IView view = new View.View(9000, clientHandler);
-            view.Start();
+            IController controller = new Controller.Controller();
+            IModel model = new Model.Model(controller); 
+            IView view = new View.View(9000);
+            controller.SetModel(model);
+            view.Start(controller);
 
             //terminating:
             System.Threading.Thread.Sleep(500);

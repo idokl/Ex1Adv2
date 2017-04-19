@@ -14,7 +14,7 @@ namespace Ex1.Model
 
     class MultiPlayerDS
     {
-        private Direction direction;
+       
         public MultiPlayerDS(TcpClient startGameClient, string nameOfGame, Maze maze)
         {
             StartGameClient = startGameClient;
@@ -32,12 +32,13 @@ namespace Ex1.Model
         public TcpClient JoinGameClient { get; set; }
         public string NameOfGame { get; set; }
         public Maze MazeInit { get; set; }
+        private Direction direction;
         public Direction CurrentDirection
         {
-            get { return Direction.Down; }
+            get { return direction; }
             set
             {
-                CurrentDirection = Direction.Left;
+                direction = value;
                 OnChangeOfPlayDirection(new DirectionChangeEventArgs(CurrentDirection));
             }
         }

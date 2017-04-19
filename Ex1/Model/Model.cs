@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Net.Sockets;
 using Adapter;
+using Ex1.Controller;
 using MazeGeneratorLib;
 using MazeLib;
 using SearchAlgorithmsLib;
@@ -15,10 +16,12 @@ namespace Ex1.Model
         private Dictionary<SearchableMaze, Solution> DictionaryOfMazesAndSolutions { get; set; }
         public Dictionary<string, MultiPlayerDS> DictionaryOfMultyPlayerDS { get; set; }
         public int EvaluateNodes { get; set; }
+        private IController controller;
 
         
-        public Model()
+        public Model(IController controller)
         {
+            this.controller = controller;
             DictionaryOfMazes = new Dictionary<string, Maze>();
             DictionaryOfMazesAndSolutions = new Dictionary<SearchableMaze, Solution>();
             DictionaryOfMultyPlayerDS = new Dictionary<string,MultiPlayerDS>();

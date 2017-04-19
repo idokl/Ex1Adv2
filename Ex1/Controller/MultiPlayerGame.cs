@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Net.Sockets;
+using MazeLib;
 
 namespace Ex1.Model
 {
@@ -42,8 +43,8 @@ namespace Ex1.Model
 
         public void ManageCommunication()
         {
-            multiPlayerDs.SomebodyClosedTheGame += new ChangedEventHandler(DSbecameClosed);
-            multiPlayerDs.PlayActionOccurd += new DirectionChanged(Play);
+            multiPlayerDs.SomebodyClosedTheGame += DSbecameClosed;
+            multiPlayerDs.PlayActionOccurd += Play;
 
             while (!multiPlayerDs.Closed)
             {
@@ -56,14 +57,20 @@ namespace Ex1.Model
                     }
 
                     Console.WriteLine("debug massage: commandFromTheClient = {0}", commandFromTheClient);
+                    if (commandFromTheClient == "Play")
+                    {
+                        multiPlayerDs.CurrentDirection = Direction.Down;
+
+                    }
                     if (commandFromTheClient == "close")
                     {
                         multiPlayerDs.Close();
                         Console.WriteLine("debug massage: waiting 0.3 second");
                         System.Threading.Thread.Sleep(300);
                     }
+                    // DirectionChangeEventArgs direction = new DirectionChangeEventArgs(Direction.Down);
+                   
 
-                  
                     //string answer = "The server recived your command. Your command was: " + commandFromTheClient;
                     //Writer.Write(answer);
                 }

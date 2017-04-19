@@ -1,9 +1,10 @@
-﻿namespace Ex1.View
+﻿using Ex1.Controller;
+
+namespace Ex1.View
 {
     interface IView
     {
-        void Start();
+        void Start(IController controller);
         void Stop();
-        //void ExecuteCommand(string commandName);
     }
 }

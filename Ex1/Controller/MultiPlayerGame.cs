@@ -31,7 +31,7 @@ namespace Ex1.Model
                 stream = multiPlayerDs.JoinGameClient.GetStream();
             Reader = new BinaryReader(stream);
             Writer = new BinaryWriter(stream);
-            Writer.Write(Massages.PassToMultiplayerMassage);
+            Writer.Write(Messages.PassToMultiplayerMassage);
         }
 
         private void WaitToOpponent()
@@ -90,7 +90,7 @@ namespace Ex1.Model
             {
                 Console.WriteLine("This function is called when the MultiPlayedDS.Closed is changed to be true.");
                 Console.WriteLine("We will pass massage about it ro our client.");
-                Writer.Write(Massages.PassToSingleplayerMassage);
+                Writer.Write(Messages.PassToSingleplayerMassage);
                 Writer.Dispose();
             }
         }

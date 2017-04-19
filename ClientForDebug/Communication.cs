@@ -1,10 +1,13 @@
-﻿using CommunicationSettings;
+﻿//using CommunicationSettings;
 using System;
 using System.Configuration;
 using System.IO;
 using System.Net;
 using System.Net.Sockets;
 using System.Threading.Tasks;
+using CommunicationSettings;
+
+
 
 namespace ClientForDebug
 {
@@ -45,7 +48,7 @@ namespace ClientForDebug
                     string result = reader.ReadString();
                     Console.WriteLine("debug massage: Result = {0}", result);
 
-                    if (result == Massages.PassToMultiplayerMassage)
+                    if (result == Messages.PassToMultiplayerMassage)
                     {
                         bool stop = false;
                         Task readUpdates = new Task(() =>
@@ -54,7 +57,7 @@ namespace ClientForDebug
                             {
                                 string update = reader.ReadString();
                                 Console.WriteLine("Got update: {0}", update);
-                                if (update == Massages.PassToSingleplayerMassage)
+                                if (update == Messages.PassToSingleplayerMassage)
                                     stop = true;
                             }
                         });

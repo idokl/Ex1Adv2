@@ -45,7 +45,7 @@ namespace ClientForDebug
                     string result = reader.ReadString();
                     Console.WriteLine("debug massage: Result = {0}", result);
 
-                    if (result == "pass to multiplayer mode")
+                    if (result == Massages.PassToMultiplayerMassage)
                     {
                         bool stop = false;
                         Task readUpdates = new Task(() =>

@@ -31,7 +31,7 @@ namespace Ex1.Model
                 stream = multiPlayerDs.JoinGameClient.GetStream();
             Reader = new BinaryReader(stream);
             Writer = new BinaryWriter(stream);
-            Writer.Write("pass to multiplayer mode");
+            Writer.Write(Massages.PassToMultiplayerMassage);
         }
 
         private void WaitToOpponent()

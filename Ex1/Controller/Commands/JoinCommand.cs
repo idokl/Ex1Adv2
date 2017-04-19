@@ -27,7 +27,7 @@ namespace Ex1.Controller.Commands
                 mpJoin.JoinGameClient = client;
                 mpJoin.IsAvailable = false;
 
-                MultiPlayerGame mpgJoin = new MultiPlayerGame(mpJoin, false);
+                MultiPlayerGameController mpgJoin = new MultiPlayerGameController(this.model, mpJoin, false);
                 mpgJoin.Initialize();
                 mpgJoin.ManageCommunication();
 

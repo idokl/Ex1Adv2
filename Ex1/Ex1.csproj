@@ -49,6 +49,7 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controller\CommandParser.cs" />
     <Compile Include="View\ClientHandler.cs" />
     <Compile Include="Controller\Commands\CloseCommand.cs" />
     <Compile Include="CompareSolvers.cs" />
@@ -65,7 +66,7 @@
     <Compile Include="Model\Model.cs" />
     <Compile Include="Controller\Commands\PlayCommand.cs" />
     <Compile Include="Model\MultiPlayerDS.cs" />
-    <Compile Include="Controller\MultiPlayerGame.cs" />
+    <Compile Include="Controller\MultiPlayerGameController.cs" />
     <Compile Include="Model\PacketStream.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

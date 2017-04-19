@@ -25,18 +25,13 @@ namespace Ex1.Controller
                 NetworkStream stream = client.GetStream();
                 BinaryReader reader = new BinaryReader(stream);
                 BinaryWriter writer = new BinaryWriter(stream);
-                //              
-                //                    while (!stop)
-                //                    {
                 {
                     string commandLine = reader.ReadString();
-                            Console.WriteLine("debug massage: Got command: {0}", commandLine);
-                           /*stop = */Controller.ExecuteCommand(commandLine, client);
-                        }
-//                    }
+                    Console.WriteLine("debug massage: Got command: {0}", commandLine);
+                    Controller.ExecuteCommand(commandLine, client);
+                }
             });
             t.Start();
-
         }
     }
 }

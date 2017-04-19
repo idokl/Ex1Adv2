@@ -16,12 +16,12 @@ namespace Ex1.Model
         private Dictionary<SearchableMaze, Solution> DictionaryOfMazesAndSolutions { get; set; }
         public Dictionary<string, MultiPlayerDS> DictionaryOfMultyPlayerDS { get; set; }
         public int EvaluateNodes { get; set; }
-        private IController controller;
+        //private IController controller;
 
         
-        public Model(IController controller)
+        public Model(/*IController controller*/)
         {
-            this.controller = controller;
+            //this.controller = controller;
             DictionaryOfMazes = new Dictionary<string, Maze>();
             DictionaryOfMazesAndSolutions = new Dictionary<SearchableMaze, Solution>();
             DictionaryOfMultyPlayerDS = new Dictionary<string,MultiPlayerDS>();
@@ -64,8 +64,10 @@ namespace Ex1.Model
             return listOgGames;
         }
 
-        public MultiPlayerDS play(Direction direction, TcpClient client)
+        //public MultiPlayerDS play(Direction direction, TcpClient client)
+        public void play(Direction direction, MultiPlayerDS multiPlayerDS, TcpClient client)
         {
+            /*
             foreach (MultiPlayerDS multiPlayer in DictionaryOfMultyPlayerDS.Values)
             {
                 if (multiPlayer.StartGameClient == client || multiPlayer.JoinGameClient == client)
@@ -74,6 +76,7 @@ namespace Ex1.Model
                     return multiPlayer;
                 }
             }
+            */
             throw new NotImplementedException();
         }
 

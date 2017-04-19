@@ -21,10 +21,10 @@ namespace Ex1
         {
             Console.WriteLine("debug massage: I am the Server.");
             IController controller = new Controller.Controller();
-            IModel model = new Model.Model(controller); 
-            IView view = new View.View(9000);
+            IModel model = new Model.Model(/*controller*/); 
+            IView view = new View.View(9000, controller);
             controller.SetModel(model);
-            view.Start(controller);
+            view.Start(/*controller*/);
 
             //terminating:
             System.Threading.Thread.Sleep(500);

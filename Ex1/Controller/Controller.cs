@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net.Sockets;
 using Ex1.Controller.Commands;
 using Ex1.Model;
+using Ex1.View;
 
 namespace Ex1.Controller
 {
@@ -12,10 +13,8 @@ namespace Ex1.Controller
     {
         private Dictionary<string, ICommand> commands;
         private IModel model;
-        public Controller()
-        {
-            
-        }
+
+        public Controller() { }
 
         public void SetModel(IModel model)
         {
@@ -30,25 +29,26 @@ namespace Ex1.Controller
 
         public bool ExecuteCommand(string commandLine, TcpClient client)
         {
-            string[] arr = commandLine.Split(' ');
-            string commandKey = arr[0];
-           /* if (!commands.ContainsKey(commandKey))
-                throw NotImplementedException;*/
-            string[] args = arr.Skip(1).ToArray();
-            ICommand command = commands[commandKey];
-
-            //string commandResult = command.Execute(args, client);
-            //PacketStream packet = Newtonsoft.Json.JsonConvert.DeserializeObject<PacketStream>(commandResult);
-            PacketStream packet = command.Execute(args, client);
-
-            string result = packet.StringStream;
-            SinglePlayerGame sp;
-            if (!packet.MultiPlayer)
+            CommandParser parser = new CommandParser(commandLine);
+            if (!commands.ContainsKey(parser.CommandKey))
             {
-                sp = new SinglePlayerGame(client, result);
-                sp.Play();
+                SinglePlayerGame sp = new SinglePlayerGame(client, "The command " + parser.CommandKey + " isn't known");
+                sp.SendMassage();
+                return false;
             }
-            return true;
+            else
+            {
+                ICommand command = commands[parser.CommandKey];
+                PacketStream packet = command.Execute(parser.Args, client);
+
+                string result = packet.StringStream;
+                if (!packet.MultiPlayer)
+                {
+                    SinglePlayerGame sp = new SinglePlayerGame(client, result);
+                    sp.SendMassage();
+                }
+                return true;
+            }
         }
     }
 }

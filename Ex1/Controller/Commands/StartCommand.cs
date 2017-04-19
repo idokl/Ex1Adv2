@@ -28,7 +28,7 @@ namespace Ex1.Controller.Commands
                 StringStream = ""
             };
 
-            MultiPlayerGame mpgStart = new MultiPlayerGame(mpStart, true);
+            MultiPlayerGameController mpgStart = new MultiPlayerGameController(this.model, mpStart, true);
             mpgStart.Initialize();
             mpgStart.ManageCommunication();
             /*

@@ -4,7 +4,8 @@ namespace Ex1.View
 {
     interface IView
     {
-        void Start(IController controller);
+        //void Start(IController controller);
+        void Start();
         void Stop();
     }
 }

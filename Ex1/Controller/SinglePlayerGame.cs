@@ -14,7 +14,7 @@ namespace Ex1.Model
             this.stream = stream;
         }
 
-        public void Play()
+        public void SendMassage()
         {
             using (NetworkStream stream = client.GetStream())
             using (BinaryReader reader = new BinaryReader(stream))

@@ -2,6 +2,7 @@
 using System.IO;
 using System.Net.Sockets;
 using MazeLib;
+using CommunicationSettings;
 
 namespace Ex1.Model
 {
@@ -89,7 +90,7 @@ namespace Ex1.Model
             {
                 Console.WriteLine("This function is called when the MultiPlayedDS.Closed is changed to be true.");
                 Console.WriteLine("We will pass massage about it ro our client.");
-                Writer.Write("hello client, we noticed that your multiplayer game is closed now");
+                Writer.Write(Massages.PassToSingleplayerMassage);
                 Writer.Dispose();
             }
         }

@@ -3,6 +3,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.Threading.Tasks;
 using Ex1.Controller;
+using System.Configuration;
 
 namespace Ex1.View
 {
@@ -24,7 +25,7 @@ namespace Ex1.View
             IController MazeController = controller;
             IClientHandler ch = new ClientHandler(MazeController);
             //definition of communication channels:
-            IPEndPoint ep = new IPEndPoint(IPAddress.Parse("127.0.0.1"), port);
+            IPEndPoint ep = new IPEndPoint(IPAddress.Parse(ConfigurationManager.AppSettings["ip"]), port);
             listener = new TcpListener(ep);
             listener.Start();
 

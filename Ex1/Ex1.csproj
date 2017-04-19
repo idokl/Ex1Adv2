@@ -45,6 +45,7 @@
       <HintPath>..\packages\Newtonsoft.Json.10.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
@@ -81,6 +82,10 @@
     <ProjectReference Include="..\Adapter\Adapter.csproj">
       <Project>{2ae7a674-b8a3-4e7f-a8b5-da5460bdcc92}</Project>
       <Name>Adapter</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CommunicationSettings\CommunicationSettings.csproj">
+      <Project>{9068a4e8-17f2-4393-951f-a3c8d81a2497}</Project>
+      <Name>CommunicationSettings</Name>
     </ProjectReference>
     <ProjectReference Include="..\SearchAlgorithmsLib\SearchAlgorithmsLib.csproj">
       <Project>{4cda06c4-f1ab-45f3-a5f3-af697f4ab464}</Project>

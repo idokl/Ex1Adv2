@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Net.Sockets;
 using MazeLib;
+using System.ComponentModel;
 
 //credit to the example from: https://msdn.microsoft.com/en-us/library/aa645739(v=vs.71).aspx
 
@@ -9,8 +10,11 @@ namespace Ex1.Model
     // A delegate type for hooking up change notifications.
     public delegate void ChangedEventHandler(object sender, EventArgs e);
 
+    public delegate void DirectionChanged(DirectionChangeEventArgs e);
+
     class MultiPlayerDS
     {
+        private Direction direction;
         public MultiPlayerDS(TcpClient startGameClient, string nameOfGame, Maze maze)
         {
             StartGameClient = startGameClient;
@@ -21,11 +25,22 @@ namespace Ex1.Model
             Closed = false;
         }
 
+       
+
+
         public TcpClient StartGameClient { get; set; }
         public TcpClient JoinGameClient { get; set; }
         public string NameOfGame { get; set; }
         public Maze MazeInit { get; set; }
-        public Direction CurrentDirection { get; set; }
+        public Direction CurrentDirection
+        {
+            get { return Direction.Down; }
+            set
+            {
+                CurrentDirection = Direction.Left;
+                OnChangeOfPlayDirection(new DirectionChangeEventArgs(CurrentDirection));
+            }
+        }
         public bool IsAvailable { get; set; }
         public bool Closed { get; private set; }
 
@@ -33,6 +48,8 @@ namespace Ex1.Model
         public event ChangedEventHandler IsAvailableChanged;
         // An event that clients can use to be notified whenever the MultiPlayerDS.Closed change.
         public event ChangedEventHandler SomebodyClosedTheGame;
+
+        public event DirectionChanged PlayActionOccurd;
 
         // Invoke the Changed event; called whenever list changes
         void OnChangedOfIsAvailable(EventArgs e)
@@ -47,11 +64,17 @@ namespace Ex1.Model
                 SomebodyClosedTheGame(this, e);
         }
 
+        void OnChangeOfPlayDirection(DirectionChangeEventArgs e)
+        {
+            PlayActionOccurd?.Invoke (e);
+        }
+
         public void Close()
         {
             OnChangedOfClosed(EventArgs.Empty);
             this.Closed = true;
         }
+
     }
 }
 

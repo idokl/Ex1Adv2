@@ -43,6 +43,7 @@ namespace Ex1.Model
         public void ManageCommunication()
         {
             multiPlayerDs.SomebodyClosedTheGame += new ChangedEventHandler(DSbecameClosed);
+            multiPlayerDs.PlayActionOccurd += new DirectionChanged(Play);
 
             while (!multiPlayerDs.Closed)
             {
@@ -62,6 +63,7 @@ namespace Ex1.Model
                         System.Threading.Thread.Sleep(300);
                     }
 
+                  
                     //string answer = "The server recived your command. Your command was: " + commandFromTheClient;
                     //Writer.Write(answer);
                 }
@@ -85,6 +87,10 @@ namespace Ex1.Model
             }
         }
 
+        private void Play(DirectionChangeEventArgs e)
+        {
+            Console.WriteLine("This function ");
+        }
     }
 }
 

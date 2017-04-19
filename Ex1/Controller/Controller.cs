@@ -22,7 +22,7 @@ namespace Ex1.Controller
             commands.Add("start", new StartCommand(model));
             commands.Add("list", new ListCommand(model));
             commands.Add("join", new JoinCommand(model));
-            //commands.Add("play", new PlayCommand(model));
+           // commands.Add("play", new PlayCommand(model));
             //commands.Add("close", new CloseCommand(model));
         }
         public bool ExecuteCommand(string commandLine, TcpClient client)

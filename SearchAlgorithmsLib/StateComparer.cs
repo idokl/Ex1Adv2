@@ -8,8 +8,6 @@ namespace SearchAlgorithmsLib
 {
     class StateComparer : IComparer<State>
     {
-        //private static StringComparer MyComparer = StringComparer.Ordinal;
-        
         public int Compare(State x, State y)
         {
             if (x.Cost < y.Cost)

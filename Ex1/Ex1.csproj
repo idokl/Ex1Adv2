@@ -58,7 +58,7 @@
     <Compile Include="View\IClientHandler.cs" />
     <Compile Include="Controller\ICommand.cs" />
     <Compile Include="Controller\IController.cs" />
-    <Compile Include="DirectionChangeEventArgs.cs" />
+    <Compile Include="Model\DirectionChangeEventArgs.cs" />
     <Compile Include="Model\IModel.cs" />
     <Compile Include="View\IView.cs" />
     <Compile Include="Controller\Commands\JoinCommand.cs" />

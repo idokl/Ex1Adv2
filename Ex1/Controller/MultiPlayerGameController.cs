@@ -9,7 +9,7 @@ using Ex1.Controller.Commands;
 
 namespace Ex1.Model
 {
-    class MultiPlayerGameController
+    class MultiPlayerGameController: IController
     {
         private IModel model;
         private Dictionary<string, ICommand> commands;
@@ -122,6 +122,16 @@ namespace Ex1.Model
         private void Play(DirectionChangeEventArgs e)
         {
             Console.WriteLine("This function ");
+        }
+
+        public bool ExecuteCommand(string commandLine, TcpClient client)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void SetModel(IModel model)
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -16,11 +16,9 @@ namespace Ex1.Controller.Commands
             this.Name = args[0];
             var rows = int.Parse(args[1]);
             var cols = int.Parse(args[2]);
-           // var maze =
+          
             var mpStart = this.model.start(this.Name, rows, cols, client);
-           // new MultiPlayerDS(client, this.Name, maze);
-
-            //this.model.DictionaryOfMultyPlayerDS.Add(this.Name,mpStart);
+           
             var startPacketStream = new PacketStream
             {
                 MultiPlayer = true,
@@ -28,7 +26,8 @@ namespace Ex1.Controller.Commands
                 StringStream = ""
             };
 
-            MultiPlayerGameController mpgStart = new MultiPlayerGameController(this.model, mpStart, true);
+            MultiPlayerGameController mpgStart = new MultiPlayerGameController(mpStart, true);
+            mpgStart.SetModel(this.model);
             mpgStart.Initialize();
             mpgStart.ManageCommunication();
             /*

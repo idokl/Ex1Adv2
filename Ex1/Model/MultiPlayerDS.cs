@@ -10,16 +10,18 @@ namespace Ex1.Model
     // A delegate type for hooking up change notifications.
     public delegate void ChangedEventHandler(object sender, EventArgs e);
 
-    public delegate void DirectionChanged(DirectionChangeEventArgs e);
+    public delegate void HostDirectionChanged(TcpClient client);
+
+    public delegate void GuestDirectionChanged(TcpClient client);
 
     class MultiPlayerDS
     {
        
         public MultiPlayerDS(TcpClient startGameClient, string nameOfGame, Maze maze)
         {
-            StartGameClient = startGameClient;
+            HostClient = startGameClient;
             NameOfGame = nameOfGame;
-            JoinGameClient = null;
+            GuestClient = null;
             MazeInit = maze;
             IsAvailable = true;
             Closed = false;
@@ -28,18 +30,28 @@ namespace Ex1.Model
        
 
 
-        public TcpClient StartGameClient { get; set; }
-        public TcpClient JoinGameClient { get; set; }
+        public TcpClient HostClient { get; set; }
+        public TcpClient GuestClient { get; set; }
         public string NameOfGame { get; set; }
         public Maze MazeInit { get; set; }
-        private Direction direction;
-        public Direction CurrentDirection
+        private Direction hostCurrentDirection;
+        private Direction guestCurrentDirection;
+        public Direction HostCurrentDirection
         {
-            get { return direction; }
+            get { return hostCurrentDirection; }
             set
             {
-                direction = value;
-                OnChangeOfPlayDirection(new DirectionChangeEventArgs(CurrentDirection));
+                hostCurrentDirection = value;
+                OnChangeOfHostDirection(GuestClient);
+            }
+        }
+        public Direction GuestCurrentDirection
+        {
+            get { return guestCurrentDirection; }
+            set
+            {
+                guestCurrentDirection = value;
+                OnChangeOfGuestDirection(HostClient);
             }
         }
         public bool IsAvailable { get; set; }
@@ -50,24 +62,28 @@ namespace Ex1.Model
         // An event that clients can use to be notified whenever the MultiPlayerDS.Closed change.
         public event ChangedEventHandler SomebodyClosedTheGame;
 
-        public event DirectionChanged PlayActionOccurd;
+        public event HostDirectionChanged HostPlayActionOccurd;
+        public event HostDirectionChanged GuestPlayActionOccurd;
 
         // Invoke the Changed event; called whenever list changes
         void OnChangedOfIsAvailable(EventArgs e)
         {
-            if (IsAvailableChanged != null)
-                IsAvailableChanged(this, e);
+            IsAvailableChanged?.Invoke(this, e);
         }
 
         void OnChangedOfClosed(EventArgs e)
         {
-            if (SomebodyClosedTheGame != null)
-                SomebodyClosedTheGame(this, e);
+            SomebodyClosedTheGame?.Invoke(this, e);
         }
 
-        void OnChangeOfPlayDirection(DirectionChangeEventArgs e)
+        void OnChangeOfGuestDirection(TcpClient host)
         {
-            PlayActionOccurd?.Invoke (e);
+            GuestPlayActionOccurd?.Invoke (host);
+        }
+
+        void OnChangeOfHostDirection(TcpClient guest)
+        {
+            HostPlayActionOccurd?.Invoke(guest);
         }
 
         public void Close()

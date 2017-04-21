@@ -14,8 +14,8 @@ namespace Ex1.Model
         List<string> list();
         MultiPlayerDS join(string name);
         //MultiPlayerDS play(Direction direction, TcpClient client);
-        void play(Direction direction, MultiPlayerDS multiPlayerDS, TcpClient client);
-        void close(string name);
+        //void play(Direction direction, TcpClient client);
+        //void close(string name);
         int EvaluateNodes { get; set; }
     }
 }

@@ -22,7 +22,7 @@ namespace Ex1
             Console.WriteLine("debug massage: I am the Server.");
             IController controller = new Controller.Controller();
             IModel model = new Model.Model(/*controller*/); 
-            IView view = new View.View(9000, controller);
+            IView view = new View.View(8000, controller);
             controller.SetModel(model);
             view.Start(/*controller*/);
 

@@ -14,17 +14,17 @@ namespace Ex1.Model
         private IModel model;
         private Dictionary<string, ICommand> commands;
 
-        private bool IamTheStartClient;
+        private bool IamHostClient;
         private MultiPlayerDS multiPlayerDs;
-
+        private NetworkStream stream;
         private BinaryReader Reader;
         private BinaryWriter Writer;
+        private PacketStream packet;
 
-        public MultiPlayerGameController(IModel model, MultiPlayerDS multiPlayerDs, bool amITheStartClient)
+        public MultiPlayerGameController(MultiPlayerDS multiPlayerDs, bool amITheStartClient)
         {
-            this.model = model;
             this.multiPlayerDs = multiPlayerDs;
-            IamTheStartClient = amITheStartClient;
+            IamHostClient = amITheStartClient;
             
             //dictionary with the possible commands of multiplayer mode:
             commands = new Dictionary<string, ICommand>();
@@ -34,13 +34,12 @@ namespace Ex1.Model
 
         public void Initialize()
         {
-            if (IamTheStartClient)
+            if (IamHostClient)
                 this.WaitToOpponent();
-            NetworkStream stream;
-            if (IamTheStartClient)
-                stream = multiPlayerDs.StartGameClient.GetStream();
+            if (IamHostClient)
+                stream = multiPlayerDs.HostClient.GetStream();
             else
-                stream = multiPlayerDs.JoinGameClient.GetStream();
+                stream = multiPlayerDs.GuestClient.GetStream();
             Reader = new BinaryReader(stream);
             Writer = new BinaryWriter(stream);
             Writer.Write(Messages.PassToMultiplayerMassage);
@@ -48,7 +47,7 @@ namespace Ex1.Model
 
         private void WaitToOpponent()
         {
-            while(multiPlayerDs.JoinGameClient == null)
+            while(multiPlayerDs.GuestClient == null)
             {
                 System.Threading.Thread.Sleep(100);
             }
@@ -58,9 +57,10 @@ namespace Ex1.Model
         {
             //subscribe to events of changes in the Multiplayer-Data-Structure:
             multiPlayerDs.SomebodyClosedTheGame += DSbecameClosed;
-            multiPlayerDs.PlayActionOccurd += Play;
+            multiPlayerDs.HostPlayActionOccurd += HostPlay;
+            multiPlayerDs.GuestPlayActionOccurd += GuestPlay;
 
-            TcpClient client = IamTheStartClient ? multiPlayerDs.StartGameClient : multiPlayerDs.JoinGameClient;
+            TcpClient client = IamHostClient ? multiPlayerDs.HostClient : multiPlayerDs.GuestClient;
             //handle communication with our client (recieve commands and execute them):
             while (!multiPlayerDs.Closed)
             {
@@ -68,40 +68,11 @@ namespace Ex1.Model
                 {
                     string commandFromTheClient = Reader.ReadString();
                     Console.WriteLine("debug massage: commandFromTheClient = {0}", commandFromTheClient);
-                    if (multiPlayerDs.Closed)
-                    {
-                        break;
-                    }
-                    CommandParser parser = new CommandParser(commandFromTheClient);
-                    if (!commands.ContainsKey(parser.CommandKey))
-                    {
-                        Writer.Write("The command " + parser.CommandKey + " isn't known in a multiplayer game.");
-                    }
-                    else
-                    {
-                        ICommand command = commands[parser.CommandKey];
-                        PacketStream packet = command.Execute(parser.Args, client);
-
-                        //string result = packet.StringStream;
-
-/*
-//This code has to be implemented in the play ICommand!!!!!!!!!!!!!!!!!!! :
-                        if (commandFromTheClient == "Play")
-                        {
-                            multiPlayerDs.CurrentDirection = Direction.Down;
-
-                        }
-           
-                        // DirectionChangeEventArgs direction = new DirectionChangeEventArgs(Direction.Down);
-*/
-
-                    //string answer = "The server recived your command. Your command was: " + commandFromTheClient;
-                    //Writer.Write(answer);
-                    }
+                    this.ExecuteCommand(commandFromTheClient, client);
                 }
                 catch (Exception)
                 {
-                    Reader.Dispose();
+                    //Reader.Dispose();
                 }
             }
 
@@ -115,23 +86,44 @@ namespace Ex1.Model
                 Console.WriteLine("debug massage: This function is called when the MultiPlayedDS.Closed is changed to be true.");
                 Console.WriteLine("debug massage: We will pass massage about it to our client.");
                 Writer.Write(Messages.PassToSingleplayerMassage);
-                Writer.Dispose();
+                            }
+        }
+
+        private void HostPlay(TcpClient guestClient)
+        {
+            
+            stream = guestClient.GetStream();
+            Writer = new BinaryWriter(stream);
+            Console.WriteLine(packet.StringStream);
+            Writer.Write("testFromHost");
+        }
+
+        private void GuestPlay(TcpClient hostClient)
+        {
+            stream = hostClient.GetStream();
+            Writer = new BinaryWriter(stream);
+            Console.WriteLine(packet.StringStream);
+            Writer.Write("testFromGuest");
+          
+        }
+
+        public void ExecuteCommand(string commandLine, TcpClient client)
+        {
+            stream = client.GetStream();
+            Writer = new BinaryWriter(stream);
+            
+            CommandParser parser = new CommandParser(commandLine);
+            if (!commands.ContainsKey(parser.CommandKey))
+            {
+                Writer.Write("The command " + parser.CommandKey + " isn't known in a multiplayer game.");
             }
-        }
-
-        private void Play(DirectionChangeEventArgs e)
-        {
-            Console.WriteLine("This function ");
-        }
-
-        public bool ExecuteCommand(string commandLine, TcpClient client)
-        {
-            throw new NotImplementedException();
+            ICommand command = commands[parser.CommandKey];
+            packet = command.Execute(parser.Args, client);
         }
 
         public void SetModel(IModel model)
         {
-            throw new NotImplementedException();
+            this.model = model;
         }
     }
 }

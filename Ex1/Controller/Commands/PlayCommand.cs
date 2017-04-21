@@ -16,16 +16,20 @@ namespace Ex1.Controller.Commands
         {
             this.multiPlayerDS = multiPlayerDS;
             this.model = model;
+            this.Name = this.multiPlayerDS.NameOfGame;
         }
         public PacketStream Execute(string[] args, TcpClient client)
         {
 
-            //this.Direction = (Direction)Enum.Parse(typeof(Direction),args[0]);
-            //MultiPlayerDS mpPlay = this.model.play(this.Direction, client);
-            //mpPlay.CurrentDirection = Direction;
-
-            /* test! : */ multiPlayerDS.CurrentDirection = Direction.Down;
-            //... here we can to call to model.play(direction, multiplayeDS, client)
+            this.Direction = (Direction)Enum.Parse(typeof(Direction),args[0]);
+           if(multiPlayerDS.HostClient == client)
+            {
+                multiPlayerDS.HostCurrentDirection = this.Direction;
+            }
+            else
+            {
+                multiPlayerDS.GuestCurrentDirection = this.Direction;
+            }
 
             PacketStream playPacketStream = new PacketStream
             {

@@ -18,10 +18,6 @@ namespace Ex1.Controller
         {
             Task t = new Task(() =>
             {
-                //bool stop = false;
-                //using (NetworkStream stream = client.GetStream())
-                //using (BinaryReader reader = new BinaryReader(stream))
-                //using (BinaryWriter writer = new BinaryWriter(stream))
                 NetworkStream stream = client.GetStream();
                 BinaryReader reader = new BinaryReader(stream);
                 BinaryWriter writer = new BinaryWriter(stream);

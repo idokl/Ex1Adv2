@@ -27,14 +27,15 @@ namespace Ex1.Controller
             commands.Add("join", new JoinCommand(model));
         }
 
-        public bool ExecuteCommand(string commandLine, TcpClient client)
+        public void ExecuteCommand(string commandLine, TcpClient client)
         {
             CommandParser parser = new CommandParser(commandLine);
+            SinglePlayerGame sp;
             if (!commands.ContainsKey(parser.CommandKey))
             {
-                SinglePlayerGame sp = new SinglePlayerGame(client, "The command " + parser.CommandKey + " isn't known");
+                sp = new SinglePlayerGame(client, "The command " + parser.CommandKey + " isn't known");
                 sp.SendMassage();
-                return false;
+               // return false;
             }
             else
             {
@@ -44,10 +45,10 @@ namespace Ex1.Controller
                 string result = packet.StringStream;
                 if (!packet.MultiPlayer)
                 {
-                    SinglePlayerGame sp = new SinglePlayerGame(client, result);
+                   sp = new SinglePlayerGame(client, result);
                     sp.SendMassage();
                 }
-                return true;
+              //  return true;
             }
         }
     }

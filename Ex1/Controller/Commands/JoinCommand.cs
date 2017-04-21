@@ -24,10 +24,11 @@ namespace Ex1.Controller.Commands
             try
             {
                 mpJoin = this.model.join(name);
-                mpJoin.JoinGameClient = client;
+                mpJoin.GuestClient = client;
                 mpJoin.IsAvailable = false;
 
-                MultiPlayerGameController mpgJoin = new MultiPlayerGameController(this.model, mpJoin, false);
+                MultiPlayerGameController mpgJoin = new MultiPlayerGameController(mpJoin, false);
+                mpgJoin.SetModel(this.model);
                 mpgJoin.Initialize();
                 mpgJoin.ManageCommunication();
 

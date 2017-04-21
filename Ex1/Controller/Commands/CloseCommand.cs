@@ -15,9 +15,6 @@ namespace Ex1.Controller.Commands
         }
         public PacketStream Execute(string[] args, TcpClient client)
         {
-            //string name = args[0];
-            //model.close(name);
-
             this.multiPlayerDS.Close();
             Console.WriteLine("debug massage: waiting 0.3 second");
             System.Threading.Thread.Sleep(300);

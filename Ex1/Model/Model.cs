@@ -16,23 +16,17 @@ namespace Ex1.Model
         private Dictionary<SearchableMaze, Solution> DictionaryOfMazesAndSolutions { get; set; }
         public Dictionary<string, MultiPlayerDS> DictionaryOfMultyPlayerDS { get; set; }
         public int EvaluateNodes { get; set; }
-        //private IController controller;
 
         
-        public Model(/*IController controller*/)
+        public Model()
         {
-            //this.controller = controller;
             DictionaryOfMazes = new Dictionary<string, Maze>();
             DictionaryOfMazesAndSolutions = new Dictionary<SearchableMaze, Solution>();
             DictionaryOfMultyPlayerDS = new Dictionary<string,MultiPlayerDS>();
         }
 
 
-        public void close(string name)
-        {
-            throw new NotImplementedException();
-        }
-
+       
         public Maze generate(string name, int rows, int cols)
         {
             DFSMazeGenerator dfsMazeGenerator = new DFSMazeGenerator();
@@ -62,22 +56,6 @@ namespace Ex1.Model
                 }
             }
             return listOgGames;
-        }
-
-        //public MultiPlayerDS play(Direction direction, TcpClient client)
-        public void play(Direction direction, MultiPlayerDS multiPlayerDS, TcpClient client)
-        {
-            /*
-            foreach (MultiPlayerDS multiPlayer in DictionaryOfMultyPlayerDS.Values)
-            {
-                if (multiPlayer.StartGameClient == client || multiPlayer.JoinGameClient == client)
-                {
-                    multiPlayer.CurrentDirection = direction;
-                    return multiPlayer;
-                }
-            }
-            */
-            throw new NotImplementedException();
         }
 
         public Solution solve(string name, int algorithm)

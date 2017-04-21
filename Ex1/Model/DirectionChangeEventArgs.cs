@@ -16,5 +16,33 @@ namespace Ex1
             this.direction = direction;
         }
 
+        public override string ToString()
+        {
+            switch (direction)
+            {
+                case Direction.Up:
+                    {
+                        return "Up";
+                    }
+                case Direction.Down:
+                    {
+                        return "Down";
+
+                    }
+                case Direction.Left:
+                    {
+                        return "Left";
+
+                    }
+                case Direction.Right:
+                    {
+                        return "Right";
+
+                    }
+                default:
+                    return "";
+            }
+           
+        }
     }
 }

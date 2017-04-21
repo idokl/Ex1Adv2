@@ -36,7 +36,7 @@ namespace SearchAlgorithmsLib
         /// Initializes a new instance of the <see cref="GenericState{T}"/> class.
         /// </summary>
         /// <param name="stateContent">Content of the state.</param>
-        /// <param name="cost">The cost to arrive to the state from the 'CameFrom' state.</param>
+        /// <param name="cost">The cost to arrive to the state from the initial state.</param>
         public GenericState(T stateContent, double cost)
         {
             StateContent = stateContent;

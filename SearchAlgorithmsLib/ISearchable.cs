@@ -37,7 +37,7 @@ namespace SearchAlgorithmsLib
 
         /// <summary>
         /// Gets all possible states that we can to arrive directly from the state s to them.
-        /// every possible state has to maintain the cost to arrive from s to it.
+        /// every possible state has to maintain the cost to arrive from the initial state to it.
         /// </summary>
         /// <param name="s">The state.</param>
         /// <returns>List&lt;State&gt;.</returns>

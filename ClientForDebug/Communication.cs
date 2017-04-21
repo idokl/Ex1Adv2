@@ -1,4 +1,17 @@
-﻿using System;
+﻿// ***********************************************************************
+// Assembly         : ClientForDebug
+// Author           : Ohad and Ido
+// Created          : 04-06-2017
+//
+// Last Modified By : IDO1
+// Last Modified On : 04-21-2017
+// ***********************************************************************
+// <copyright file="Communication.cs" company="">
+//     Copyright ©  2017
+// </copyright>
+// <summary></summary>
+// ***********************************************************************
+using System;
 using System.Configuration;
 using System.IO;
 using System.Net;
@@ -8,55 +21,71 @@ using CommunicationSettings;
 
 namespace ClientForDebug
 {
+    /// <summary>
+    /// Class Communication. managing communication with the server (
+    /// </summary>
     internal class Communication
     {
+        /// <summary>
+        /// Communicate with the server.
+        /// read massage from the user. connect to the server. send the massage to it, recieve its answer and print it.
+        /// do it iteratively.
+        /// (in 'Multi-Player-Mode' save the connection with the server. in 'Single-Player-Mode' disconnect.)
+        /// </summary>
         public void Communicate()
         {
             var command = "";
+            //flag that indicates that the user entered a comment that haven't been sent yet.
             var commandIsReadyToBeSent = false;
+            //in every iteration: connect to the server. send a massage to it, recieve its answer and print it.
+            //if the answer is Messages.PassToMultiplayerMassage, then manage long communication with the server,
+            //i.e. both send massages and get answers parallelly until the answer is Messages.PassToSingleplayerMassage.
             while (true)
             {
+                //read command from the user:
+                if (!commandIsReadyToBeSent)
+                {
+                    //Console.Write("debug massage: Please enter a command: ");
+                    command = Console.ReadLine();
+                    commandIsReadyToBeSent = true;
+                }
+
+                //connect to the server:
                 var ep = new IPEndPoint(
                     IPAddress.Parse(ConfigurationManager.AppSettings["ip"]), Convert.ToInt32(ConfigurationManager.AppSettings["port"]));
                 var client = new TcpClient();
                 client.Connect(ep);
-                Console.WriteLine("debug massage: You are connected");
+                //Console.WriteLine("debug massage: You are connected");
+                
                 using (var stream = client.GetStream())
                 using (var reader = new BinaryReader(stream))
                 using (var writer = new BinaryWriter(stream))
                 {
-                    // Send data to server
-                    if (!commandIsReadyToBeSent)
-                    {
-                        Console.Write("Please enter a command: ");
-                        //command = "debug arg0 arg1 arg2";
-                        //command = "generate mazeName 10 10";
-                        command = Console.ReadLine();
-                        commandIsReadyToBeSent = true;
-                        if (command == "terminate")
-                            break;
-                    }
+                    // Send the command to server:
                     if (commandIsReadyToBeSent)
                     {
                         writer.Write(command);
                         commandIsReadyToBeSent = false;
                     }
 
-                    // Get result from server
-                    var result = reader.ReadString();
-                    Console.WriteLine("debug massage: Result = {0}", result);
-
-                    if (result == Messages.PassToMultiplayerMassage)
+                    // Get answer from server and print it:
+                    var answerFromServer = reader.ReadString();
+                    if (!(answerFromServer == Messages.PassToMultiplayerMassage))
+                        Console.WriteLine("{0}", answerFromServer);
+                    //Manage long communication with the server:
+                    else
                     {
+                        //flag to stop the long communication
                         var stop = false;
                         var readUpdates = new Task(() =>
                         {
                             while (!stop)
                             {
-                                var update = reader.ReadString();
-                                Console.WriteLine("Got update: {0}", update);
-                                if (update == Messages.PassToSingleplayerMassage)
+                                var updateFromServer = reader.ReadString();
+                                if (updateFromServer == Messages.PassToSingleplayerMassage)
                                     stop = true;
+                                else
+                                    Console.WriteLine(updateFromServer);
                             }
                         });
                         readUpdates.Start();
@@ -65,7 +94,7 @@ namespace ClientForDebug
                         {
                             if (!commandIsReadyToBeSent)
                             {
-                                Console.Write("You are in multiplayer mode. Please enter a command: ");
+                                //Console.Write("debug massage: You are in multiplayer mode. Please enter a command: ");
                                 command = Console.ReadLine();
                                 commandIsReadyToBeSent = true;
                             }
@@ -79,6 +108,7 @@ namespace ClientForDebug
                         stop = true;
                     }
                 }
+                //Disconnect
                 client.Close();
             }
         }

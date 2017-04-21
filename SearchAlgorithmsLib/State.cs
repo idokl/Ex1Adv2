@@ -29,7 +29,7 @@ namespace SearchAlgorithmsLib
         /// <summary>
         /// Gets or sets the cost.
         /// </summary>
-        /// <value>The cost of passing from the 'CameFrom' state to this state. It has to be defined by the searchable that it belongs to </value>
+        /// <value>The cost of passing from the initial state to this state. It has to be defined by the searchable that it belongs to </value>
         double Cost { get; set; }
 
         /// <summary>

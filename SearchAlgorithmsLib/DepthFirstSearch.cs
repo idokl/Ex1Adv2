@@ -1,10 +1,34 @@
-﻿using System;
+﻿// ***********************************************************************
+// Assembly         : SearchAlgorithmsLib
+// Author           : Ohad
+// Created          : 04-05-2017
+//
+// Last Modified By : IDO1
+// Last Modified On : 04-21-2017
+// ***********************************************************************
+// <copyright file="DepthFirstSearch.cs" company="">
+//     Copyright ©  2017
+// </copyright>
+// <summary></summary>
+// ***********************************************************************
+using System;
 using System.Collections.Generic;
 
 namespace SearchAlgorithmsLib
 {
+    /// <summary>
+    /// Class DepthFirstSearch.
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <seealso cref="SearchAlgorithmsLib.Searcher" />
     public class DepthFirstSearch<T> : Searcher
     {
+        /// <summary>
+        /// Searches the specified searchable by Depth First Search algorithm.
+        /// </summary>
+        /// <param name="searchable">The searchable.</param>
+        /// <returns>Solution.</returns>
+        /// <exception cref="System.NotImplementedException"></exception>
         public override Solution search(ISearchable searchable)
         {
             var s = new Stack<State>();

@@ -1,6 +1,6 @@
 ﻿// ***********************************************************************
 // Assembly         : SearchAlgorithmsLib
-// Author           : IDO1
+// Author           : Ohad and Ido
 // Created          : 04-05-2017
 //
 // Last Modified By : IDO1
@@ -15,13 +15,13 @@
 namespace SearchAlgorithmsLib
 {
     /// <summary>
-    /// Class Searcher.
+    /// Class Searcher. base abstract class for the Isearcher interface implementation.
     /// </summary>
     /// <seealso cref="SearchAlgorithmsLib.ISearcher" />
     public abstract class Searcher : ISearcher
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="Searcher"/> class.
+        /// Initializes a new instance of the <see cref="Searcher"/> class. initialize the number of evaluatedNodes.
         /// </summary>
         public Searcher()
         {
@@ -31,7 +31,8 @@ namespace SearchAlgorithmsLib
         /// <summary>
         /// Gets or sets the evaluated nodes.
         /// </summary>
-        /// <value>The evaluated nodes.</value>
+        /// <value>The evaluated nodes - number of states that are checked until finding solution to arrive to the goal state of the searchable.
+        /// (we count the number of states that are compared to the goal state) </value>
         public int evaluatedNodes { get; set; }
 
         // ISearcher’s methods:

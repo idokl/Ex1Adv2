@@ -1,6 +1,6 @@
 ﻿// ***********************************************************************
 // Assembly         : SearchAlgorithmsLib
-// Author           : IDO1
+// Author           : Ohad and Ido
 // Created          : 04-05-2017
 //
 // Last Modified By : IDO1

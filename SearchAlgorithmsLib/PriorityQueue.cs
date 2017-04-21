@@ -7,6 +7,10 @@ using System.Threading.Tasks;
 namespace SearchAlgorithmsLib
 {
     //Credit to: http://stackoverflow.com/questions/102398/priority-queue-in-net
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public class PriorityQueue<T>
     {
         IComparer<T> comparer;
@@ -20,6 +24,10 @@ namespace SearchAlgorithmsLib
             this.comparer = (comparer == null) ? Comparer<T>.Default : comparer;
             this.heap = new T[capacity];
         }
+        /// <summary>
+        /// Pushes the specified v.
+        /// </summary>
+        /// <param name="v">The v.</param>
         public void push(T v)
         {
             if (Count >= heap.Length) Array.Resize(ref heap, Count * 2);

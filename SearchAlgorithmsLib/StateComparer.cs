@@ -4,6 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+/// <summary>
+/// implementation of IComparer of States. compare states according to their cost.
+/// </summary>
 namespace SearchAlgorithmsLib
 {
     class StateComparer : IComparer<State>

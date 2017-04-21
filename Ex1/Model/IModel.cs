@@ -15,9 +15,9 @@ namespace Ex1.Model
         int EvaluateNodes { get; set; }
 
         Maze generate(string name, int rows, int cols);
-        Solution solve(string name, int algorithm);
+        Solution solve(string name, int algorithmNumber);
         MultiPlayerDS start(string name, int rows, int cols, TcpClient client);
         List<string> list();
-        MultiPlayerDS join(string name);
+        MultiPlayerDS GetMultiplayerDataStructure(string name);
     }
 }

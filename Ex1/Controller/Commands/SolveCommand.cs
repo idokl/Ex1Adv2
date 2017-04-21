@@ -23,8 +23,9 @@ namespace Ex1.Controller.Commands
         public PacketStream Execute(string[] args, TcpClient client)
         {
             Name = args[0];
-            var algorithm = int.Parse(args[1]);
-            var solution = model.solve(Name, algorithm);
+            var algorithmNumber = int.Parse(args[1]);
+
+            var solution = model.solve(Name, algorithmNumber);
             solutionStringBuilder = new StringBuilder("");
             var state = solution.Path.First;
             var point = state.Value as PointState;

@@ -32,7 +32,7 @@ namespace Ex1.Model
             return MyMaze;
         }
 
-        public MultiPlayerDS join(string name)
+        public MultiPlayerDS GetMultiplayerDataStructure(string name)
         {
             if (DictionaryOfMultyPlayerDS.ContainsKey(name)) return DictionaryOfMultyPlayerDS[name];
             throw new NotImplementedException();
@@ -47,13 +47,15 @@ namespace Ex1.Model
             return listOgGames;
         }
 
-        public Solution solve(string name, int algorithm)
+        public Solution solve(string name, int algorithmNumber)
         {
             var maze = DictionaryOfMazes[name];
             var searchableMaze = new SearchableMaze(maze);
             if (DictionaryOfMazesAndSolutions.ContainsKey(searchableMaze))
                 return DictionaryOfMazesAndSolutions[searchableMaze];
             Solution solution;
+
+             /*
             if (algorithm == 1)
             {
                 var BFS = new BestFirstSearch<PointState>();
@@ -66,6 +68,21 @@ namespace Ex1.Model
                 solution = DFS.search(searchableMaze);
                 EvaluateNodes = DFS.getNumberOfNodesEvaluated();
             }
+            */
+
+            ISearcher searchAlgorithm = null;
+            switch (algorithmNumber)
+            {
+                case 0:
+                    searchAlgorithm = new BestFirstSearch<PointState>();
+                    break;
+                case 1:
+                    searchAlgorithm = new DepthFirstSearch<PointState>();
+                    break;
+            }
+
+            solution = searchAlgorithm.search(searchableMaze);
+            EvaluateNodes = searchAlgorithm.getNumberOfNodesEvaluated();
             DictionaryOfMazesAndSolutions.Add(searchableMaze, solution);
             return solution;
         }

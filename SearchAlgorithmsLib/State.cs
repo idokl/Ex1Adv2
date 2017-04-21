@@ -29,11 +29,11 @@ namespace SearchAlgorithmsLib
         /// <summary>
         /// Gets or sets the cost.
         /// </summary>
-        /// <value>The cost of passing from the 'CameFrom' state to this state. It has to be defined by the ISearchable that it belongs to </value>
+        /// <value>The cost of passing from the 'CameFrom' state to this state. It has to be defined by the searchable that it belongs to </value>
         double Cost { get; set; }
 
         /// <summary>
-        /// Gets or sets the came from. It will be set by the ISearcher.
+        /// Gets or sets the came from. It will be set by the searcher.
         /// </summary>
         /// <value>The state that the current state came from.</value>
         State CameFrom { get; set; }

@@ -25,7 +25,7 @@ namespace Ex1.Controller.Commands
             MultiPlayerDS mpJoin;
             try
             {
-                mpJoin = model.join(name);
+                mpJoin = model.GetMultiplayerDataStructure(name);
                 mpJoin.GuestClient = client;
                 mpJoin.AvailableToJoin = false;
 

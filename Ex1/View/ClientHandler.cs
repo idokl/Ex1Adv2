@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 
 namespace Ex1.Controller
 {
-    class ClientHandler : IClientHandler
+    internal class ClientHandler : IClientHandler
     {
-        private IController Controller;
+        private readonly IController Controller;
 
         public ClientHandler(IController controller)
         {
@@ -16,17 +16,13 @@ namespace Ex1.Controller
 
         public void HandleClient(TcpClient client)
         {
-            Task t = new Task(() =>
+            var t = new Task(() =>
             {
-                //bool stop = false;
-                //using (NetworkStream stream = client.GetStream())
-                //using (BinaryReader reader = new BinaryReader(stream))
-                //using (BinaryWriter writer = new BinaryWriter(stream))
-                NetworkStream stream = client.GetStream();
-                BinaryReader reader = new BinaryReader(stream);
-                BinaryWriter writer = new BinaryWriter(stream);
+                var stream = client.GetStream();
+                var reader = new BinaryReader(stream);
+                var writer = new BinaryWriter(stream);
                 {
-                    string commandLine = reader.ReadString();
+                    var commandLine = reader.ReadString();
                     Console.WriteLine("debug massage: Got command: {0}", commandLine);
                     Controller.ExecuteCommand(commandLine, client);
                 }
@@ -35,4 +31,3 @@ namespace Ex1.Controller
         }
     }
 }
-

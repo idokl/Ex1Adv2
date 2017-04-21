@@ -1,46 +1,64 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Net.Sockets;
-using MazeLib;
+using System.Threading;
 using CommunicationSettings;
-using System.Collections.Generic;
 using Ex1.Controller;
 using Ex1.Controller.Commands;
+using MazeLib;
+using Newtonsoft.Json.Linq;
 
 namespace Ex1.Model
 {
-    class MultiPlayerGameController: IController
+    internal class MultiPlayerGameController : IController
     {
+        private readonly Dictionary<string, ICommand> commands;
+
+        private readonly bool IamHostClient;
         private IModel model;
-        private Dictionary<string, ICommand> commands;
-
-        private bool IamTheStartClient;
-        private MultiPlayerDS multiPlayerDs;
-
+        private readonly MultiPlayerDS multiPlayerDs;
+        private PacketStream packet;
         private BinaryReader Reader;
+        private NetworkStream stream;
         private BinaryWriter Writer;
 
-        public MultiPlayerGameController(IModel model, MultiPlayerDS multiPlayerDs, bool amITheStartClient)
+        public MultiPlayerGameController(MultiPlayerDS multiPlayerDs, bool amITheHostClient)
         {
-            this.model = model;
             this.multiPlayerDs = multiPlayerDs;
-            IamTheStartClient = amITheStartClient;
-            
+            IamHostClient = amITheHostClient;
+
             //dictionary with the possible commands of multiplayer mode:
             commands = new Dictionary<string, ICommand>();
             commands.Add("play", new PlayCommand(multiPlayerDs, model));
             commands.Add("close", new CloseCommand(multiPlayerDs, model));
         }
 
+        public void ExecuteCommand(string commandLine, TcpClient client)
+        {
+            stream = client.GetStream();
+            Writer = new BinaryWriter(stream);
+
+            var parser = new CommandParser(commandLine);
+            if (!commands.ContainsKey(parser.CommandKey))
+                Writer.Write("The command " + parser.CommandKey + " isn't known in a multiplayer game.");
+            var command = commands[parser.CommandKey];
+            command.Execute(parser.Args, client);
+        }
+
+        public void SetModel(IModel model)
+        {
+            this.model = model;
+        }
+
         public void Initialize()
         {
-            if (IamTheStartClient)
-                this.WaitToOpponent();
-            NetworkStream stream;
-            if (IamTheStartClient)
-                stream = multiPlayerDs.StartGameClient.GetStream();
+            if (IamHostClient)
+                WaitToOpponent();
+            if (IamHostClient)
+                stream = multiPlayerDs.HostClient.GetStream();
             else
-                stream = multiPlayerDs.JoinGameClient.GetStream();
+                stream = multiPlayerDs.GuestClient.GetStream();
             Reader = new BinaryReader(stream);
             Writer = new BinaryWriter(stream);
             Writer.Write(Messages.PassToMultiplayerMassage);
@@ -48,90 +66,71 @@ namespace Ex1.Model
 
         private void WaitToOpponent()
         {
-            while(multiPlayerDs.JoinGameClient == null)
-            {
-                System.Threading.Thread.Sleep(100);
-            }
+            while (multiPlayerDs.GuestClient == null)
+                Thread.Sleep(100);
         }
 
         public void ManageCommunication()
         {
+            Writer.Write(multiPlayerDs.MazeInit.ToJSON());
+
             //subscribe to events of changes in the Multiplayer-Data-Structure:
             multiPlayerDs.SomebodyClosedTheGame += DSbecameClosed;
-            multiPlayerDs.PlayActionOccurd += Play;
+            multiPlayerDs.HostPlayActionOccurd += HostPlay;
+            multiPlayerDs.GuestPlayActionOccurd += GuestPlay;
 
-            TcpClient client = IamTheStartClient ? multiPlayerDs.StartGameClient : multiPlayerDs.JoinGameClient;
+            var client = IamHostClient ? multiPlayerDs.HostClient : multiPlayerDs.GuestClient;
             //handle communication with our client (recieve commands and execute them):
             while (!multiPlayerDs.Closed)
-            {
                 try
                 {
-                    string commandFromTheClient = Reader.ReadString();
+                    var commandFromTheClient = Reader.ReadString();
                     Console.WriteLine("debug massage: commandFromTheClient = {0}", commandFromTheClient);
-                    if (multiPlayerDs.Closed)
-                    {
-                        break;
-                    }
-                    CommandParser parser = new CommandParser(commandFromTheClient);
-                    if (!commands.ContainsKey(parser.CommandKey))
-                    {
-                        Writer.Write("The command " + parser.CommandKey + " isn't known in a multiplayer game.");
-                    }
-                    else
-                    {
-                        ICommand command = commands[parser.CommandKey];
-                        PacketStream packet = command.Execute(parser.Args, client);
-
-                        //string result = packet.StringStream;
-
-/*
-//This code has to be implemented in the play ICommand!!!!!!!!!!!!!!!!!!! :
-                        if (commandFromTheClient == "Play")
-                        {
-                            multiPlayerDs.CurrentDirection = Direction.Down;
-
-                        }
-           
-                        // DirectionChangeEventArgs direction = new DirectionChangeEventArgs(Direction.Down);
-*/
-
-                    //string answer = "The server recived your command. Your command was: " + commandFromTheClient;
-                    //Writer.Write(answer);
-                    }
+                    ExecuteCommand(commandFromTheClient, client);
                 }
                 catch (Exception)
                 {
                     Reader.Dispose();
                 }
-            }
-
         }
 
         // This will be called whenever the list changes.
         private void DSbecameClosed(object sender, EventArgs e)
         {
-            if (!multiPlayerDs.Closed)
+            if (multiPlayerDs.Closed)
             {
-                Console.WriteLine("debug massage: This function is called when the MultiPlayedDS.Closed is changed to be true.");
+                Console.WriteLine(
+                    "debug massage: This function is called when the MultiPlayedDS.Closed is changed to be true.");
                 Console.WriteLine("debug massage: We will pass massage about it to our client.");
                 Writer.Write(Messages.PassToSingleplayerMassage);
-                Writer.Dispose();
             }
         }
 
-        private void Play(DirectionChangeEventArgs e)
+        private void HostPlay(TcpClient guestClient, Direction direction)
         {
-            Console.WriteLine("This function ");
+            var s = PlayToJSON(direction);
+            stream = guestClient.GetStream();
+            Writer = new BinaryWriter(stream);
+            Writer.Write(s);
         }
 
-        public bool ExecuteCommand(string commandLine, TcpClient client)
+        private void GuestPlay(TcpClient hostClient, Direction direction)
         {
-            throw new NotImplementedException();
+            var s = PlayToJSON(direction);
+            stream = hostClient.GetStream();
+            Writer = new BinaryWriter(stream);
+            Writer.Write(s);
         }
 
-        public void SetModel(IModel model)
+        private string PlayToJSON(Direction direction)
         {
-            throw new NotImplementedException();
+            var playJObject = new JObject
+            {
+                ["Name"] = multiPlayerDs.NameOfGame,
+                ["Direction"] = direction.ToString()
+            };
+
+            return playJObject.ToString();
         }
     }
 }

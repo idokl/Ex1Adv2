@@ -11,14 +11,13 @@ namespace SearchAlgorithmsLib
 {
     public abstract class Searcher : ISearcher
     {
+        public Searcher()
+        {
+            evaluatedNodes = 0;
+        }
 
         public int evaluatedNodes { get; set; }
 
-       public Searcher()
-       {
-           evaluatedNodes = 0;
-       }
-       
         // ISearcher’s methods:
         public int getNumberOfNodesEvaluated()
         {
@@ -27,5 +26,4 @@ namespace SearchAlgorithmsLib
 
         public abstract Solution search(ISearchable searchable);
     }
-
 }

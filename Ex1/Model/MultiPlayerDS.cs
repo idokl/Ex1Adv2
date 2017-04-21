@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Net.Sockets;
 using MazeLib;
-using System.ComponentModel;
 
 //credit to the example from: https://msdn.microsoft.com/en-us/library/aa645739(v=vs.71).aspx
 
@@ -10,72 +9,89 @@ namespace Ex1.Model
     // A delegate type for hooking up change notifications.
     public delegate void ChangedEventHandler(object sender, EventArgs e);
 
-    public delegate void DirectionChanged(DirectionChangeEventArgs e);
+    public delegate void HostDirectionChanged(TcpClient client, Direction direction);
 
-    class MultiPlayerDS
+    public delegate void GuestDirectionChanged(TcpClient client, Direction direction);
+
+    internal class MultiPlayerDS
     {
-       
+        private Direction guestCurrentDirection;
+        private Direction hostCurrentDirection;
+
         public MultiPlayerDS(TcpClient startGameClient, string nameOfGame, Maze maze)
         {
-            StartGameClient = startGameClient;
+            HostClient = startGameClient;
             NameOfGame = nameOfGame;
-            JoinGameClient = null;
+            GuestClient = null;
             MazeInit = maze;
             IsAvailable = true;
             Closed = false;
         }
 
-       
 
-
-        public TcpClient StartGameClient { get; set; }
-        public TcpClient JoinGameClient { get; set; }
+        public TcpClient HostClient { get; set; }
+        public TcpClient GuestClient { get; set; }
         public string NameOfGame { get; set; }
         public Maze MazeInit { get; set; }
-        private Direction direction;
-        public Direction CurrentDirection
+
+        public Direction HostCurrentDirection
         {
-            get { return direction; }
+            get { return hostCurrentDirection; }
             set
             {
-                direction = value;
-                OnChangeOfPlayDirection(new DirectionChangeEventArgs(CurrentDirection));
+                hostCurrentDirection = value;
+                OnChangeOfHostDirection(GuestClient, HostCurrentDirection);
             }
         }
+
+        public Direction GuestCurrentDirection
+        {
+            get { return guestCurrentDirection; }
+            set
+            {
+                guestCurrentDirection = value;
+                OnChangeOfGuestDirection(HostClient, GuestCurrentDirection);
+            }
+        }
+
         public bool IsAvailable { get; set; }
         public bool Closed { get; private set; }
 
         // An event that clients can use to be notified whenever the MultiPlayerDS.IsAvilble change.
         public event ChangedEventHandler IsAvailableChanged;
+
         // An event that clients can use to be notified whenever the MultiPlayerDS.Closed change.
         public event ChangedEventHandler SomebodyClosedTheGame;
 
-        public event DirectionChanged PlayActionOccurd;
+        public event HostDirectionChanged HostPlayActionOccurd;
+        public event GuestDirectionChanged GuestPlayActionOccurd;
 
         // Invoke the Changed event; called whenever list changes
-        void OnChangedOfIsAvailable(EventArgs e)
+        private void OnChangedOfIsAvailable(EventArgs e)
         {
-            if (IsAvailableChanged != null)
-                IsAvailableChanged(this, e);
+            IsAvailableChanged?.Invoke(this, e);
         }
 
-        void OnChangedOfClosed(EventArgs e)
+        private void OnChangedOfClosed(EventArgs e)
         {
-            if (SomebodyClosedTheGame != null)
-                SomebodyClosedTheGame(this, e);
+            SomebodyClosedTheGame?.Invoke(this, e);
         }
 
-        void OnChangeOfPlayDirection(DirectionChangeEventArgs e)
+        private void OnChangeOfGuestDirection(TcpClient host, Direction direction)
         {
-            PlayActionOccurd?.Invoke (e);
+            GuestPlayActionOccurd?.Invoke(host, direction);
+        }
+
+        private void OnChangeOfHostDirection(TcpClient guest, Direction direction)
+        {
+            HostPlayActionOccurd?.Invoke(guest, direction);
         }
 
         public void Close()
         {
             OnChangedOfClosed(EventArgs.Empty);
-            this.Closed = true;
+            Closed = true;
         }
-
     }
 }
 

@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SearchAlgorithmsLib
+﻿namespace SearchAlgorithmsLib
 {
     public interface ISearcher
     {
         // the search method
-        Solution search (ISearchable searchable);
+        Solution search(ISearchable searchable);
+
         // get how many nodes were evaluated by the algorithm
         int getNumberOfNodesEvaluated();
     }

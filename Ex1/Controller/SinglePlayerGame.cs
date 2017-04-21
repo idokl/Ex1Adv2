@@ -3,10 +3,10 @@ using System.Net.Sockets;
 
 namespace Ex1.Model
 {
-    class SinglePlayerGame
+    internal class SinglePlayerGame
     {
-        private TcpClient client;
-        private string stream;
+        private readonly TcpClient client;
+        private readonly string stream;
 
         public SinglePlayerGame(TcpClient client, string stream)
         {
@@ -16,10 +16,12 @@ namespace Ex1.Model
 
         public void SendMassage()
         {
-            using (NetworkStream stream = client.GetStream())
-            using (BinaryReader reader = new BinaryReader(stream))
-            using (BinaryWriter writer = new BinaryWriter(stream))
+            using (var stream = client.GetStream())
+            using (var reader = new BinaryReader(stream))
+            using (var writer = new BinaryWriter(stream))
+            {
                 writer.Write(this.stream);
+            }
             client.Close();
         }
     }

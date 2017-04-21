@@ -6,25 +6,23 @@ using System.Net.Sockets;
 using System.Threading.Tasks;
 using CommunicationSettings;
 
-
-
 namespace ClientForDebug
 {
-    class Communication
+    internal class Communication
     {
         public void Communicate()
         {
-            String command = "";
-            bool commandIsReadyToBeSent = false;
+            var command = "";
+            var commandIsReadyToBeSent = false;
             while (true)
             {
-                IPEndPoint ep = new IPEndPoint(IPAddress.Parse(ConfigurationManager.AppSettings["ip"]), 9000);
-                TcpClient client = new TcpClient();
+                var ep = new IPEndPoint(IPAddress.Parse(ConfigurationManager.AppSettings["ip"]), 8888);
+                var client = new TcpClient();
                 client.Connect(ep);
                 Console.WriteLine("debug massage: You are connected");
-                using (NetworkStream stream = client.GetStream())
-                using (BinaryReader reader = new BinaryReader(stream))
-                using (BinaryWriter writer = new BinaryWriter(stream))
+                using (var stream = client.GetStream())
+                using (var reader = new BinaryReader(stream))
+                using (var writer = new BinaryWriter(stream))
                 {
                     // Send data to server
                     if (!commandIsReadyToBeSent)
@@ -42,19 +40,19 @@ namespace ClientForDebug
                         writer.Write(command);
                         commandIsReadyToBeSent = false;
                     }
-                    
+
                     // Get result from server
-                    string result = reader.ReadString();
+                    var result = reader.ReadString();
                     Console.WriteLine("debug massage: Result = {0}", result);
 
                     if (result == Messages.PassToMultiplayerMassage)
                     {
-                        bool stop = false;
-                        Task readUpdates = new Task(() =>
+                        var stop = false;
+                        var readUpdates = new Task(() =>
                         {
                             while (!stop)
                             {
-                                string update = reader.ReadString();
+                                var update = reader.ReadString();
                                 Console.WriteLine("Got update: {0}", update);
                                 if (update == Messages.PassToSingleplayerMassage)
                                     stop = true;
@@ -71,13 +69,11 @@ namespace ClientForDebug
                                 commandIsReadyToBeSent = true;
                             }
                             if (!stop)
-                            {
                                 if (commandIsReadyToBeSent)
                                 {
                                     writer.Write(command);
                                     commandIsReadyToBeSent = false;
                                 }
-                            }
                         }
                         stop = true;
                     }

@@ -5,17 +5,19 @@ using SearchAlgorithmsLib;
 
 namespace Ex1.Model
 {
-    interface IModel
+    internal interface IModel
     {
         Dictionary<string, MultiPlayerDS> DictionaryOfMultyPlayerDS { get; set; }
+
+        //MultiPlayerDS play(Direction direction, TcpClient client);
+        //void play(Direction direction, TcpClient client);
+        //void close(string name);
+        int EvaluateNodes { get; set; }
+
         Maze generate(string name, int rows, int cols);
         Solution solve(string name, int algorithm);
         MultiPlayerDS start(string name, int rows, int cols, TcpClient client);
         List<string> list();
         MultiPlayerDS join(string name);
-        //MultiPlayerDS play(Direction direction, TcpClient client);
-        void play(Direction direction, MultiPlayerDS multiPlayerDS, TcpClient client);
-        void close(string name);
-        int EvaluateNodes { get; set; }
     }
 }

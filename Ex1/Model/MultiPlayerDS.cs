@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Net.Sockets;
 using MazeLib;
-using System.ComponentModel;
 
 //credit to the example from: https://msdn.microsoft.com/en-us/library/aa645739(v=vs.71).aspx
 
@@ -10,13 +9,15 @@ namespace Ex1.Model
     // A delegate type for hooking up change notifications.
     public delegate void ChangedEventHandler(object sender, EventArgs e);
 
-    public delegate void HostDirectionChanged(TcpClient client);
+    public delegate void HostDirectionChanged(TcpClient client, Direction direction);
 
-    public delegate void GuestDirectionChanged(TcpClient client);
+    public delegate void GuestDirectionChanged(TcpClient client, Direction direction);
 
-    class MultiPlayerDS
+    internal class MultiPlayerDS
     {
-       
+        private Direction guestCurrentDirection;
+        private Direction hostCurrentDirection;
+
         public MultiPlayerDS(TcpClient startGameClient, string nameOfGame, Maze maze)
         {
             HostClient = startGameClient;
@@ -27,71 +28,70 @@ namespace Ex1.Model
             Closed = false;
         }
 
-       
-
 
         public TcpClient HostClient { get; set; }
         public TcpClient GuestClient { get; set; }
         public string NameOfGame { get; set; }
         public Maze MazeInit { get; set; }
-        private Direction hostCurrentDirection;
-        private Direction guestCurrentDirection;
+
         public Direction HostCurrentDirection
         {
             get { return hostCurrentDirection; }
             set
             {
                 hostCurrentDirection = value;
-                OnChangeOfHostDirection(GuestClient);
+                OnChangeOfHostDirection(GuestClient, HostCurrentDirection);
             }
         }
+
         public Direction GuestCurrentDirection
         {
             get { return guestCurrentDirection; }
             set
             {
                 guestCurrentDirection = value;
-                OnChangeOfGuestDirection(HostClient);
+                OnChangeOfGuestDirection(HostClient, GuestCurrentDirection);
             }
         }
+
         public bool IsAvailable { get; set; }
         public bool Closed { get; private set; }
 
         // An event that clients can use to be notified whenever the MultiPlayerDS.IsAvilble change.
         public event ChangedEventHandler IsAvailableChanged;
+
         // An event that clients can use to be notified whenever the MultiPlayerDS.Closed change.
         public event ChangedEventHandler SomebodyClosedTheGame;
 
         public event HostDirectionChanged HostPlayActionOccurd;
-        public event HostDirectionChanged GuestPlayActionOccurd;
+        public event GuestDirectionChanged GuestPlayActionOccurd;
 
         // Invoke the Changed event; called whenever list changes
-        void OnChangedOfIsAvailable(EventArgs e)
+        private void OnChangedOfIsAvailable(EventArgs e)
         {
             IsAvailableChanged?.Invoke(this, e);
         }
 
-        void OnChangedOfClosed(EventArgs e)
+        private void OnChangedOfClosed(EventArgs e)
         {
             SomebodyClosedTheGame?.Invoke(this, e);
         }
 
-        void OnChangeOfGuestDirection(TcpClient host)
+        private void OnChangeOfGuestDirection(TcpClient host, Direction direction)
         {
-            GuestPlayActionOccurd?.Invoke (host);
+            GuestPlayActionOccurd?.Invoke(host, direction);
         }
 
-        void OnChangeOfHostDirection(TcpClient guest)
+        private void OnChangeOfHostDirection(TcpClient guest, Direction direction)
         {
-            HostPlayActionOccurd?.Invoke(guest);
+            HostPlayActionOccurd?.Invoke(guest, direction);
         }
 
         public void Close()
         {
             OnChangedOfClosed(EventArgs.Empty);
-            this.Closed = true;
+            Closed = true;
         }
-
     }
 }
 

@@ -3,7 +3,7 @@ using Ex1.Model;
 
 namespace Ex1.Controller
 {
-    interface ICommand
+    internal interface ICommand
     {
         PacketStream Execute(string[] args, TcpClient client = null);
     }

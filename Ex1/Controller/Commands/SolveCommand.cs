@@ -8,23 +8,26 @@ using SearchAlgorithmsLib;
 
 namespace Ex1.Controller.Commands
 {
-    class SolveCommand : ICommand
+    internal class SolveCommand : ICommand
     {
-        private IModel model;
-        private string Name { get; set; }
-        private StringBuilder solutionStringBuilder { get; set; }
+        private readonly IModel model;
+
         public SolveCommand(IModel model)
         {
             this.model = model;
         }
+
+        private string Name { get; set; }
+        private StringBuilder solutionStringBuilder { get; set; }
+
         public PacketStream Execute(string[] args, TcpClient client)
         {
-            this.Name = args[0];
-            int algorithm = int.Parse(args[1]);
-            Solution solution = model.solve(this.Name, algorithm);
-            this.solutionStringBuilder = new StringBuilder("");
-            LinkedListNode<State> state = solution.Path.First;
-            PointState point = state.Value as PointState;
+            Name = args[0];
+            var algorithm = int.Parse(args[1]);
+            var solution = model.solve(Name, algorithm);
+            solutionStringBuilder = new StringBuilder("");
+            var state = solution.Path.First;
+            var point = state.Value as PointState;
             LinkedListNode<State> nextState;
             PointState nextPoint;
             for (nextState = state.Next; nextState != null; nextState = state.Next)
@@ -33,34 +36,34 @@ namespace Ex1.Controller.Commands
                 if (nextPoint.CurrentPosition.Row == point.CurrentPosition.Row)
                 {
                     if (nextPoint.CurrentPosition.Col < point.CurrentPosition.Col)
-                        this.solutionStringBuilder.Append("0");
+                        solutionStringBuilder.Append("0");
                     else
-                        this.solutionStringBuilder.Append("1");
+                        solutionStringBuilder.Append("1");
                 }
                 else
                 {
                     if (nextPoint.CurrentPosition.Row < point.CurrentPosition.Row)
-                        this.solutionStringBuilder.Append("2");
+                        solutionStringBuilder.Append("2");
                     else
-                        this.solutionStringBuilder.Append("3");
+                        solutionStringBuilder.Append("3");
                 }
                 state = nextState;
                 point = nextPoint;
             }
-            PacketStream solvePacketStream = new PacketStream
+            var solvePacketStream = new PacketStream
             {
-                StringStream = this.ToJSON()
+                StringStream = ToJSON()
             };
             return solvePacketStream;
         }
 
         private string ToJSON()
         {
-            JObject startJObject = new JObject
+            var startJObject = new JObject
             {
-                ["Name"] = this.Name,
-                ["Solution"] = this.solutionStringBuilder.ToString(),
-                ["NodesEvaluated"] = this.model.EvaluateNodes
+                ["Name"] = Name,
+                ["Solution"] = solutionStringBuilder.ToString(),
+                ["NodesEvaluated"] = model.EvaluateNodes
             };
 
             return startJObject.ToString();

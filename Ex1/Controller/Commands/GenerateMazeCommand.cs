@@ -1,12 +1,11 @@
 ﻿using System.Net.Sockets;
 using Ex1.Model;
-using MazeLib;
 
 namespace Ex1.Controller.Commands
 {
-    class GenerateMazeCommand : ICommand
+    internal class GenerateMazeCommand : ICommand
     {
-        private IModel model;
+        private readonly IModel model;
 
         public GenerateMazeCommand(IModel model)
         {
@@ -15,16 +14,15 @@ namespace Ex1.Controller.Commands
 
         public PacketStream Execute(string[] args, TcpClient client)
         {
-            string name = args[0];
-            int rows = int.Parse(args[1]);
-            int cols = int.Parse(args[2]);
-            Maze maze = model.generate(name, rows, cols);
-            PacketStream generatePacketStream = new PacketStream
+            var name = args[0];
+            var rows = int.Parse(args[1]);
+            var cols = int.Parse(args[2]);
+            var maze = model.generate(name, rows, cols);
+            var generatePacketStream = new PacketStream
             {
                 StringStream = maze.ToJSON()
             };
             return generatePacketStream;
-           
         }
     }
 }

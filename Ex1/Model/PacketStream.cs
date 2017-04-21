@@ -1,6 +1,6 @@
 ﻿namespace Ex1.Model
 {
-    class PacketStream
+    internal class PacketStream
     {
         public bool MultiPlayer { get; set; } = false;
         public MultiPlayerDS MultiPlayerDs { get; set; }

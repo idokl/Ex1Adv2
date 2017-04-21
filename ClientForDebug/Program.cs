@@ -1,18 +1,19 @@
 ﻿using System;
+using System.Threading;
 
 namespace ClientForDebug
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             Console.WriteLine("debug massage: I am the Client.");
             Console.WriteLine("Waiting 0.5 second to the server");
-            System.Threading.Thread.Sleep(500);
-            Communication communication = new Communication();
+            Thread.Sleep(500);
+            var communication = new Communication();
             communication.Communicate();
 
-            System.Threading.Thread.Sleep(1000);
+            Thread.Sleep(1000);
         }
     }
 }

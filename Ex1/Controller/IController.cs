@@ -3,9 +3,9 @@ using Ex1.Model;
 
 namespace Ex1.Controller
 {
-    interface IController
+    internal interface IController
     {
-       void ExecuteCommand(string commandLine, TcpClient client);
-       void SetModel(IModel model);
+        void ExecuteCommand(string commandLine, TcpClient client);
+        void SetModel(IModel model);
     }
 }

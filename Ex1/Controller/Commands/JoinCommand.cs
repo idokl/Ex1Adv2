@@ -4,31 +4,33 @@ using Ex1.Model;
 
 namespace Ex1.Controller.Commands
 {
-    class JoinCommand : ICommand
+    internal class JoinCommand : ICommand
     {
-        private IModel model;
+        private readonly IModel model;
+
         public JoinCommand(IModel model)
         {
             this.model = model;
         }
+
         public PacketStream Execute(string[] args, TcpClient client)
         {
-            PacketStream joinPacketStream = new PacketStream
+            var joinPacketStream = new PacketStream
             {
                 MultiPlayer = true,
                 StringStream = ""
             };
 
-            string name = args[0];
+            var name = args[0];
             MultiPlayerDS mpJoin;
             try
             {
-                mpJoin = this.model.join(name);
+                mpJoin = model.join(name);
                 mpJoin.GuestClient = client;
                 mpJoin.IsAvailable = false;
 
-                MultiPlayerGameController mpgJoin = new MultiPlayerGameController(mpJoin, false);
-                mpgJoin.SetModel(this.model);
+                var mpgJoin = new MultiPlayerGameController(mpJoin, false);
+                mpgJoin.SetModel(model);
                 mpgJoin.Initialize();
                 mpgJoin.ManageCommunication();
 
@@ -77,7 +79,7 @@ namespace Ex1.Controller.Commands
             {
                 Console.WriteLine("the name of game to join isn't exist");
             }
-           
+
             return joinPacketStream;
         }
     }

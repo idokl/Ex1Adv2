@@ -1,20 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Net.Sockets;
 using Ex1.Controller.Commands;
 using Ex1.Model;
-using Ex1.View;
 
 namespace Ex1.Controller
 {
-    class Controller : IController
+    internal class Controller : IController
     {
         private Dictionary<string, ICommand> commands;
         private IModel model;
-
-        public Controller() { }
 
         public void SetModel(IModel model)
         {
@@ -29,26 +23,26 @@ namespace Ex1.Controller
 
         public void ExecuteCommand(string commandLine, TcpClient client)
         {
-            CommandParser parser = new CommandParser(commandLine);
+            var parser = new CommandParser(commandLine);
             SinglePlayerGame sp;
             if (!commands.ContainsKey(parser.CommandKey))
             {
                 sp = new SinglePlayerGame(client, "The command " + parser.CommandKey + " isn't known");
                 sp.SendMassage();
-               // return false;
+                // return false;
             }
             else
             {
-                ICommand command = commands[parser.CommandKey];
-                PacketStream packet = command.Execute(parser.Args, client);
+                var command = commands[parser.CommandKey];
+                var packet = command.Execute(parser.Args, client);
 
-                string result = packet.StringStream;
+                var result = packet.StringStream;
                 if (!packet.MultiPlayer)
                 {
-                   sp = new SinglePlayerGame(client, result);
+                    sp = new SinglePlayerGame(client, result);
                     sp.SendMassage();
                 }
-              //  return true;
+                //  return true;
             }
         }
     }

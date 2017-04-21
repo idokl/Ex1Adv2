@@ -1,24 +1,24 @@
 ﻿using System;
+using System.Configuration;
 using System.Net;
 using System.Net.Sockets;
 using System.Threading.Tasks;
 using Ex1.Controller;
-using System.Configuration;
 
 namespace Ex1.View
 {
-    class View : IView
+    internal class View : IView
     {
-
-        private int port;
         private TcpListener listener;
-        private IController MazeController;
+        private readonly IController MazeController;
+
+        private readonly int port;
 
 
         public View(int port, IController controller)
         {
             this.port = port;
-            this.MazeController = controller;
+            MazeController = controller;
         }
 
         //public void Start(IController controller)
@@ -26,19 +26,19 @@ namespace Ex1.View
         {
             IClientHandler ch = new ClientHandler(MazeController);
             //definition of communication channels:
-            IPEndPoint ep = new IPEndPoint(IPAddress.Parse(ConfigurationManager.AppSettings["ip"]), port);
+            var ep = new IPEndPoint(IPAddress.Parse(ConfigurationManager.AppSettings["ip"]), port);
             listener = new TcpListener(ep);
             listener.Start();
 
-            Task acceptingClients = new Task(() =>
+            var acceptingClients = new Task(() =>
             {
-                int counterOfClients = 0;
+                var counterOfClients = 0;
                 //accept clients:
                 while (true)
                 {
                     try
                     {
-                        TcpClient client = listener.AcceptTcpClient();
+                        var client = listener.AcceptTcpClient();
                         Console.WriteLine("debug massage: Got new connection");
                         ch.HandleClient(client);
                     }
@@ -60,4 +60,3 @@ namespace Ex1.View
         }
     }
 }
-

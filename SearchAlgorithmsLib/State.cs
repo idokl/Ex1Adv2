@@ -15,5 +15,5 @@ namespace SearchAlgorithmsLib
 
         State CameFrom { get; set; }
 
-        }
+    }
 }

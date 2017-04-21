@@ -12,7 +12,7 @@ namespace SearchAlgorithmsLib
         public State CameFrom { get; set; }
         public double Cost { get; set; }
 
-        public GenericState(T stateContent)
+        private GenericState(T stateContent)
         {
             StateContent = stateContent;
         }
@@ -31,5 +31,25 @@ namespace SearchAlgorithmsLib
         }
 
         public override int GetHashCode() => StateContent.GetHashCode();
+
+        public static class StatePool
+        {
+            static private Dictionary<T, GenericState<T>> StatesHashTable = new Dictionary<T, GenericState<T>>();
+
+            static public GenericState<T> GetState(T stateContent)
+            {
+                if (StatesHashTable.ContainsKey(stateContent))
+                {
+                    return StatesHashTable[stateContent];
+                }
+                else
+                {
+                    GenericState<T> newState = new GenericState<T>(stateContent);
+                    StatesHashTable.Add(stateContent, newState);
+                    return newState;
+                }
+            }
+        }
+
     }
 }        

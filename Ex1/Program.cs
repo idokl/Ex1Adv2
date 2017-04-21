@@ -20,7 +20,7 @@ namespace Ex1
             ////terminating:
             //System.Threading.Thread.Sleep(500);
             //Console.WriteLine("press any key to terminate this server...");
-            //Console.ReadLine();
+            Console.ReadLine();
             view.Stop();
 
             //CompareSolvers.Run();

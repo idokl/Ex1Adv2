@@ -42,7 +42,7 @@ namespace Ex1.Model
         {
             var listOgGames = new List<string>();
             foreach (var mp in DictionaryOfMultyPlayerDS.Values)
-                if (mp.IsAvailable)
+                if (mp.AvailableToJoin)
                     listOgGames.Add(mp.NameOfGame);
             return listOgGames;
         }

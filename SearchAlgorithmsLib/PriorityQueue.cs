@@ -74,13 +74,11 @@ namespace SearchAlgorithmsLib
             heap[n] = v;
         }
 
-        //my implementation (not efficient: O(n))
         public bool DoesContain(T element)
         {
             return heap.Contains(element);
         }
 
-        //my implementation (not efficient: O(n))
         public void DecreaseKey(T oldElement, T newElement)
         {
             var indexOfElement = Array.IndexOf(heap, oldElement);
@@ -88,7 +86,6 @@ namespace SearchAlgorithmsLib
             SiftUp(indexOfElement);
         }
 
-        //my implementation (not efficient: O(n))
         public void TryToDecreaseTheKeyOfTheElement(T element)
         {
             var indexOfElement = Array.IndexOf(heap, element);

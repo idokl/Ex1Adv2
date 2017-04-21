@@ -27,7 +27,7 @@ namespace Ex1.Controller.Commands
             {
                 mpJoin = model.join(name);
                 mpJoin.GuestClient = client;
-                mpJoin.IsAvailable = false;
+                mpJoin.AvailableToJoin = false;
 
                 var mpgJoin = new MultiPlayerGameController(mpJoin, false);
                 mpgJoin.SetModel(model);

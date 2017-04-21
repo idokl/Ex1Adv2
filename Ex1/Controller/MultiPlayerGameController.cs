@@ -18,7 +18,7 @@ namespace Ex1.Model
         private readonly bool IamHostClient;
         private IModel model;
         private readonly MultiPlayerDS multiPlayerDs;
-        private PacketStream packet;
+        //private PacketStream packet;
         private BinaryReader Reader;
         private NetworkStream stream;
         private BinaryWriter Writer;
@@ -36,14 +36,16 @@ namespace Ex1.Model
 
         public void ExecuteCommand(string commandLine, TcpClient client)
         {
-            stream = client.GetStream();
-            Writer = new BinaryWriter(stream);
-
+            //stream = client.GetStream();
+            //Writer = new BinaryWriter(stream);
             var parser = new CommandParser(commandLine);
             if (!commands.ContainsKey(parser.CommandKey))
                 Writer.Write("The command " + parser.CommandKey + " isn't known in a multiplayer game.");
-            var command = commands[parser.CommandKey];
-            command.Execute(parser.Args, client);
+            else
+            {
+                var command = commands[parser.CommandKey];
+                command.Execute(parser.Args, client);
+            }
         }
 
         public void SetModel(IModel model)
@@ -55,10 +57,18 @@ namespace Ex1.Model
         {
             if (IamHostClient)
                 WaitToOpponent();
+            //initialize Writer and reader and subscribe to events of changes in the Multiplayer-Data-Structure:
+            multiPlayerDs.SomebodyClosedTheGameEvent += DSbecameClosed;
             if (IamHostClient)
+            {
                 stream = multiPlayerDs.HostClient.GetStream();
+                multiPlayerDs.GuestPlayedEvent += OpponentPlayed;
+            }
             else
+            {
                 stream = multiPlayerDs.GuestClient.GetStream();
+                multiPlayerDs.HostPlayActionOccurd += OpponentPlayed;
+            }
             Reader = new BinaryReader(stream);
             Writer = new BinaryWriter(stream);
             Writer.Write(Messages.PassToMultiplayerMassage);
@@ -75,9 +85,9 @@ namespace Ex1.Model
             Writer.Write(multiPlayerDs.MazeInit.ToJSON());
 
             //subscribe to events of changes in the Multiplayer-Data-Structure:
-            multiPlayerDs.SomebodyClosedTheGame += DSbecameClosed;
-            multiPlayerDs.HostPlayActionOccurd += HostPlay;
-            multiPlayerDs.GuestPlayActionOccurd += GuestPlay;
+            //multiPlayerDs.SomebodyClosedTheGame += DSbecameClosed;
+            //multiPlayerDs.HostPlayActionOccurd += HostPlay;
+            //multiPlayerDs.GuestPlayActionOccurd += GuestPlay;
 
             var client = IamHostClient ? multiPlayerDs.HostClient : multiPlayerDs.GuestClient;
             //handle communication with our client (recieve commands and execute them):
@@ -106,21 +116,24 @@ namespace Ex1.Model
             }
         }
 
-        private void HostPlay(TcpClient guestClient, Direction direction)
+        private void OpponentPlayed(/*TcpClient guestClient,*/ Direction direction)
         {
             var s = PlayToJSON(direction);
-            stream = guestClient.GetStream();
-            Writer = new BinaryWriter(stream);
+            //stream = guestClient.GetStream();
+            //Writer = new BinaryWriter(stream);
             Writer.Write(s);
         }
 
-        private void GuestPlay(TcpClient hostClient, Direction direction)
+        /*
+        private void GuestPlay(//TcpClient hostClient,
+                                Direction direction)
         {
             var s = PlayToJSON(direction);
-            stream = hostClient.GetStream();
-            Writer = new BinaryWriter(stream);
+            //stream = hostClient.GetStream();
+            //Writer = new BinaryWriter(stream);
             Writer.Write(s);
         }
+        */
 
         private string PlayToJSON(Direction direction)
         {

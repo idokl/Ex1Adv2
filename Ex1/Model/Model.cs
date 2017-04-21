@@ -1,4 +1,17 @@
-﻿using System;
+﻿// ***********************************************************************
+// Assembly         : Ex1
+// Author           : Cohen
+// Created          : 04-18-2017
+//
+// Last Modified By : Cohen
+// Last Modified On : 04-21-2017
+// ***********************************************************************
+// <copyright file="Model.cs" company="">
+//     Copyright ©  2017
+// </copyright>
+// <summary></summary>
+// ***********************************************************************
+using System;
 using System.Collections.Generic;
 using System.Net.Sockets;
 using Adapter;
@@ -8,21 +21,52 @@ using SearchAlgorithmsLib;
 
 namespace Ex1.Model
 {
+    /// <summary>
+    /// Class Model.
+    /// </summary>
+    /// <seealso cref="Ex1.Model.IModel" />
     internal class Model : IModel
     {
+
+        /// <summary>
+        /// Gets the dictionary of mazes.
+        /// </summary>
+        /// <value>The dictionary of mazes.</value>
+        private Dictionary<string, Maze> DictionaryOfMazes { get; }
+        /// <summary>
+        /// Gets the dictionary of mazes and solutions.
+        /// </summary>
+        /// <value>The dictionary of mazes and solutions.</value>
+        private Dictionary<SearchableMaze, Solution> DictionaryOfMazesAndSolutions { get; }
+        /// <summary>
+        /// Gets or sets the dictionary of multi player ds.
+        /// </summary>
+        /// <value>The dictionary of multi player ds.</value>
+        public Dictionary<string, MultiPlayerDS> DictionaryOfMultiPlayerDS { get; set; }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Model"/> class.
+        /// </summary>
         public Model()
         {
             DictionaryOfMazes = new Dictionary<string, Maze>();
             DictionaryOfMazesAndSolutions = new Dictionary<SearchableMaze, Solution>();
-            DictionaryOfMultyPlayerDS = new Dictionary<string, MultiPlayerDS>();
+            DictionaryOfMultiPlayerDS = new Dictionary<string, MultiPlayerDS>();
         }
 
-        private Dictionary<string, Maze> DictionaryOfMazes { get; }
-        private Dictionary<SearchableMaze, Solution> DictionaryOfMazesAndSolutions { get; }
-        public Dictionary<string, MultiPlayerDS> DictionaryOfMultyPlayerDS { get; set; }
+        /// <summary>
+        /// Gets or sets the evaluate nodes.
+        /// </summary>
+        /// <value>The evaluate nodes.</value>
         public int EvaluateNodes { get; set; }
-
-
+        /// <summary>
+        /// Generates the specified name.
+        /// </summary>
+        /// <param name="name">The name.</param>
+        /// <param name="rows">The rows.</param>
+        /// <param name="cols">The cols.</param>
+        /// <returns>Maze.</returns>
         public Maze generate(string name, int rows, int cols)
         {
             var dfsMazeGenerator = new DFSMazeGenerator();
@@ -32,21 +76,37 @@ namespace Ex1.Model
             return MyMaze;
         }
 
-        public MultiPlayerDS GetMultiplayerDataStructure(string name)
+        /// <summary>
+        /// Gets the multi player data structure.
+        /// </summary>
+        /// <param name="name">The name.</param>
+        /// <returns>MultiPlayerDS.</returns>
+        /// <exception cref="System.NotImplementedException"></exception>
+        public MultiPlayerDS GetMultiPlayerDataStructure(string name)
         {
-            if (DictionaryOfMultyPlayerDS.ContainsKey(name)) return DictionaryOfMultyPlayerDS[name];
+            if (DictionaryOfMultiPlayerDS.ContainsKey(name)) return DictionaryOfMultiPlayerDS[name];
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// return list of optianl multi player games
+        /// </summary>
+        /// <returns>List&lt;System.String&gt;.</returns>
         public List<string> list()
         {
             var listOgGames = new List<string>();
-            foreach (var mp in DictionaryOfMultyPlayerDS.Values)
+            foreach (var mp in DictionaryOfMultiPlayerDS.Values)
                 if (mp.AvailableToJoin)
                     listOgGames.Add(mp.NameOfGame);
             return listOgGames;
         }
 
+        /// <summary>
+        /// Solves the specified maze.
+        /// </summary>
+        /// <param name="name">The name.</param>
+        /// <param name="algorithmNumber">The algorithm number.</param>
+        /// <returns>Solution.</returns>
         public Solution solve(string name, int algorithmNumber)
         {
             var maze = DictionaryOfMazes[name];
@@ -54,22 +114,6 @@ namespace Ex1.Model
             if (DictionaryOfMazesAndSolutions.ContainsKey(searchableMaze))
                 return DictionaryOfMazesAndSolutions[searchableMaze];
             Solution solution;
-
-             /*
-            if (algorithm == 1)
-            {
-                var BFS = new BestFirstSearch<PointState>();
-                solution = BFS.search(searchableMaze);
-                EvaluateNodes = BFS.getNumberOfNodesEvaluated();
-            }
-            else
-            {
-                var DFS = new DepthFirstSearch<PointState>();
-                solution = DFS.search(searchableMaze);
-                EvaluateNodes = DFS.getNumberOfNodesEvaluated();
-            }
-            */
-
             ISearcher searchAlgorithm = null;
             switch (algorithmNumber)
             {
@@ -86,19 +130,27 @@ namespace Ex1.Model
             DictionaryOfMazesAndSolutions.Add(searchableMaze, solution);
             return solution;
         }
-
+         
+        /// <summary>
+        /// Starts a new multi plyer game by set the info for it
+        /// </summary>
+        /// <param name="name">The name.</param>
+        /// <param name="rows">The rows.</param>
+        /// <param name="cols">The cols.</param>
+        /// <param name="host">The host.</param>
+        /// <returns>MultiPlayerDS.</returns>
         public MultiPlayerDS start(string name, int rows, int cols, TcpClient host)
         {
             if (DictionaryOfMazes.ContainsKey(name))
             {
                 var multiPlayerDs = new MultiPlayerDS(host, name, DictionaryOfMazes[name]);
-                DictionaryOfMultyPlayerDS.Add(name, multiPlayerDs);
+                DictionaryOfMultiPlayerDS.Add(name, multiPlayerDs);
                 return multiPlayerDs;
             }
             else
             {
                 var multiPlayerDs = new MultiPlayerDS(host, name, generate(name, rows, cols));
-                DictionaryOfMultyPlayerDS.Add(name, multiPlayerDs);
+                DictionaryOfMultiPlayerDS.Add(name, multiPlayerDs);
                 return multiPlayerDs;
             }
         }

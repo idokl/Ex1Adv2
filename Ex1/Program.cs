@@ -2,6 +2,8 @@
 using Ex1.Controller;
 using Ex1.Model;
 using Ex1.View;
+using System.Configuration;
+
 
 namespace Ex1
 {
@@ -13,7 +15,7 @@ namespace Ex1
             Console.WriteLine("debug massage: I am the Server.");
             IController controller = new Controller.Controller();
             IModel model = new Model.Model();
-            IView view = new View.View(8888, controller);
+            IView view = new View.View(Convert.ToInt32(ConfigurationManager.AppSettings["port"]), controller);
             controller.SetModel(model);
             view.Start();
 

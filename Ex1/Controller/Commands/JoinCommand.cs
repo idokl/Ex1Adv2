@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Net.Sockets;
 using Ex1.Model;
+using System.Configuration;
 
 namespace Ex1.Controller.Commands
 {

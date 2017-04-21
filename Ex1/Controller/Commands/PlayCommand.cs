@@ -22,13 +22,30 @@ namespace Ex1.Controller.Commands
 
         public PacketStream Execute(string[] args, TcpClient client)
         {
-            Direction = (Direction) Enum.Parse(typeof(Direction), args[0]);
+            
+            Direction = this.DirectionParser(args[0]);
             if (multiPlayerDS.HostClient == client)
                 multiPlayerDS.HostCurrentDirection = Direction;
             else
                 multiPlayerDS.GuestCurrentDirection = Direction;
 
             return new PacketStream();
+        }
+
+        public Direction DirectionParser(string direction)
+        {
+            switch (direction)
+            {
+                case "up":
+                    return Direction.Up;
+                case "down":
+                    return Direction.Down;
+                case "left":
+                    return Direction.Left;
+                case "right":
+                    return Direction.Right;
+            }
+            return Direction;
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System.Net.Sockets;
 using System.Text;
 using Ex1.Model;
+using Newtonsoft.Json.Linq;
 
 namespace Ex1.Controller.Commands
 {
@@ -16,17 +17,20 @@ namespace Ex1.Controller.Commands
         public PacketStream Execute(string[] args, TcpClient client)
         {
             var listOfGames = model.list();
-            var listOfGameStringBuilder = new StringBuilder(" ");
+            JArray j = new JArray();
+            
+           // var listOfGameStringBuilder = new StringBuilder(" ");
             foreach (var name in listOfGames)
             {
-                var nameFormat = string.Format("{0},", name);
-                listOfGameStringBuilder.AppendLine(nameFormat);
+                j.Add(name);
+                //var nameFormat = string.Format("{0},", name);
+                //listOfGameStringBuilder.AppendLine(nameFormat);
             }
-            listOfGameStringBuilder.Length -= 1;
+           // listOfGameStringBuilder.Length -= 1;
 
             var ListPacketStream = new PacketStream
             {
-                StringStream = listOfGameStringBuilder.ToString()
+                StringStream = j.ToString()
             };
             return ListPacketStream;
         }

@@ -16,7 +16,8 @@ namespace ClientForDebug
             var commandIsReadyToBeSent = false;
             while (true)
             {
-                var ep = new IPEndPoint(IPAddress.Parse(ConfigurationManager.AppSettings["ip"]), 8888);
+                var ep = new IPEndPoint(
+                    IPAddress.Parse(ConfigurationManager.AppSettings["ip"]), Convert.ToInt32(ConfigurationManager.AppSettings["port"]));
                 var client = new TcpClient();
                 client.Connect(ep);
                 Console.WriteLine("debug massage: You are connected");

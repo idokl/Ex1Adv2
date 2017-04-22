@@ -15,7 +15,7 @@ namespace SearchAlgorithmsLib
 {
     /// <summary>
     /// Interface ISearcher
-    /// </summary>
+    /// </summary> 
     public interface ISearcher
     {
 

@@ -32,7 +32,7 @@ namespace Ex1.Controller.Commands
         /// The multi player Data Structure
         /// </summary>
         private readonly MultiPlayerDS multiPlayerDS;
-
+         
         /// <summary>
         /// Initializes a new instance of the <see cref="CloseCommand"/> class.
         /// </summary>

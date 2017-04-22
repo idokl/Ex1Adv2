@@ -19,7 +19,7 @@ using System.Net.Sockets;
 using System.Threading.Tasks;
 using CommunicationSettings;
 
-namespace ClientForDebug
+namespace Client
 {
     /// <summary>
     /// Class Communication. managing communication with the server (
@@ -28,7 +28,7 @@ namespace ClientForDebug
     {
         /// <summary>
         /// Communicate with the server.
-        /// read massage from the user. connect to the server. send the massage to it, recieve its answer and print it.
+        /// read massage from the user. connect to the server. send the massage to it, receive its answer and print it.
         /// do it iteratively.
         /// (in 'Multi-Player-Mode' save the connection with the server. in 'Single-Player-Mode' disconnect.)
         /// </summary>
@@ -37,9 +37,9 @@ namespace ClientForDebug
             var command = "";
             //flag that indicates that the user entered a comment that haven't been sent yet.
             var commandIsReadyToBeSent = false;
-            //in every iteration: connect to the server. send a massage to it, recieve its answer and print it.
-            //if the answer is Messages.PassToMultiplayerMassage, then manage long communication with the server,
-            //i.e. both send massages and get answers parallelly until the answer is Messages.PassToSingleplayerMassage.
+            //in every iteration: connect to the server. send a massage to it, receive its answer and print it.
+            //if the answer is Messages.PassToMultiPlayerMassage, then manage long communication with the server,
+            //i.e. both send massages and get answers in parallel until the answer is Messages.PassToSinglePlayerMassage.
             while (true)
             {
                 //read command from the user:
@@ -70,7 +70,7 @@ namespace ClientForDebug
 
                     // Get answer from server and print it:
                     var answerFromServer = reader.ReadString();
-                    if (!(answerFromServer == Messages.PassToMultiplayerMassage))
+                    if (!(answerFromServer == Messages.PassToMultiPlayerMassage))
                         Console.WriteLine("{0}", answerFromServer);
                     //Manage long communication with the server:
                     else
@@ -82,7 +82,7 @@ namespace ClientForDebug
                             while (!stop)
                             {
                                 var updateFromServer = reader.ReadString();
-                                if (updateFromServer == Messages.PassToSingleplayerMassage)
+                                if (updateFromServer == Messages.PassToSinglePlayerMassage)
                                     stop = true;
                                 else
                                     Console.WriteLine(updateFromServer);
@@ -94,7 +94,7 @@ namespace ClientForDebug
                         {
                             if (!commandIsReadyToBeSent)
                             {
-                                //Console.Write("debug massage: You are in multiplayer mode. Please enter a command: ");
+                                //Console.Write("debug massage: You are in MultiPlayer mode. Please enter a command: ");
                                 command = Console.ReadLine();
                                 commandIsReadyToBeSent = true;
                             }

@@ -43,7 +43,7 @@ namespace Ex1.Controller.Commands
         /// <param name="client">The client.</param>
         /// <returns>PacketStream.</returns>
         public PacketStream Execute(string[] args, TcpClient client)
-        {
+        { 
             var name = args[0];
             var rows = int.Parse(args[1]);
             var cols = int.Parse(args[2]);

@@ -19,7 +19,7 @@ namespace SearchAlgorithmsLib
     public interface State
     {
 
-        /// <summary>
+        /// <summary> 
         /// Equalses the specified state.
         /// </summary>
         /// <param name="s">The state.</param>

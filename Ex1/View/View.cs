@@ -17,7 +17,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.Threading.Tasks;
 using Ex1.Controller;
-
+ 
 namespace Ex1.View
 {
     /// <summary>

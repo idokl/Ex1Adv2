@@ -67,7 +67,7 @@ namespace Ex1.Controller.Commands
                 mpgJoin.SetModel(model);
                 mpgJoin.Initialize();
                 mpgJoin.ManageCommunication();
-            }
+            } 
             catch
             {
                 Console.WriteLine("the name of game to join isn't exist");

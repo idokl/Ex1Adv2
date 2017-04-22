@@ -14,7 +14,7 @@
 using System;
 using System.Threading;
 
-namespace ClientForDebug
+namespace Client
 {
     /// <summary>
     /// The program of the client 

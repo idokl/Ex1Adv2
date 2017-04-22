@@ -14,7 +14,7 @@
 using System.Collections.Generic;
 
 namespace SearchAlgorithmsLib
-{
+{ 
     /// <summary>
     /// Class GenericState. generic state for someone that wants to use SearchAlgorithmsLib
     /// but doesn't want to implement the state interface by himself.

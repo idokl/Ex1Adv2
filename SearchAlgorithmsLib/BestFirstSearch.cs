@@ -23,7 +23,7 @@ namespace SearchAlgorithmsLib
     /// <seealso cref="SearchAlgorithmsLib.PQAdapter" />
     public class BestFirstSearch<T> : PQAdapter
     {
-        /// <summary>
+        /// <summary> 
         /// Initializes a new instance of the <see cref="BestFirstSearch{T}"/> class.
         /// </summary>
         public BestFirstSearch() : base(new StateComparer())

@@ -74,7 +74,7 @@ namespace Adapter
                 up = new Position(currRow - 1, currCol);
                 if (CellType.Free == MyMaze[currRow - 1, currCol])
                     accessiblePositionStates.Add(new PointState(up, costOfNeighbor));
-            }
+            } 
             if (currCol != 0)
             {
                 left = new Position(currRow, currCol - 1);

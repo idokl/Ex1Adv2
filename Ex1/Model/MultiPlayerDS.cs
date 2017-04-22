@@ -122,7 +122,7 @@ namespace Ex1.Model
             AvailableToJoin = true;
             Closed = false;
         }
-         
+          
         /// <summary>
         /// Closes this instance.
         /// </summary>

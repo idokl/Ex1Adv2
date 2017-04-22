@@ -17,7 +17,7 @@ namespace SearchAlgorithmsLib
 {
     /// <summary>
     /// Class Solution. maintains a sequence of states for arriving from the initial state to the goal state of the searchable.
-    /// </summary>
+    /// </summary> 
     public class Solution
     {
         /// <summary>

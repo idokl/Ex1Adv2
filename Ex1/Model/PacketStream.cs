@@ -12,7 +12,7 @@
 // <summary></summary>
 // ***********************************************************************
 namespace Ex1.Model
-{
+{ 
     /// <summary>
     /// Class PacketStream.
     /// </summary>

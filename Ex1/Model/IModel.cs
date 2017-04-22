@@ -17,7 +17,7 @@ using MazeLib;
 using SearchAlgorithmsLib;
 
 namespace Ex1.Model
-{
+{ 
     /// <summary>
     /// Interface IModel
     /// </summary>

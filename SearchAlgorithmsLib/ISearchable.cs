@@ -16,7 +16,7 @@ using System.Collections.Generic;
 namespace SearchAlgorithmsLib
 {
 
-    /// <summary>
+    /// <summary> 
     /// Interface ISearchable. represents a problem: how can we arrive from initial state to the goal state.
     /// the problem is represented by a graph with list of neighbors of every vertex.
     /// everyone that want to use the SearchAlgorithmsLib to solve his problem has to implement this interface.

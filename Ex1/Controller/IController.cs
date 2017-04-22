@@ -7,5 +7,5 @@ namespace Ex1.Controller
     {
         void ExecuteCommand(string commandLine, TcpClient client);
         void SetModel(IModel model);
-    }
+    } 
 }

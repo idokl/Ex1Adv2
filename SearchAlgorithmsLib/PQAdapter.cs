@@ -15,7 +15,7 @@ using System.Collections.Generic;
 
 namespace SearchAlgorithmsLib
 {
-    /// <summary>
+    /// <summary> 
     /// Class PQAdapter. adapt the searcher to algorithms that use priority queue.
     /// </summary>
     /// <seealso cref="SearchAlgorithmsLib.Searcher" />

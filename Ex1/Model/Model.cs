@@ -130,7 +130,7 @@ namespace Ex1.Model
             DictionaryOfMazesAndSolutions.Add(searchableMaze, solution);
             return solution;
         }
-         
+          
         /// <summary>
         /// Starts a new multi plyer game by set the info for it
         /// </summary>

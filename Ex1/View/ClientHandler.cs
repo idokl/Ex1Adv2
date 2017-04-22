@@ -36,7 +36,7 @@ namespace Ex1.Controller
         public ClientHandler(IController controller)
         {
             Controller = controller;
-        }
+        } 
          
         /// <summary>
         /// Handles the client.

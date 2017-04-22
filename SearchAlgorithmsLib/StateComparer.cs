@@ -31,7 +31,7 @@ namespace SearchAlgorithmsLib
         {
             if (x.Cost < y.Cost)
                 return -1;
-            if (x.Cost > y.Cost)
+            if (x.Cost > y.Cost) 
                 return 1;
             return 0;
         }

@@ -19,7 +19,7 @@ namespace SearchAlgorithmsLib
 {
     //Credit to: http://stackoverflow.com/questions/102398/priority-queue-in-net
     /// <summary>
-    /// priority queue that is implemented by minimum heap.
+    /// priority queue that is implemented by minimum heap. 
     /// Credit to: http://stackoverflow.com/questions/102398/priority-queue-in-net (the most of the implementation is of them).
     /// </summary>
     /// <typeparam name="T"></typeparam>

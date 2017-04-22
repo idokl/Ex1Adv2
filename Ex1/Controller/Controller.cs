@@ -54,7 +54,7 @@ namespace Ex1.Controller
         /// <param name="commandLine">The command line.</param>
         /// <param name="client">The client.</param>
         public void ExecuteCommand(string commandLine, TcpClient client)
-        {
+        { 
             var parser = new CommandParser(commandLine);
             SinglePlayerGame sp;
             if (!commands.ContainsKey(parser.CommandKey))

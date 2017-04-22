@@ -23,7 +23,7 @@ namespace Ex1.Controller.Commands
     /// </summary>
     /// <seealso cref="Ex1.Controller.ICommand" />
     internal class PlayCommand : ICommand
-    {
+    { 
         /// <summary>
         /// The model
         /// </summary>

@@ -25,7 +25,7 @@ namespace Ex1.Controller
         /// </summary>
         /// <param name="commandLine">The command line.</param>
         public CommandParser(string commandLine)
-        {
+        { 
             var arr = commandLine.Split(' ');
             CommandKey = arr[0];
             Args = arr.Skip(1).ToArray();

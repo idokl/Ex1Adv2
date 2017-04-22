@@ -40,7 +40,7 @@ namespace Ex1.Model
             this.client = client;
             this.stream = stream;
         }
-         
+          
         /// <summary>
         /// Sends the massage.
         /// </summary>

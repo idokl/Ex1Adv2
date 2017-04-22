@@ -12,7 +12,7 @@
 // <summary></summary>
 // ***********************************************************************
 namespace Ex1.View
-{
+{ 
     /// <summary>
     /// Interface IView
     /// </summary>

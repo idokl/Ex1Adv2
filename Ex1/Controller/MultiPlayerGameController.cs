@@ -126,7 +126,7 @@ namespace Ex1.Model
             }
             Reader = new BinaryReader(stream);
             Writer = new BinaryWriter(stream);
-            Writer.Write(Messages.PassToMultiplayerMassage);
+            Writer.Write(Messages.PassToMultiPlayerMassage);
         }
 
         /// <summary>
@@ -171,7 +171,7 @@ namespace Ex1.Model
         { 
             if (multiPlayerDs.Closed)
             {
-                Writer.Write(Messages.PassToSingleplayerMassage);
+                Writer.Write(Messages.PassToSinglePlayerMassage);
             }
         }
 

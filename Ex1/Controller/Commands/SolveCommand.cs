@@ -90,7 +90,7 @@ namespace Ex1.Controller.Commands
                 point = nextPoint;
             }
             var solvePacketStream = new PacketStream
-            {
+            { 
                 StringStream = ToJSON()
             };
             return solvePacketStream;

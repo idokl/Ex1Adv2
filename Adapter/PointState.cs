@@ -18,7 +18,7 @@ namespace Adapter
 {
     /// <summary>
     /// Class PointState.
-    /// </summary>
+    /// </summary> 
     /// <seealso cref="SearchAlgorithmsLib.State" />
     public class PointState : State
     {

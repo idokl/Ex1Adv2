@@ -17,7 +17,7 @@ using Ex1.Model;
 using Ex1.View;
 using System.Configuration;
 
-
+ 
 namespace Ex1
 {
     /// <summary>

@@ -15,7 +15,7 @@ using System;
 using Adapter;
 using MazeGeneratorLib;
 using SearchAlgorithmsLib;
-
+ 
 namespace Ex1
 {
     /// <summary>

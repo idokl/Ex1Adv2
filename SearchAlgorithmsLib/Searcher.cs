@@ -19,7 +19,7 @@ namespace SearchAlgorithmsLib
     /// </summary>
     /// <seealso cref="SearchAlgorithmsLib.ISearcher" />
     public abstract class Searcher : ISearcher
-    {
+    { 
         /// <summary>
         /// Initializes a new instance of the <see cref="Searcher"/> class. initialize the number of evaluatedNodes.
         /// </summary>

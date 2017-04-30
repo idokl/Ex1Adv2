@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using GUI.Model;
 using GUI.ViewModel;
 
 namespace GUI
@@ -9,6 +10,7 @@ namespace GUI
     public partial class SettingsWindow : Window
     {
         private SettingsViewModel vm;
+       
         public SettingsWindow()
         {
             InitializeComponent();

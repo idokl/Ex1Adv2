@@ -13,6 +13,7 @@ namespace GUI.ViewModel
 
         public SettingsViewModel()
         {
+            this.model = new SettingsModel();
         }
 
         public SettingsViewModel(ISettingsModel model)

@@ -24,5 +24,26 @@ namespace GUI
         {
             InitializeComponent();
         }
+
+       private void SinglePlayerButton_Click(object sender, RoutedEventArgs e)
+        {
+            SinglePlayerWindow singlePlayerWindow = new SinglePlayerWindow();
+            singlePlayerWindow.Show();
+            this.Close();
+        }
+
+        private void SettingsButton_Click(object sender, RoutedEventArgs e)
+        {
+            SettingsWindow settingsWindow = new SettingsWindow();
+            settingsWindow.Show();
+            this.Close();
+        }
+
+        private void MultiPlayerButton_Click(object sender, RoutedEventArgs e)
+        {
+            MultiPlayerWindow multiPlayerWindow = new MultiPlayerWindow();
+            multiPlayerWindow.Show();
+            this.Close();
+        }
     }
 }

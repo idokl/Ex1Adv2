@@ -19,7 +19,6 @@ namespace GUI
     /// </summary>
     public partial class SinglePlayerWindow : Window
     {
-        public String MazeName = "";
 
         public SinglePlayerWindow()
         {
@@ -29,8 +28,7 @@ namespace GUI
 
         private void StartGameButton_Click(object sender, RoutedEventArgs e)
         {
-            MazeName = MazeNameTextBox.Text;
-            MazeRowsTextBox.Text = MazeName;
+           
         }
     }
 }

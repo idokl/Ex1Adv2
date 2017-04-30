@@ -14,5 +14,6 @@ namespace GUI.Model
         int MazeCols { get; set; }
         int SearchAlgorithm { get; set; }
         void SaveSettings();
-    }
+    }
+
 }

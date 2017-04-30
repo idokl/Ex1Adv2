@@ -16,11 +16,7 @@ namespace GUI.ViewModel
             this.model = new SettingsModel();
         }
 
-        public SettingsViewModel(ISettingsModel model)
-        {
-            this.model = model;
-        }
-        public string ServerIP
+       public string ServerIP
         {
             get { return model.ServerIP; }
             set

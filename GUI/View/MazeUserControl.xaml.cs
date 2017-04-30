@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace GUI
+namespace GUI.View
 {
     /// <summary>
-    /// Interaction logic for UserControl.xaml
+    /// Interaction logic for MazeUserControl.xaml
     /// </summary>
-    public partial class UserControlClassControl : UserControl
+    public partial class MazeUserControl : UserControl
     {
-        public UserControlClassControl()
+        public MazeUserControl()
         {
             InitializeComponent();
         }

@@ -45,5 +45,10 @@ namespace GUI
             multiPlayerWindow.Show();
             this.Close();
         }
+
+        private void MainWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            Application.Current.MainWindow = this;
+        }
     }
 }

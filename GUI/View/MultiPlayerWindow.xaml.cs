@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GUI.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,9 +20,12 @@ namespace GUI
     /// </summary>
     public partial class MultiPlayerWindow : Window
     {
+        private MultiPlayerViewModel mpVM;
         public MultiPlayerWindow()
         {
             InitializeComponent();
+            mpVM = new MultiPlayerViewModel();
+            this.DataContext = mpVM;
         }
     }
 }

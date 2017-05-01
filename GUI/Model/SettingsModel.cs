@@ -2,6 +2,11 @@
 {
     class SettingsModel : ISettingsModel
     {
+
+        public int DefaultMazeRows = 5;
+        public int DefaultMazeCols = 5;
+        public int DefaultSearchAlgorithm = 0;
+
         public string ServerIP
         {
             get { return Properties.Settings.Default.ServerIP; }
@@ -13,9 +18,40 @@
             set { Properties.Settings.Default.ServerPort = value; }
         }
     
-        public int MazeRows { get; set; }
-        public int MazeCols { get; set; }
-        public int SearchAlgorithm { get; set; }
+        public int MazeRows
+        {
+            get
+            {
+                return DefaultMazeRows;
+            }
+            set
+            {
+                DefaultMazeRows = value;
+            }
+        }
+    
+        public int MazeCols
+        {
+            get
+            {
+                return DefaultMazeCols;
+            }
+            set
+            {
+                DefaultMazeCols = value;
+            }
+        }
+        public int SearchAlgorithm
+        {
+            get
+            {
+                return DefaultSearchAlgorithm;
+            }
+            set
+            {
+                DefaultSearchAlgorithm = value;
+            }
+        }
 
         public void SaveSettings()
         {

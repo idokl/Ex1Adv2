@@ -1,12 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
+using GUI.Model;
 
 namespace GUI.ViewModel
 {
-    class SInglePlayerViewModel : ViewModel
+    class SinglePlayerViewModel : ViewModel
     {
+        private IClientModel model;
+
+        public SinglePlayerViewModel()
+        {
+            this.model = new ClientModel();
+            //manage all the communication with the server
+
+        }
     }
 }

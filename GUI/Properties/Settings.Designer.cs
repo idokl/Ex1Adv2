@@ -18,8 +18,9 @@ namespace GUI.Properties
     {
 
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
-        internal string ServerIP;
-        internal int ServerPort;
+        internal string ServerIP = "127.0.0.1";
+        internal int ServerPort = 8888;
+
 
         public static Settings Default
         {
@@ -27,6 +28,15 @@ namespace GUI.Properties
             {
                 return defaultInstance;
             }
+
+            set
+            {
+
+            }
+
+           
         }
+
+
     }
 }

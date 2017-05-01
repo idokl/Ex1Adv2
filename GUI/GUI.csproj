@@ -55,6 +55,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Model\ClientModel.cs" />
+    <Compile Include="Model\IClientModel.cs" />
     <Compile Include="Model\ISettingsModel.cs" />
     <Compile Include="Model\SettingsModel.cs" />
     <Compile Include="ViewModel\MultiPlayerViewModel.cs" />
@@ -129,7 +131,16 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\Adapter\Adapter.csproj">
+      <Project>{2ae7a674-b8a3-4e7f-a8b5-da5460bdcc92}</Project>
+      <Name>Adapter</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CommunicationSettings\CommunicationSettings.csproj">
+      <Project>{bdc31661-a45a-4b02-affb-3a8bd35e30ca}</Project>
+      <Name>CommunicationSettings</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

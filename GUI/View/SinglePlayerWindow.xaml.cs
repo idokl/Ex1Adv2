@@ -1,4 +1,6 @@
-﻿using System;
+﻿using GUI.Model;
+using GUI.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,11 +21,13 @@ namespace GUI
     /// </summary>
     public partial class SinglePlayerWindow : Window
     {
+        private SinglePlayerViewModel spVM;
 
         public SinglePlayerWindow()
         {
             InitializeComponent();
-            this.DataContext = this;
+            spVM = new SinglePlayerViewModel();
+            this.DataContext = spVM;
         }
 
         private void StartGameButton_Click(object sender, RoutedEventArgs e)

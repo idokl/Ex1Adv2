@@ -34,7 +34,28 @@ namespace GUI.ViewModel
                 NotifyPropertyChanged("ServerPort");
             }
         }
-      
+
+        public int MazeRows
+        {
+            get { return model.MazeRows; }
+            set { NotifyPropertyChanged("MazeRows"); }
+        }
+
+        public int MazeCols
+        {
+            get { return model.MazeCols; }
+            set { NotifyPropertyChanged("MazeCols"); }
+        }
+
+        public int SearchAlgorithm
+        {
+            get { return model.SearchAlgorithm; }
+            set
+            {
+                NotifyPropertyChanged("SearchAlgorithm");
+            }
+        }
+
         public void SaveSettings()
         {
             model.SaveSettings();

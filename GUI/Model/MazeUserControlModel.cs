@@ -4,46 +4,23 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using Adapter;
-using GUI.Model;
-using GUI.ViewModel;
 using MazeGeneratorLib;
 using MazeLib;
 
-namespace GUI.View
+namespace GUI.Model
 {
-    /// <summary>
-    /// Interaction logic for MazeUserControl.xaml
-    /// </summary>
-    public partial class MazeUserControl : UserControl
+    class MazeUserControlModel
     {
-        //  private MazeUserControlViewModel mazeUserControlViewModel;
-        private ObservableCollection<RectItem> RectItems { get; set; }
 
-        public MazeUserControl()
-        {
-            InitializeComponent();
-            this.draw();
-            this.DataContext = this;
-        }
-
-        public void draw()
+        public void init()
         {
             var dfsMazeGenerator = new DFSMazeGenerator();
             var MyMaze = dfsMazeGenerator.Generate(20, 20);
             //MyMaze.Name;
             var SM = new SearchableMaze(MyMaze);
             int size = MyMaze.Rows * MyMaze.Cols;
-            this.RectItems = new ObservableCollection<RectItem>();
+            this.mazeUserControlViewModel.RectItems = new ObservableCollection<RectItem>();
 
             double height = System.Windows.SystemParameters.PrimaryScreenHeight;
             double width = System.Windows.SystemParameters.PrimaryScreenWidth;
@@ -54,7 +31,6 @@ namespace GUI.View
                 for (int j = 0; j < MyMaze.Cols; j++)
                 {
                     RectItem rec = new RectItem();
-                    
                     if (CellType.Free == MyMaze[i, j])
                     {
                         rec.WhiteColor = true;
@@ -63,9 +39,7 @@ namespace GUI.View
                     rec.Height = heightOfBlock;
                     rec.X = j * widthOfBlock;
                     rec.Y = i = heightOfBlock;
-                  
-
-                    this.RectItems.Add(rec);
+                    this.mazeUserControlViewModel.RectItems.Add(rec);
                 }
             }
         }

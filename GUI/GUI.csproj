@@ -35,6 +35,13 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="MazeGeneratorLib">
+      <HintPath>..\packages\MazeGeneratorLib.dll</HintPath>
+    </Reference>
+    <Reference Include="MazeLib, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\MazeLib.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
@@ -58,7 +65,10 @@
     <Compile Include="Model\ClientModel.cs" />
     <Compile Include="Model\IClientModel.cs" />
     <Compile Include="Model\ISettingsModel.cs" />
+    <Compile Include="Model\MazeUserControlModel.cs" />
+    <Compile Include="Model\RectItem.cs" />
     <Compile Include="Model\SettingsModel.cs" />
+    <Compile Include="ViewModel\MazeUserControlViewModel.cs" />
     <Compile Include="ViewModel\MultiPlayerViewModel.cs" />
     <Compile Include="ViewModel\SettingsViewModel.cs" />
     <Compile Include="ViewModel\SInglePlayerViewModel.cs" />

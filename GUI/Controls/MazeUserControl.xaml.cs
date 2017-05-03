@@ -19,7 +19,7 @@ using GUI.ViewModel;
 using MazeGeneratorLib;
 using MazeLib;
 
-namespace GUI.View
+namespace GUI.Controls
 {
     /// <summary>
     /// Interaction logic for MazeUserControl.xaml
@@ -39,7 +39,7 @@ namespace GUI.View
         public void draw()
         {
             var dfsMazeGenerator = new DFSMazeGenerator();
-            var MyMaze = dfsMazeGenerator.Generate(20, 20);
+            var MyMaze = dfsMazeGenerator.Generate(5, 5);
             //MyMaze.Name;
             var SM = new SearchableMaze(MyMaze);
             int size = MyMaze.Rows * MyMaze.Cols;
@@ -62,7 +62,7 @@ namespace GUI.View
                     rec.Width = widthOfBlock;
                     rec.Height = heightOfBlock;
                     rec.X = j * widthOfBlock;
-                    rec.Y = i = heightOfBlock;
+                    rec.Y = i * heightOfBlock;
                   
 
                     this.RectItems.Add(rec);

@@ -78,7 +78,7 @@
     <Compile Include="View\MazeDefinitionsUserControl.xaml.cs">
       <DependentUpon>MazeDefinitionsUserControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\MazeUserControl.xaml.cs">
+    <Compile Include="Controls\MazeUserControl.xaml.cs">
       <DependentUpon>MazeUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\MultiPlayerWindow.xaml.cs">
@@ -106,7 +106,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\MazeUserControl.xaml">
+    <Page Include="Controls\MazeUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

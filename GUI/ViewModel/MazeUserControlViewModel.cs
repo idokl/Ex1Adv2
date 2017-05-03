@@ -10,12 +10,12 @@ namespace GUI.ViewModel
 {
     class MazeUserControlViewModel
     {
-        private ObservableCollection<RectItem> RectItems { get; set; }
-        private 
+        public ObservableCollection<RectItem> RectItems { get; set; }
+        private MazeUserControlModel mazeUserControlModel;
 
         public MazeUserControlViewModel()
         {
-            
+            this.mazeUserControlModel = new MazeUserControlModel(this);
         }
     }
 }

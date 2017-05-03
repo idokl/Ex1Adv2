@@ -7,11 +7,17 @@ using System.Threading.Tasks;
 using Adapter;
 using MazeGeneratorLib;
 using MazeLib;
+using GUI.ViewModel;
 
 namespace GUI.Model
 {
     class MazeUserControlModel
     {
+        private MazeUserControlViewModel mazeUserControlViewModel;
+        public MazeUserControlModel(MazeUserControlViewModel mazeUserControlViewModel)
+        {
+            this.mazeUserControlViewModel = mazeUserControlViewModel;
+        }
 
         public void init()
         {

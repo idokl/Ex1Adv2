@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GUI.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,13 @@ namespace GUI.View
     /// </summary>
     public partial class MazeDefinitionsUserControl : UserControl
     {
+        private MazeDefinitionsUserControlVM mdusvm;
+
         public MazeDefinitionsUserControl()
         {
             InitializeComponent();
+            this.mdusvm = new MazeDefinitionsUserControlVM();
+            this.DataContext = mdusvm;
         }
     }
 }

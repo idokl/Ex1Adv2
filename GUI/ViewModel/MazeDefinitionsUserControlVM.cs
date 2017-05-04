@@ -27,5 +27,12 @@ namespace GUI.ViewModel
             get { return model.MazeColsDefinition; }
             set { NotifyPropertyChanged("MazeColsDefinition"); }
         }
+
+        public string MazeNameDefinition
+        {
+            get { return model.MazeNameDefinition; }
+            set { NotifyPropertyChanged("MazeNameDefinition"); }
+        }
+        
     }
 }

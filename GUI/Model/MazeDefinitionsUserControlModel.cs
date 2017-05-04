@@ -5,6 +5,7 @@
 
         public int MazeRowsDefinition = 15;
         public int MazeColsDefinition = 15;
+        public string MazeNameDefinition = "idoMazeName";
         /*
               public int MazeRowsDefinition
               {

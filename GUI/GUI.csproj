@@ -62,6 +62,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Controls\UserControl1.xaml.cs">
+      <DependentUpon>UserControl1.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Model\ClientModel.cs" />
     <Compile Include="Model\IClientModel.cs" />
     <Compile Include="Model\ISettingsModel.cs" />
@@ -78,7 +81,7 @@
     <Compile Include="View\MazeDefinitionsUserControl.xaml.cs">
       <DependentUpon>MazeDefinitionsUserControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\MazeUserControl.xaml.cs">
+    <Compile Include="Controls\MazeUserControl.xaml.cs">
       <DependentUpon>MazeUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\MultiPlayerWindow.xaml.cs">
@@ -90,6 +93,10 @@
     <Compile Include="View\SinglePlayerWindow.xaml.cs">
       <DependentUpon>SinglePlayerWindow.xaml</DependentUpon>
     </Compile>
+    <Page Include="Controls\UserControl1.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -106,7 +113,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\MazeUserControl.xaml">
+    <Page Include="Controls\MazeUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

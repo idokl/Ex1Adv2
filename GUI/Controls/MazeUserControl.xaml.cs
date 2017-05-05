@@ -19,7 +19,7 @@ using GUI.ViewModel;
 using MazeGeneratorLib;
 using MazeLib;
 
-namespace GUI.View
+namespace GUI.Controls
 {
     /// <summary>
     /// Interaction logic for MazeUserControl.xaml
@@ -27,23 +27,55 @@ namespace GUI.View
     public partial class MazeUserControl : UserControl
     {
         //  private MazeUserControlViewModel mazeUserControlViewModel;
-        private ObservableCollection<RectItem> RectItems { get; set; }
+        private ObservableCollection<RectItem> RectItems = new ObservableCollection<RectItem>();
+        private ObservableCollection<Rectangle> Rectangles = new ObservableCollection<Rectangle>();
 
         public MazeUserControl()
         {
             InitializeComponent();
-            this.draw();
+
+            Rectangle rect = new Rectangle();
+            rect.Width = 100;
+            rect.Height = 100;
+            int widthOfBlock = 40;
+            int heightOfBlock = 40;
+            for (int i = 0; i < 5; i++)
+            {
+                for (int j = 0; j < 5; j++)
+                {
+                    Rectangle rec = new Rectangle();
+
+                    /*
+                    if (0)
+                    {
+                        //rec.Fill = ;
+                    }
+                    */
+                    rec.Width = widthOfBlock;
+                    rec.Height = heightOfBlock;
+                    rec.Fill = new SolidColorBrush(System.Windows.Media.Colors.Black);
+                    //rec.X = j * widthOfBlock;
+                    //rec.Y = i * heightOfBlock;
+
+
+                    this.Rectangles.Add(rec);
+                }
+            }
+            icRectangles.ItemsSource = Rectangles;
+
+
+            //this.draw();
             this.DataContext = this;
         }
 
         public void draw()
         {
             var dfsMazeGenerator = new DFSMazeGenerator();
-            var MyMaze = dfsMazeGenerator.Generate(20, 20);
+            var MyMaze = dfsMazeGenerator.Generate(5, 5);
             //MyMaze.Name;
             var SM = new SearchableMaze(MyMaze);
             int size = MyMaze.Rows * MyMaze.Cols;
-            this.RectItems = new ObservableCollection<RectItem>();
+            //this.RectItems = new ObservableCollection<RectItem>();
 
             double height = System.Windows.SystemParameters.PrimaryScreenHeight;
             double width = System.Windows.SystemParameters.PrimaryScreenWidth;
@@ -62,7 +94,7 @@ namespace GUI.View
                     rec.Width = widthOfBlock;
                     rec.Height = heightOfBlock;
                     rec.X = j * widthOfBlock;
-                    rec.Y = i = heightOfBlock;
+                    rec.Y = i * heightOfBlock;
                   
 
                     this.RectItems.Add(rec);

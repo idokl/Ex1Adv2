@@ -28,11 +28,11 @@ namespace GUI.ViewModel
             set { NotifyPropertyChanged("MazeColsDefinition"); }
         }
 
-        public int MazeNameDefinition
+        public string MazeNameDefinition
         {
             get { return model.MazeNameDefinition; }
             set { NotifyPropertyChanged("MazeNameDefinition"); }
         }
-
+        
     }
 }

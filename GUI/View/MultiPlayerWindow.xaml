@@ -4,12 +4,13 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GUI"
-        xmlns:View="clr-namespace:GUI.View" x:Class="GUI.MultiPlayerWindow"
+        xmlns:View="clr-namespace:GUI.View" xmlns:Controls="clr-namespace:GUI.Controls" x:Class="GUI.MultiPlayerWindow"
         mc:Ignorable="d"
         Title="MultiPlayerWindow" Height="300" Width="300">
     <Grid>
+        <Controls:MazeUserControl HorizontalAlignment="Left" Height="200" VerticalAlignment="Top" Width="300"/>
+        <View:MazeDefinitionsUserControl HorizontalAlignment="Left" Height="300" VerticalAlignment="Top" Width="300"/>
 
-        <View:MazeDefinitionsUserControl HorizontalAlignment="Left" Height="100" VerticalAlignment="Top" Width="100"/>
 
     </Grid>
 </Window>

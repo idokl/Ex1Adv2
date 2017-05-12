@@ -84,11 +84,17 @@
     <Compile Include="Controls\MazeUserControl.xaml.cs">
       <DependentUpon>MazeUserControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\MultiPlayerGameWindow.xaml.cs">
+      <DependentUpon>MultiPlayerGameWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\MultiPlayerWindow.xaml.cs">
       <DependentUpon>MultiPlayerWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\SettingsWindow.xaml.cs">
       <DependentUpon>SettingsWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\SinglePlayerGameWindows.xaml.cs">
+      <DependentUpon>SinglePlayerGameWindows.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\SinglePlayerWindow.xaml.cs">
       <DependentUpon>SinglePlayerWindow.xaml</DependentUpon>
@@ -117,11 +123,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\MultiPlayerGameWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\MultiPlayerWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\SettingsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\SinglePlayerGameWindows.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

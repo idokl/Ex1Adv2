@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using GUI.View;
 
 namespace GUI
 {
@@ -29,21 +30,22 @@ namespace GUI
         {
             SinglePlayerWindow singlePlayerWindow = new SinglePlayerWindow();
             singlePlayerWindow.Show();
-            this.Close();
+            this.Hide();
         }
 
         private void SettingsButton_Click(object sender, RoutedEventArgs e)
         {
             SettingsWindow settingsWindow = new SettingsWindow();
             settingsWindow.Show();
-            this.Close();
+            this.Hide();
+
         }
 
         private void MultiPlayerButton_Click(object sender, RoutedEventArgs e)
         {
             MultiPlayerWindow multiPlayerWindow = new MultiPlayerWindow();
             multiPlayerWindow.Show();
-            this.Close();
+            this.Hide();
         }
 
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)

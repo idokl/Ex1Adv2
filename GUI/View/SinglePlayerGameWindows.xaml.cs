@@ -1,6 +1,4 @@
-﻿using GUI.Model;
-using GUI.ViewModel;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,23 +15,19 @@ using System.Windows.Shapes;
 namespace GUI.View
 {
     /// <summary>
-    /// Interaction logic for SinglePlayer.xaml
+    /// Interaction logic for SinglePlayerGameWindows.xaml
     /// </summary>
-    public partial class SinglePlayerWindow : Window
+    public partial class SinglePlayerGameWindow : Window
     {
-        private SinglePlayerViewModel spVM;
-
-        public SinglePlayerWindow()
+        public SinglePlayerGameWindow()
         {
             InitializeComponent();
-            spVM = new SinglePlayerViewModel();
-            this.DataContext = spVM;
         }
 
-        private void StartGameButton_Click(object sender, RoutedEventArgs e)
+        private void Button_Click(object sender, RoutedEventArgs e)
         {
-            SinglePlayerGameWindow spGame = new SinglePlayerGameWindow();
-            spGame.Show();
+            MainWindow win = (MainWindow)Application.Current.MainWindow;
+            win.Show();
             this.Close();
         }
     }

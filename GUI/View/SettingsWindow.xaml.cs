@@ -20,15 +20,13 @@ namespace GUI
         private void btnOK_Click(object sender, RoutedEventArgs e)
         {
             vm.SaveSettings();
-            //MainWindow win = (MainWindow)Application.Current.MainWindow;
-            MainWindow win = new MainWindow();
+            MainWindow win = (MainWindow)Application.Current.MainWindow;
             win.Show();
             this.Close();
         }
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
-           // MainWindow win = (MainWindow)Application.Current.MainWindow;
-            MainWindow win = new MainWindow();
+            MainWindow win = (MainWindow)Application.Current.MainWindow;
             win.Show();
             this.Close();
         }

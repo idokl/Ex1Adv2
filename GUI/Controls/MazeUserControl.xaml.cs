@@ -42,8 +42,7 @@ namespace GUI.Controls
 
             int size = MyMaze.Rows * MyMaze.Cols;
             Rectangle rect = new Rectangle();
-            // rect.Width = 100;
-            //rect.Height = 100;
+          
              int widthOfBlock = 40;
             int heightOfBlock = 40;
            // double height = 100;//System.Windows.SystemParameters.PrimaryScreenHeight;
@@ -62,7 +61,13 @@ namespace GUI.Controls
                         rec.Fill = new SolidColorBrush(System.Windows.Media.Colors.White);
                         rec.Stroke = new SolidColorBrush(System.Windows.Media.Colors.Black);
                     }
-                    rec.Fill = new SolidColorBrush(System.Windows.Media.Colors.Black);
+                    else
+                    {
+                        rec.Fill = new SolidColorBrush(System.Windows.Media.Colors.Black);
+                    }
+                    
+                    rec.RadiusX = j * widthOfBlock;
+                    rec.RadiusY = i * heightOfBlock;
                     this.Rectangles.Add(rec);
 
                 }

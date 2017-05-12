@@ -6,8 +6,8 @@
         xmlns:local="clr-namespace:GUI.View"  xmlns:Controls="clr-namespace:GUI.Controls"
         mc:Ignorable="d"
         Title="SinglePlayerGameWindows" Height="300" Width="300">
-    <Grid Background="Blue">
-        <Controls:MazeUserControl/>
+    <Grid>
+        <Controls:MazeUserControl Margin="0,84,0,0"/>
         <Button Content="Restart game" HorizontalAlignment="Left" Margin="24,21,0,0" VerticalAlignment="Top" Width="75"/>
         <Button Content="Solve maze" HorizontalAlignment="Left" Margin="117,21,0,0" VerticalAlignment="Top" Width="75"/>
         <Button Content="Button" HorizontalAlignment="Left" Margin="207,21,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click"/>

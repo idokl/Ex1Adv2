@@ -5,10 +5,11 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
-    <Grid HorizontalAlignment="Left" Height="100" VerticalAlignment="Top" Width="100">
-        <ItemsControl Name="icRectangles" DisplayMemberPath="Name"> </ItemsControl>
-        <ItemsControl Name="rect" DisplayMemberPath="Name"></ItemsControl>
-    </Grid>
+    <Border BorderThickness="2" BorderBrush="Black">
+        <Canvas Name="MyCanvas" >
+            <ItemsControl Name="icRectangles" DisplayMemberPath="Name"></ItemsControl>
+        </Canvas>
+    </Border>
 
 
 </UserControl>

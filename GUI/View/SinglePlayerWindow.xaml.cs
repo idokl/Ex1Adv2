@@ -30,10 +30,15 @@ namespace GUI.View
             this.DataContext = spVM;
         }
 
-        private void StartGameButton_Click(object sender, RoutedEventArgs e)
+        private void txtMazeName_TextChanged(object sender, TextChangedEventArgs e)
         {
-            SinglePlayerGameWindow spGame = new SinglePlayerGameWindow();
-            spGame.Show();
+
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            SinglePlayerGameWindow spGW = new SinglePlayerGameWindow();
+            spGW.Show();
             this.Close();
         }
     }

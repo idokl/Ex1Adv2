@@ -30,5 +30,10 @@ namespace GUI.View
             win.Show();
             this.Close();
         }
+
+        private void MazeUserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            MyMazeBoard.Draw();
+        }
     }
 }

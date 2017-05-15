@@ -8,7 +8,8 @@
         Title="SinglePlayerGameWindows" Height="Auto" Width="Auto">
     <Grid>
         <Canvas Margin="0,72,0,0">
-            <Controls:MazeUserControl/>
+            <Controls:MazeUserControl x:Name="MyMazeBoard" />
+            
         </Canvas>
         <Button Content="Restart game" HorizontalAlignment="Left" Margin="24,21,0,0" VerticalAlignment="Top" Width="75"/>
         <Button Content="Solve maze" HorizontalAlignment="Left" Margin="117,21,0,0" VerticalAlignment="Top" Width="75"/>

@@ -6,9 +6,13 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <Border BorderThickness="2" BorderBrush="Black">
-        <Canvas Name="MyCanvas" >
-            <ItemsControl Name="icRectangles" DisplayMemberPath="Name"></ItemsControl>
+       
+            <Canvas Name="MyCanvas">
+              
+            <TextBox Text="{Binding bla}"></TextBox>
+
         </Canvas>
+       
     </Border>
 
 

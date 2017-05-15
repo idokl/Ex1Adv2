@@ -2,7 +2,7 @@
 using GUI.Model;
 using GUI.ViewModel;
 
-namespace GUI
+namespace GUI.View
 {
     /// <summary>
     /// Interaction logic for SettingsWindow.xaml
